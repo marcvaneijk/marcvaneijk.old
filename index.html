@@ -1,0 +1,32 @@
+---
+layout: default
+---
+<ul class="contentIndexUl">
+	{% for post in paginator.posts %}
+		<li>
+	    		<div class="contentWrapper">
+	    			<a class="contentTitle" href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+	    			<div class="contentMeta">{{ post.date | date: "%B %d, %Y" }}</div>
+	    			<div class="content">
+	    				{{ post.excerpt }}
+	    				{% if post.content contains site.excerpt_separator %}
+						<a href="{{ post.url | prepend: site.baseurl }}">...Read more</a>
+					{% endif %}
+	    			</div>
+    			</div>
+	    	</li>
+	{% endfor %}
+</ul>
+<div class="contentPaginator">
+  {% if paginator.previous_page %}
+    <a href="{{ paginator.previous_page_path }}">Previous</a>
+  {% else %}
+    <span>Previous</span>
+  {% endif %}
+  <span>Page: {{ paginator.page }} of {{ paginator.total_pages }}</span>
+  {% if paginator.next_page %}
+    <a href="{{ paginator.next_page_path }}">Next</a>
+  {% else %}
+    <span>Next</span>
+  {% endif %}
+</div>

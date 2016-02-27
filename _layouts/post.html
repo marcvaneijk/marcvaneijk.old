@@ -1,0 +1,11 @@
+---
+layout: default
+---
+<div class="contentWrapper">
+  <div class="contentTitle">{{ page.title }}</div>
+  <div class="contentMeta">{{ page.date | date: "%B %d, %Y" }}</div>
+  <div class="contentEdit">
+    <a href="{{site.github.repository_url}}/blob/master/{{page.path}}" target="_blank">edit on github</a>
+  </div>
+  <div class="content">{{ content }}</div>
+</div>

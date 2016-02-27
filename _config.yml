@@ -1,0 +1,18 @@
+# Site Details
+title: Marc van Eijk
+description: Microsoft Cloud Platform
+footer: Marc van Eijk
+
+# Links for for Menu
+menulinks:       
+  About: '/about'
+  Feed: '/atom.xml'
+
+#markdown type
+markdown: kramdown
+
+# Number of post to display on index.html
+paginate: 2
+
+# Read more seperator
+excerpt_separator: <!--more-->

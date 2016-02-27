@@ -1,0 +1,74 @@
+/* Generic */
+
+.contentWrapper {
+  background-color: #ffffff;
+  padding: 40px;
+  margin-bottom: 20px;
+}
+
+.content {
+  font-size: 17px;
+  color: #3a3a3a;
+}
+
+a {
+  text-decoration: none;
+  color: #1e73be;
+}
+
+a:hover {
+  color: #1a1a1a;
+}
+
+.contentTitle {
+  font-size: 30px;
+  color: #1e73be;
+  font-weight: 300;
+}
+
+.contentMeta {
+  font-size: 15px;
+  color: #666666;
+}
+
+.contentEdit {
+  font-size: 15px;
+  color: #666666;
+}
+
+/* Index */
+.contentIndexUl {
+  padding: 0px;
+  margin: 0px;
+  list-style-type: none;
+}
+
+.contentPaginator {
+  margin-bottom: 20px;
+}
+
+/* Widget Search */
+
+.widgetSearch {
+  background-color: #ffffff;
+  padding: 40px;
+  margin-bottom: 20px;
+}
+
+.widgetSearchBox {
+  width: 100%; 
+  font-family: "Open Sans",sans-serif;
+  font-size: 17px;
+  background-color: #fafafa;
+  border: 1px solid #cccccc;
+  color: #666666;
+  padding: 10px 15px;
+}
+
+.widgetSearchUl {
+  list-style-type: none;
+  padding: 0px;
+  padding-top: 10px;
+  font-size: 17px;
+}
+

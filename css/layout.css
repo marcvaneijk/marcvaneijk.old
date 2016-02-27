@@ -1,0 +1,71 @@
+---
+---
+body {
+    margin:0;
+    padding:0;
+    background-color: #e3e3e3;
+    font-family: "Open Sans",sans-serif;
+}
+
+.clearFloat {
+    clear: both;
+}
+
+/* Header */
+.siteHeaderWrapper {
+    width: 100%;
+    background-color: #ffffff;
+    }
+    
+.siteHeader {
+    width: 1100px;
+    margin-right: auto;
+    margin-left: auto;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    }
+
+/* Menu */
+.siteMenuWrapper {
+    width: 100%;
+    background-color: #000000;
+    margin-bottom: 20px;
+    }
+
+.siteMenu {
+    width: 1100px;
+    margin-right: auto;
+    margin-left: auto;
+    }
+
+
+/* Content */
+.siteContentWrapper {
+    width: 1100px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.siteContent {
+    width: 800px;
+    float: left;
+}
+
+.siteWidgets {
+    margin-left: 20px;
+    width: 280px;
+    float: left;
+}
+
+/* Footer */
+.siteFooterWrapper {
+    width: 100%;
+    background-color: #000000;
+    clear: both;
+    }
+
+.siteFooter {
+    width: 1100px;
+    margin-right: auto;
+    margin-left: auto;
+}

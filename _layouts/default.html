@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ site.title }}</title>
+    <!-- link to site stylesheet -->
+    <link rel="stylesheet" type="text/css" href="/css/layout.css">
+    <link rel="stylesheet" type="text/css" href="/css/header.css">
+    <link rel="stylesheet" type="text/css" href="/css/menu.css">
+    <link rel="stylesheet" type="text/css" href="/css/content.css">
+    <link rel="stylesheet" type="text/css" href="/css/code.css">
+    <link rel="stylesheet" type="text/css" href="/css/footer.css">
+    <!-- link to external stylesheet -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,regular,italic,600,600italic,700,700italic,800,800italic">
+</head>
+<body>
+    <div class="siteHeaderWrapper">
+        <div class="siteHeader">
+            <div class="siteTitle"><a href="{{ '/' | prepend: site.baseurl }}">{{ site.title }}</div>
+            <div class="siteDescription">{{ site.description }}</div>
+        </div>
+    </div>
+    <div class="siteMenuWrapper">
+        <div class="siteMenu">
+            <div class="siteMenuLinks">
+                {% for page in site.menulinks %}
+                    <a class="siteMenuLink" href="{{ page[1]  }}">{{ page[0] }}</a>
+                {% endfor %}
+            </div>
+            <div class="clearFloat"></div>
+        </div>
+    </div>
+    <div class="siteContentWrapper">
+        <div class="siteContent">{{ content }}</div>
+        <div class="siteWidgets">
+            <div class="widgetSearch">
+                <div id="search">
+                    <form action="get" id="site_search">
+                        <input class="widgetSearchBox" type="search" id="search_box" placeholder="Search..">
+                    </form>
+                    <ul class="widgetSearchUl" id="search_results">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="siteFooterWrapper">
+        <div class="siteFooter">{{ site.footer }}</div>
+    </div>
+</body>
+<!-- sripts for search -->
+<script src="/js/lunr.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="/js/search.js"></script>
+</html>
