@@ -1,0 +1,319 @@
+---
+layout: post
+date: 2013-01-20
+author: Marc van Eijk
+title: NIC Teaming, Hyper-V switch, QoS and actual performance | part 1 – Theory
+tags: Converged Fabric, Converged Network Adapter, Hyper-V QoS, LBFO, Marc van Eijk, Network performance, Network throughput, Networking, NIC teaming, Powershell, QoS, tNIC, vNIC, Windows Server 2012
+---
+This blog series consists of four parts
+•NIC Teaming, Hyper-V switch, QoS and actual performance | part 1 – Theory
+•NIC Teaming, Hyper-V switch, QoS and actual performance | part 2 – Preparing the lab
+•NIC Teaming, Hyper-V switch, QoS and actual performance | part 3 – Performance
+•NIC Teaming, Hyper-V switch, QoS and actual performance | part 4 – Traffic classes
+
+One of the basics of every Hyper-V configuration is networking. Set aside the missing flexibility, the choices for a Hyper-V cluster design in Windows Server 2008 R2 were clear. A dedicated network interface for each type of traffic (management, cluster, live migration). With this configuration in production NICs were underutilized most of the time and when you needed the bandwidth it was capped at the maximum of a single interface. In the (rare) case of a NIC dying on you there was no failover. In Windows Server 2008 R2 there was no NIC Teaming support. For load balancing and failover the only option was resorting to the NIC Teaming software provided by the hardware vendor.
+
+From experience I can say that a lot of customers were having trouble designing their networking in a Windows Server 2008 R2 cluster correctly. Problems with 3rd party NIC Teaming, live migration over VM networks, not enough physical adapters, you name it, we’ve seen the most “creative” configurations.
+
+Most customers are stuck in the Windows 2008 R2 thinking pattern. This is understandable as Microsoft strongly recommended that each network in a Windows 2008 R2 Hyper-V cluster had its own dedicated physical NIC in each host.
+
+In Windows Server 2012, NIC Teaming is delivered by Microsoft out of the box. The official term is NIC Teaming, it is also referenced as Load Balancing and Failover (LBFO). NIC Teaming is an integral part of the Windows 2012 operating system. With NIC Teaming you can team multiple NICs into a single interface. You can mix NICs from different vendors, as long as they are physical Ethernet adapters and meet the Windows Logo requirement. The NICs must operate at the same speed.  Teaming NICs operating at different speeds is not supported. But flexibility comes with complexity and many choices.
+
+01-Complete-configuration2
+
+With Hyper-V in Windows Server 2012 it is even possible to create a Hyper-V switch on top of a NIC team. The Hyper-V switch is a full-fledged software based layer 2 switch with features like QOS, port ACLs, 3rd party extensions, resource metering and so on. You can create virtual adapters and attach them to the Hyper-V switch. These developments provide us with the proper tools to create converged fabrics.
+
+
+What to expect
+
+Usually the first thing tested after initial configuration is copying a large file between two hosts. With a Hyper-V Switch configured on a NIC team composed of two 10Gb adapters you might expect the file to copy with (2 x 10 Gbits / 8 =) 2.5 GBytes per second. When you copy the file you find that actual throughput is a lot lower (about 400 MB/s to 800 MB/s).
+
+The first reaction : it doesn’t work!!
+
+Let me clarify. It’s a little more complicated than just combining two 10Gb NICs and expecting a 2.5 GB/s file copy. It is possible to get these bandwidth results but you need to understand that there are a lot of factors of influence on the actual throughput.
+
+Before we dive in to testing first we will have to look at the choices provided by Windows Server 2012 and how the inner workings of these choices are of influence on the actual bandwidth.
+
+
+Theory
+
+Transmission Control Protocol
+
+TCP is one of the main protocols in the TCP/IP suite.
+
+Transmission Control Protocol (TCP) is a transport protocol (layer 4). TCP provides reliable, ordered delivery of a stream of octets. TCP provides the mechanism to recover from missing or out-of-order packets. Reordering packets generates great impact on the throughput of the connection. Microsoft’s NIC Teaming (or any other serious NIC Teaming solution) will try to keep all packets associated with a single TCP stream on the same NIC to minimize out-of-order packets.
+
+Hardware
+
+There are some NIC hardware functionalities you should be aware of.
+
+Receive side scaling
+
+Receive side scaling (RSS) enables the efficient distribution of network receive processing across multiple processors.
+
+It is possible to specify which processors are used for handling RSS requests. You can check if your current NIC hardware has RSS support by running the following PowerShell Get-SmbServerNetworkInterface
+
+02 Get-SmbServerNetworkInterface
+
+Virtual machine queue
+
+Virtual machine queue (VMQ) creates a dedicated queue on the physical network adapter for each virtual network adapter that requests a queue. Packets that match a queue are placed in that queue. Other packets, along with all multicast and broadcast packets, are placed in the default queue for additional processing in the Hyper-V switch. You should enable VMQ for every virtual machine (and it is enabled by default). The new WS2012 feature, D-VMQ, will automatically assign the queues to the right VMs as needed based on their current activity.
+
+Note Hyper-threaded CPUs on the same core processor share the same execution engine. RSS and VMQ will ignore hyper-threading.
+
+Receive Side Coalescing
+
+Receive Side Coalescing (RSC) improves the scalability of the servers by reducing the overhead for processing a large amount of network I/O traffic by offloading some of the work to network adapters.
+
+For advanced configuration of these NIC hardware features Microsoft has released a great document on performance tuning guidelines for Windows Server 2012.
+
+NIC Teaming Connection Modes
+
+NIC Teaming has three connection modes that defines how you connect your cabling to the switch and if any configuration on the switches must be made. Failover is one of the basic functionalities of NIC Teaming, but when you connect all physical NICs of the team to a single switch and this switch dies you have no failover. Redundancy in your switching is a critical part of your design and defines the choices you will have to make in connection modes of NIC Teaming.
+
+Several manufacturers today ship multi-chassis switches, i.e., two (or more) switches that behave as though they were a single switch, also known as stacked switches.  If you distribute your interfaces across the different chasses of a multi-chassis (stacked) switch you avoid this problem.  You still get connection to a single switch, but you don’t have a single point of failure.
+
+Switch independent mode
+
+In Switch independent mode no configuration is required on your physical switches.
+
+03-Switch-Independent
+
+In the other two connection modes you need to aggregate multiple physical ports on your switch in to a single logical link. To achieve redundancy in you physical switching infrastructure you can stack two switches and create a logical port across the stacked switches or resort to proprietary protocols like Distributed Trunking (HP) or Multi-Chassis Etherchannel (Cisco).
+
+Static teaming (IEEE 802.3ad draft v1)
+
+In Static teaming mode there is no check for incorrectly plugged cables or other errors. This mode is useful when the preferred bandwidth exceeds a single physical NIC and the switch does not support LACP, but the switch does support static teaming.
+
+04-Static-Teaming
+
+LACP (IEEE 802.1ax)
+
+In LACP (Link Aggregation Control Protocol) mode each port sends LACPDUs (link aggregation control protocol data unit) to notify the remote device of its system LACP priority, system MAC address, port LACP priority, port number and operational key. When the remote device receives an LACPDU it compares the information with the information received on other ports to determine the ports that belong to the same logical link.
+
+05-LACP
+
+NIC Teaming Load distribution modes
+
+The Load distribution mode defines the way the traffic is distributed amongst the physical interfaces. There are two options.
+
+Address Hash 
+
+Address Hash creates a hash based on components of the packet and assigns packets with that hash value to one of team members. This keeps all packets from the same TCP stream on the same network adapter. Address Hash will hash based on the address components in the following order.
+•4-tuple hash : uses the RSS hash if available, otherwise hashes the TCP/UDP ports and the IP addresses. If these packet address components are not available this mode will use 2-tuple instead.
+•2-tuple hash : hashes the IP addresses if ports are not available (For example if it is not TCP or UDP or the TCP/UDP layer is hidden by IPSEC)
+•MAC address hash: hashes the MAC addresses (when it is not IP traffic)
+
+Hyper-V port
+
+Hyper-V port hashes the port number on the Hyper-V switch that the traffic is coming from. Windows Server 2012 uses the Hyper-V switch port as the identifier rather than the source MAC address, because in some instances, a virtual machine might be using more than one MAC address on a switch port. A virtual adapter created for the ManagementOS also has a port on the Hyper-V switch.
+
+With this load balancing algorithm each port in the Hyper-V switch will be hashed to a single team member. Therefore a single virtual adapter in a virtual machine or a virtual Ethernet adapter in the management OS will never have more bandwidth than a single team member. NIC Teaming uses round-robin to assign each port on the Hyper-V switch to a single team member in HyperVPorts mode.
+
+Matrix
+
+Now that we know the connections modes and the load distribution modes we have the possibility to combine these. Each combination has pros and cons.
+
+Switch Independent / Address Hash
+
+Sends on all active members. Each IP address can only be associated with a single MAC address for routing. So it receives on one member (Primary member)
+
+Best used when
+•Native mode teaming where switch diversity is a concern
+•Active/Standby mode (I can’t think of a scenario why you should use that)
+•Servers running workloads that are heavy outbound, light inbound workloads (For example IIS)
+
+Switch Independent / Hyper-V port
+
+Sends on all active members, receives on all active members. Each Hyper-V port will be bandwidth limited to one team member’s bandwidth. Maximum use of VMQs because all inbound traffic for a VM is on the same NIC as the outbound traffic of that VM.
+
+Best used when
+•number of VMs well exceeds number of team members
+•restriction of a VM to one NIC’s bandwidth is acceptable
+
+Switch Dependent / Address Hash
+
+Sends on all active members, receives on all active members. Inbound traffic may use a different NIC than outbound traffic for a given stream. Inbound traffic is distributed by the switch.
+
+Best used for
+•Native teaming for maximum performance and switch diversity is not required
+•Teaming under the Hyper-V switch when an individual VM needs more bandwidth than one team member
+
+Switch Dependent / Hyper-V port 
+
+Sends on all active members, all outbound traffic from a single Hyper-V port (attached to the Hyper-V switch) will go on a single NIC. Inbound traffic may be distributed differently depending on what the switch does to distribute traffic.
+
+Best used when
+•More VMs than team members and LACP is a policy requirement.
+
+Distinction in team members 
+
+In a team we can distinguish different types of interfaces. The physical Network Adapter is the basis of a team. Cables are physically plugged in to these adapters and then connected to a single or multiple switches. Team NICs, or in short tNICs, can be created in the management OS (the official term for the host). It is possible to create multiple tNICs in a single team.
+
+06-tNICs
+
+A tNIC can be created in Default Mode (which passes all traffic that doesn’t match any VLAN IDs associated to another tNIC) or in VLAN Mode (which passes all traffic that matches the VLAN ID). When you created a new NIC team the primary interface will be created in Default Mode unless you specify a VLAN. Secondary interfaces can only be created in VLAN mode.
+
+07-New-tNIC
+
+When you run Hyper-V and NIC Teaming (and you should!!) you create a Hyper-V switch on top of the team in the management OS and create Virtual NICs, or in short vNICs attached to the Hyper-V Switch. A vNIC can be configured with a VLAN. Do not mix tNICs and vNICs.
+
+The only supported configuration for Hyper-V and NIC Teaming is that all NIC creation and VLAN tagging must be done in the Hyper-V Switch. This means that all the interfaces we need for stand-alone Hyper-V or clustering Hyper-V must be created in the Hyper-V switch. You can still run dedicated physical NICs for each type of traffic you want, but the added flexibility of a converged fabric most likely wins.
+
+First we create a Hyper-V switch on top of the NIC team. A virtual machine will get a port on the Hyper-V switch, as it did with Windows Server 2008 R2. But with Windows Server 2012 you now can also create vNICs for the management OS. These vNICs show up in the GUI just as you are used to with a physical NIC, you can set IP addresses and adjust most NIC properties.
+
+08-Single-Server
+
+By default a vNIC does not have a VLAN configured. In this mode it receives all untagged traffic. You can configure a VLAN on a vNIC. A VLAN for each type of network (live migration, cluster, management) is the most obvious design. If your management vNIC is to send and receive untagged traffic on your switch you then only specify a VLAN for live migration and cluster.
+
+Quality of Service
+
+With all these vNICs and VMs attached to the Hyper-V Switch it is essential to control the bandwidth for each interface. This is where the new Quality Of Service (QoS) functionality of Windows Server 2012 comes in. With Quality of Service you can configure minimum and maximum values for bandwidth per interface on the Hyper-V switch. These values can be absolute or weighted (a calculated percentage). These policies will prevent an individual interface (whether it is a VM or a vNIC in the management OS) to starve all other interfaces.
+
+QoS in Windows Server 2008 R2 provided a maximum bandwidth. Hyper-V QoS in Windows Server 2012 enables minimum bandwidth, which guarantees a specified minimum bandwidth for a traffic flow (identified by a Hyper-V Virtual Switch port number).
+
+When QoS is enabled based on minimum bandwidth it is best practice to configure the minimum based on weight. A weight can be assigned to each individual traffic flow (a vNIC or a VM). Traffic flows that have no weight assigned will be handled by the default flow. You should also assign a weight to the default flow. The sum of all the assigned weights (including the weight of the default flow) is the basis of the calculation for each traffic flow minimum bandwidth percentage.
+
+Microsoft has documented the following best practices for configuring Hyper-V QoS here
+1.Keep the sum of the weights near or under 100
+2.Assign a relatively large weight to critical workloads even if they don’t require that percentage of bandwidth (for example assign a weight of 5 or more for management and cluster heartbeat traffic)
+3.Do not use consecutive numbers (weight of 1, 2 and 3) but gap the numbers (weight of 1,3 and 5)
+4.Take note of traffic that has no weight assigned to it will fall into the default flow bucket
+
+Hyper-V QoS requires each traffic flow to be classified or identified by a Hyper-V Virtual Switch port number so that the QoS Packet Scheduler can take appropriate actions.
+
+In the session Enabling multi-tenancy and converged fabric for the cloud using QoS at BUILD 2011 Richard Wurdack and Charley Wen explain the inner workings of the QoS packet Scheduler.
+
+09-QoS
+
+Capacity Meter
+
+The Physical NIC reports its link speed and also report when a packed is sent. This allows measuring the time from when a packet is sent until the time the packet completes. The information is piped into the capacity meter. The capacity meter keeps track of how much congestion is on the Physical NIC and provides this information to the Traffic Meter.
+
+Traffic Meter
+
+The traffic Meter looks at packets and their traffic class going through the network stack. It marks a class of traffic as exceeding capacity if packets belonging to that classification are exceeding the capacity of the actual interface.
+
+Peak Bandwidth Meter
+
+The Peak Bandwidth Meter is also looking at packet coming in.
+
+When it sees packets belonging to a particular class that is marked as exceeding capacity they will get buffered. These packets will drain in a matter that that class of traffic never exceeds what it is allowed to use.
+
+Reserved Bandwidth Meter
+
+Bandwidth is guaranteed by the Reserved Bandwidth Meter. If a class of traffic is guaranteed an amount of bandwidth and it has not exceeded it, it will bypass the buffer. When QoS policies are set in the Hyper-V Switch and those policies set a minimum bandwidth, the overall throughput of the NIC team will be less than without the bandwidth policies.
+
+Configuration
+
+Creating a Hyper-V Switch with QOS policies on top of a NIC team
+
+Some configuration can be done in the GUI but most settings must be done in PowerShell. I advise you to do the complete process in PowerShell a couple of times manually. This will help you to understand each setting. Once you have good understanding you can the save it in a PowerShell script that will configure a new host in a blink of an eye.
+
+I’ll start with the connection mode “Switch Independent” and the load distribution mode “Hyper-V Ports”. You can change these settings later without the need to redo the complete Hyper-V Switch configuration. Keep in mind that you will have to make changes to your switches accordingly.
+
+Let’s assume we have a fresh installed machine with nothing configured yet. You only specified the password and logged in (either physically sitting at the console or remotely through a Base Management Controller). The first thing we need to do is install the Hyper-V role.
+
+Install-WindowsFeature –Name Hyper-V -IncludeManagementTools -Restart
+
+Logon after the reboot and run the following PowerShell command to create the NIC team.
+
+New-NetLbfoTeam Team1 NIC1,NIC2 -TeamingMode SwitchIndependent -LoadBalancingAlgorithm HyperVPorts
+
+This command creates a new NIC Team named Team1 with NIC1 and NIC2 as team members. The Connection Mode is Switch Independent and the Load Distribution Mode is Hyper-V Ports.
+
+Next we will create a Hyper-V Switch on top of the NIC Team
+
+New-VMSwitch “VSwitch” -MinimumBandwidthMode Weight -NetAdapterName “Team1” -AllowManagementOS 0
+
+The Minimum BandwidthMode specifies how minimum bandwidth is to be configured on the virtual switch. Allowed values are Absolute, Default, None, or Weight. If Absolute is specified, minimum bandwidth is bits per second. If Weight is specified, minimum bandwidth is a value ranging from 1 to 100. If None is specified, minimum bandwidth is disabled on the switch – that is, users cannot configure it on any network adapter connected to the switch. If Default is specified, the system will set the mode to Weight. The AllowManagementOS settings specifies whether the parent partition (the management operating system) is to have access to the physical NIC bound to the virtual switch to be created. The default is true, a settings of 0 or $false will deny access.
+
+Once the Hyper-V Switch is created with a MinimumBandwidth Mode set to weight any traffic sent by a virtual network adapter that is connected to this virtual switch is filtered into the “default flow”. It is best practice to set the relative weight value for this default flow so traffic without a weight is not starved.
+
+In a clustered Hyper-V environment virtual machines come and go on a single cluster node through live migration. New virtual machines are added frequently. In a dynamic environment it is difficult to set weights on individual virtual machines and expect the total amount of weights to stay consistent. Therefore a common configuration is to assign a higher weight to the default flow and don’t assign weights to individual virtual machines. When you have virtual machines with an SLA on minimum bandwidth you still can assign a weight to it.
+
+Set-VMSwitch “VSwitch” -DefaultFlowMinimumBandwidthWeight 50
+
+As long as we don’t set a weight on a virtual network adapter (a vNIC or a VM) all traffic falls into the default flow and uses all available bandwidth. So there no gain from QoS yet.
+
+Next we create the vNICs in the Hyper-V Switch. In this example I will create all the necessary vNICs for a Hyper-V cluster configuration.
+
+Add-VMNetworkAdapter -ManagementOS -Name “Management” -SwitchName “VSwitch”
+
+Add-VMNetworkAdapter -ManagementOS -Name “Live Migration” -SwitchName “VSwitch”
+
+Add-VMNetworkAdapter -ManagementOS -Name “Cluster” -SwitchName “VSwitch”
+
+The default value for the -ManagementOS is True. This means that these three interfaces now show up in you GUI with the names vEthernet (Management), vEthernet (Live Migration) and vEthernet (Cluster).
+
+To separate the traffic between the interfaces we assign each vNIC its own VLAN.
+
+Set-VMNetworkAdapterVlan -ManagementOS -VMNetworkAdapterName “Live Migration” -Access -VlanId 10
+
+Set-VMNetworkAdapterVlan -ManagementOS -VMNetworkAdapterName “Live Migration” -Access -VlanId 11
+
+Set-VMNetworkAdapterVlan -ManagementOS -VMNetworkAdapterName “Cluster” -Access -VlanId 12
+
+You can select you own values for the VLAN IDs just make sure you configure the VLANs as tagged on the physical switch where your NIC team physical NIC are connected to. When you do not run the Set-VMNetworkAdapterVlan on a vNIC that vNIC will communicate through the untagged VLAN that is configured on your Switch.
+
+Before we set the Minimum Bandwidth modes on the individual vNIC it might me a good idea to have a look at the calculated minimum bandwidth values through PowerShell after each command we will run. This will help to get a good understanding of how Quality of Service calculates these values. We can get an overview by running the following PowerShell command.
+
+Get-VMNetworkAdapter -ManagementOS -Name * | ft Name, VMName, MinimumBandwidthWeight, BandwidthPercentage, IsManagementOS
+
+At this moment we have only set the Minimum bandwidth on the default flow, so there is no relative weight to calculate.
+
+Now let’s set a minimum bandwidth of 5 on the Management vNIC
+
+Set-VMNetworkAdapter -ManagementOS -Name “Management” -MinimumBandwidthWeight 5
+
+When we now run the same Get-VMNetworkAdapter command again you will see that the Management vNIC has 9% of bandwidth percentage.
+
+10-GetVMNetworkAdapter
+
+The calculation is simple.
+
+To get the pecentage of a single vNIC, divide the weight of a single vNIC by the sum of all vNIC weights and multiple by 100.
+
+(Default Flow) 50 + (Management) 5 = (Total) 55
+
+5 / 55 * 100= 9% (of the Total)
+
+Next we set a minimum bandwidth of 40 on the Live Migration vNIC and a Minimum bandwidth of 5 on the Cluster vNIC
+
+Set-VMNetworkAdapter -ManagementOS -Name “Cluster” -MinimumBandwidthWeight 5
+
+Set-VMNetworkAdapter -ManagementOS -Name “Live Migration” -MinimumBandwidthWeight 40
+
+When we now run same Get-VMNetworkAdapter command again you see that the Management vNIC has 5% of bandwidth percentage.
+
+11-GetVMNetworkAdapter
+
+The calculation is done the same.
+
+(Default Flow) 50 + (Management) 5 + (Cluster) 5 + (Live Migration) 40 = (Total) 100
+•All virtual machines 50% (of the Total)
+•Management 5% (of the Total)
+•Cluster 5% (of the Total)
+•Live Migration 40% (of the Total)
+
+It is not required that the sum of all weight is 100 but it is best practice. You can decide you own values for each vNIC. If you do not set the minimum bandwidth value for a vNIC its traffic will be controlled by the default flow.
+
+In the GUI of the virtual machine in Hyper-V you have the possibility to configure minimum and maximum absolute bandwidth. Once you have configured the Virtual Switch with a MinimumBandwidth mode of Weight you are unable to set the minimum bandwidth of the VM in the GUI. When you try you will get an error.
+
+12-VM-Minimum-Error
+
+This is logical. The value in the Hyper-V GUI is configures as absolute and Hyper-V switch will only accept a weighted value. It is possible to set a minimum bandwidth per VM in PowerShell. The values will be moved with the VM within a cluster or even through Hyper-V replica as long as the target Hyper-V switch has its MinimumBandwidth mode to the same value (in this example weighted). You can set the maximum absolute value through the Hyper-V GUI settings. This will cap the traffic bandwidth to the value you specify for that specific VM.
+
+If you need a detailed explanation for all parameters of the used PowerShell Commands you can run the following cmdlets that will show all parameters, a detailed explanation per parameter and some examples.
+
+Get-Help Set-VMNetworkAdapter -Full
+
+Get-Help Set-VMNetworkAdapterVlan -Full
+
+Get-Help New-VMSwitch -Full
+
+Get-Help Set-VMSwitch -Full
+
+You can even set the IP addresses for the different interfaces through PowerShell. For some examples check out these blogs by Hans Vredevoort and Adain Finn (who is publishing a series on NIC Teaming on www.aidanfinn.com this moment).
+
+In NIC Teaming, Hyper-V switch, QoS and actual performance | part 2 – Prepare the lab we will configure the tools for testing different scenarios.
