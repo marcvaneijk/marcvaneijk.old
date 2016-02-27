@@ -1,0 +1,264 @@
+---
+layout: post
+date: 2013-01-20
+author: Marc van Eijk
+title: Windows Azure Services for Windows Server
+tags: Azure Services, Hosting Service Providers, Hyper-V, IaaS, KATAL, Marc van Eijk, Network Virtualization, Network Virtualization Gateway, Service Management Portal, Service Provider Foundation, SP1, SPF, Stamp, Tenant, VMM 2012 SP1
+---
+Many businesses are changing their perspective on cloud services. A lot of arguments that prohibit acceptance of the cloud slowly start to crumble. Internet connectivity is a common good, bandwidths are increasing and even the legal aspects are dealt with. Instead of a threat the cloud now empowers possibilities. Microsoft anticipated on this change years ago with numerous game changing developments. They have set the bar with their public cloud offerings like Office365.com, Outlook.com and Bing.com just to name a few worldwide deployed services. They have even raised the bar further with their cloud operating system Windows Azure. Providing these services to millions of people gave Microsoft great insight.
+
+Leveraging the knowledge learned through their public cloud offerings, Microsoft has created a great platform for the private cloud with Windows Server 2012 and System Center 2012. This scalable solution provides businesses an elastic environment of pooled resources with self-service capabilities and usage based metering.
+
+Microsoft now takes it to the next level by bringing Windows Azure to Windows Server. This solution mainly focusses on service providers but if you do not consider yourself one, please continue reading. The new service has also immense potential for enterprise organizations and might even trigger IT organization to think about providing hosted services.
+
+01 Windows Azure for Windows Server
+
+Windows Azure for Windows Server consists of a Service Management Portal and a Service Management API. Microsoft has released a beta of Windows Azure for Windows Server with two services and will continue to add services over time. The first two services are high density website hosting and virtual machine provisioning and management. I will focus on the virtual machine provisioning service in this blog.
+
+Microsoft provides an end to end solution enabling service providers to create an IaaS (Infrastructure as a Service) offering. This end to end solution consists four layers.
+•Windows Server 2012: The virtualization layer
+•System Center VMM 2012 SP1: The management layer
+•Service Provider Foundation for SCVMM: Multitenancy for SCVMM and a REST ODATA API
+•Windows Azure For Windows Server (WA4WS): The Service Management Portal and API
+
+02 EndToEnd1
+
+Private Cloud
+
+Windows Server 2012 is the most cloud capable Operating System ever released. Combined with System Center Virtual Machine Manager 2012 as the management tool, they form the building blocks of the modern private cloud, providing scalability and availability features to meet even the most critical environments. Service Providers running hundreds or even thousands of workloads for their customers have these requirements. Leveraging the power of the private cloud, Microsoft enables multitenancy with the Service Provider Foundation (SPF). SPF also creates an industry standard Restful ODATA web service that developers can use for programming to System Center VMM 2012. This means that service providers can retain their current portal solutions and still benefit from the private cloud provided by Microsoft.
+
+Windows Azure
+
+Windows Azure runs tens of thousands of customers and hundreds are added to the platform each day. As you can imagine the management portal, the primary tool for this platform, is used heavily. Since the launch of Windows Azure on February 1, 2010 the management portal has evolved to fulfill a diversity of requirements, from browser independency to easy administrating, monitoring and diagnostics. Microsoft has taken these developments to complete their end to end offering for service providers and created a Service Management Portal combined with a Service Management API for Windows Server that are now available in Beta.
+
+
+
+Minimal Design
+
+Depending on the services you want to offer in your hosted environment the requirements for your infrastructure may vary. You will need the following for running the Virtual Machine role in the current Beta of the Service Management Portal as a bare minimum.
+•Domain controller
+•Physical server running Hyper-V
+•System Center VMM 2012 SP1 Beta
+•Service Provider Foundation SP1 Beta
+•SQL Server 2012 for System Center VMM 2012 SP1 Beta and Service Provider Foundation SP1 Beta
+•Service Management Portal Beta and Service Management API Beta
+•SQL Server 2012 for Service Management Portal Beta and Service Management API Beta
+
+The servers running Hyper-V, System Center VMM, Service Provider Foundation and their SQL Server are in the same domain. The Service Management Portal, the Service Management API, and their SQL Server can reside in a workgroup.
+
+03 WA4WS-Minimal-Design
+
+Redundancy
+
+In any serious production environment redundancy is a requirement. The Service Management Portal and the Service Management API can be installed on different machines. Information on high availability for these services is not disclosed in the Beta. All other services can be made highly available and documentation on this is published by Microsoft.
+
+04 WA4WS-Redundant-Design
+
+Stamps
+
+A Stamp is a concept introduced by the Service Provider Foundation and represents one System Center environment with a minimum requirement of System Center VMM, a virtualization host and the virtual machines managed by System Center VMM. The Service Provider Foundation allows Service Providers to place tenants on multiple stamps located in different datacenters and geographic locations.
+
+The redundancy within a stamp can now be combined with distribution of tenants across multiple stamps.
+
+05 WA4WS-Stamp-Design
+
+Clouds and Hosting Plans 
+
+System Center VMM abstracts the fabric from the self-service user. The abstracted elements are grouped in a cloud defined in System Center VMM. A cloud can consist of the following different elements.
+•Host Groups
+•Logical Network
+•VM Networks
+•Load Balancers
+•VIPs
+•Storage
+•Cloud Libraries
+•Capacity
+•Capability Profiles
+
+The Service Management Portal tenant access is based on hosting plans. A hosting plan is a template of settings that defines the scope for a tenant. A new hosting plan is private by default. A private hosting plan can be assign to a tenant. It is possible to make the hosting plan public. New tenants can sign up and subscribe to this public hosting plan. A hosting plan has a direct mapping to a cloud in System Center VMM.
+
+Tenants
+
+Tenants can manage their Virtual Machines through the Service Management Portal based on user roles to enforce the isolation of management. System Center VMM 2012 SP1 Beta has the following user roles.
+•Administrator
+•Fabric Administrator (Delegated Administrator)
+•Read-Only Administrator
+•Tenant Administrator
+•Application Administrator (Self-Service User)
+
+06 VMM-User-Roles
+
+The Service Management Portal Beta currently has two user roles.
+•Service Management Admin
+•Tenant Admin
+
+The Service Management Admin role performs the initial configuration of the Service Management sites and database and has full administrative rights in the Service Management Admin Site. The Tenant Admin is scoped to his Virtual Machines and VM Networks and bound to the actions assigned on these objects by the Service Management Admin role.
+
+There is a direct mapping between the Tenant Admin in the Service Management Portal and the Tenant Administrator role in System Center VMM 2012. An additional mapping from a new user role in the Service Management Portal to the Application Administrator (Self-Service User) in System Center VMM 2012 will probably be added in a future release of the Portal. The Tenant Admin can then delegate resources and capabilities to Application Administrators of the same tenant.
+
+VM Networks
+
+Isolation is an important aspect in any type of cloud. Especially when multiple customers are running on the same shared infrastructure. In traditional hosted environments isolation of virtual machines is taken care of in the physical networking layer with VLANs. Each customer is assign a VLAN and routing between the VLANs is disabled. With the development of software defined networking (SDN) this isolation is abstracted from the physical infrastructure to the software layer.
+
+Microsoft has equipped Windows Server 2012 with Network Virtualization (NVGRE). Combined with System Center VMM 2012 as the central policy management role, NVGRE enables tenant to bring their own IP subnet. The service provider is no longer confronted with IP renumbering requirements. For more information please read my blog on Network Virtualization.
+
+Prerequisites
+
+Before we get all exited and run setup it’s is a good idea to do some planning first. The walkthrough will resemble the minimal design referenced in minimal design picture. This design requires the following servers.
+
+Server name IP address Role 
+dc01.hyper-v.nu 172.28.50.1 VM running Windows Server 2012 domain controller 
+host.hyper-v.nu 172.28.50.10 Physical server running Windows Server 2012 with the Hyper-V role installed 
+vmm.hyper-v.nu 172.28.50.100 VM running Windows Server 2012 with System Center VMM 2012 SP1 Beta 
+spf.hyper-v.nu 172.28.50.101 VM running Windows Server 2012 for Service Provider Foundation SP1 Beta 
+sql.hyper-v.nu 172.28.50.102 VM running Windows Server 2012 with SQL Server 2012 for System Center VMM 2012 SP1 Beta and Service Provider Foundation SP1 Beta 
+smp.workgroup 172.28.50.200 VM running Windows Server 2012 for Service Management Portal Beta and Service Management API Beta 
+smp-sql.workgroup 172.28.50.201 VM running Windows Server 2012 with SQL Server 2012 for Service Management Portal Beta and Service Management API Beta 
+
+It is possible to configure this test environment on a single physical host (host.hyper-v.nu) and run the other servers as VMs on this single host.
+
+Note on SQL Server for the Service Management Portal
+
+SQL Server setup wizard defaults to a SQL collation that is not compatible with the Service Management Portal. During installation the SQL collation must be changed to SQL_Latin1_General_CP1_CI_AS
+
+Note on SQL Server for the Service Management Portal
+
+Choose Mixed Authentication mode and specify an SA password. You will need this SA password later.
+
+I will describe the installation steps for the Service Provider Foundation, the Service Management Portal and the Service Management API. If you need help on installing the other roles you can simply click the hyperlink on the product and it will take you to the corresponding TechNet documentation.
+
+When you have your test environment up and running (except for the Service Provider Foundation, the Service Management Portal and the Service Management API) it is a good idea to configure and test the required services in System Center Virtual Machine Manager 2012 SP1 Beta. We will later need these services in the Service Management Portal for creating a hosting plan. A hosting plan has the following requirements in System Center VMM.
+•Cloud
+•VM Template
+•Hardware Template
+•Network
+
+You can find the steps for creating these services in System Center VMM by clicking on the hyperlink of each service. You should configure a cloud and test a deployment of a VM Template to a host in this cloud from System Center VMM before continuing to the next step. This will prevent issues when you create a hosting plan.
+
+Installing the Service Provider Foundation
+
+The Service Provider Foundation was a separate download in the CTP of System Center SP1. In System Center SP1 Beta the Service Provider Foundation is added to the Orchestrator installation media. You can find more information on the System Center Orchestrator Engineering blog.
+
+The Service Provider Foundation setup wizard will check for a list of prerequisites. You should install:
+•System Center Virtual Machine Manager 2012 SP1 Beta Management Interface
+•Add roles and features wizard > Web Server (IIS) Customize the default by adding these role services •IIS Management | Scripts and Tools
+•IIS Security | Basic Security
+•IIS Security | Windows Authentication
+•IIS Application Development | ASP.NET 4.5
+
+•Add roles and features wizard > Features > .NET Framework 4.5 Features > WCF Services •HTTP Activation
+
+•Add roles and features wizard > Features > Management ODATA IIS Extensions
+
+Some components must be downloaded. There is no direct download link in the setup wizard so i have created those for you here.
+•WCF Data Services 5.0 for OData V3
+•ASP.NET MVC 4 RC
+
+When you have installed all components you are prompted to specify the SQL Server for the database. Here we specify the sql-smp.workgroup machine. Please note that you will have to open port 1433 in the firewall of the SQL Server. Next you need to enter the name and port of the Service Provider Foundation website. The default port for the SPF website is 8090.
+
+The installer will create three virtual directories in the Service Provider Foundation website. Each virtual directory will have permissions assigned to an Active Directory group. Each virtual directory will also have its own application pool and application pool identity. Setup configures the following three virtual directories
+•Admin
+•Provider
+•VMM
+
+07 SpfInstallAppPool 08 SpfInstallAppPool 09 SpfInstallAppPool
+
+Installation of the Service Management Portal and API
+
+Codename KATAL now officially named the Service Management Portal can be downloaded from http://www.microsoft.com/hosting/en/us/services.aspx. You have the option to download the express installer, which will install the Admin portal, the Tenant Portal and the Service Management API on a single machine. Alternatively you can download the Microsoft Web Platform Installer, which allows you to install the portals and the Service Management API on separate machines. In this test environment we will use the express installer. The installation wizard speaks for itself.
+
+Please note. Before continuing to the next step make sure that you have chosen the SQL_Latin1_General_CP1_CI_AS SQL collation when you installed your SQL Server 2012 on smp-sql.workgroup machine. If you have installed SQL with the default SQL Collation configuration of the Portal will fail.
+
+When the installation is completed setup will open the config site on https://localhost:30101. The browser will present a new wizard where you specify the SQL server for the Service Management Portal database, the SA password configured in smp-sql.workgroup and a PassPhrase for the Config Store.
+
+10 ConfigPortal
+
+Before setting up the connection between the Service Management Portal and the Service Provider Foundation it is important to understand that the Service Management Portal uses Basic Authentication to connect to the Service Provider Foundation web service. In the SPF documentation there is an entry called “To enable Service Provider Foundation for use with a portal or application requiring basic authentication” which describes the steps to support the basic authentication request. You can find the documentation here.
+•Make sure the SPF VMM app pool account is a VMM Full Admin
+•Add the SPF VMM app pool account to the SPF server’s local groups: SPF_Admin; SPF_VMM; SPF_Provider
+•On the SQL server being used by SPF, add a logon account for the SPF app pool account. Assign the sysadmin role to this logon account.
+
+The System Center Orchestrator product team has confirmed this as the required step. Good to see that hard work is appreciated.
+
+http://blogs.technet.com/b/orchestrator/archive/2012/10/23/how-to-register-spf-as-system-center-iaas-provider-for-windows-server-service-management-portal-amp-api.aspx
+
+Configuring and Operating the Service Management Portal
+
+The Service Management Portal admin site is the primary interface for the Portal Administrator. The admin site is configured on https://localhost:30091.
+
+The Service Provider Foundation must be registered in the Service Management Portal. Select the VM Clouds entry on the left menu and select Register SPF. Enter the SPF Service URL https://172.28.50.101:8090 and specify the service account you used for the SPF VMM app pool account.
+
+11 register spf
+
+Next the System Center Provider must be registered. Specify your System Center VMM server here and enter a friendly name for the Provider that will be used throughout the Service Management Portal.
+
+When the registration is completed you should see the number up VM Clouds in the left menu of the Admin Site in the Service Management Portal matching the number of Clouds in your System Center VMM environment.
+
+When the number of VM Clouds remains zero and you confirmed that in your System Center VMM environment you have at least one Cloud configured then the service account used to register SPF probably does not have the required permissions in System Center VMM.
+
+Now we need to create a Hosting Plan. The Hosting Plan has a one to one mapping to a cloud in System Center VMM. A cloud in System Center VMM has following requirements
+•VM Template
+•Hardware Template
+•Network
+
+When these requirements are met, you can create a Hosting Plan and attach it to this cloud. On the left menu in the Service Management Portal select Plans and add a new plan. Specify a name for the Hosting Plan and select the services that you would like to include in this plan. Check Virtual Machine Clouds and complete the wizard.
+
+Select the plan you just created and open its properties by clicking on it. Select Set Quotas.
+
+In the Virtual Machine Clouds specify the cloud provider. In a design with multiple stamps you will have multiple VM Cloud Providers (System Center VMM environments) in this example you will have one. Select the cloud you created in System Center VMM in the VM Cloud entry. Scroll down and select the VM template, the hardware template and the network, that you attached to the cloud in System Center VMM. You can optionally select advanced operations, but except for “connect to console of virtual machines” the operations are not functional in the Beta release of the Service Management Portal.
+
+12 HostingPlan
+
+You now have two options. You can make the Hosting Plan public and let a new user sign up and subscribe to a Hosting Plan or can create a user account and assign the private account to the new user.
+
+Open the User Accounts entry on the left menu in the Service Management Portal and select create new user. Specify an email address and a password and select the Hosting Plan that you want to assign to the new user.
+
+Tenant experience
+
+A tenant can manage virtual machines in the Service Management Portal tenant site. Each tenant can only manage his virtual machines. The Tenant site is configured on https://localhost:30081.
+
+A tenant can create a new virtual machine by selecting Virtual Machines in the left menu. The new virtual machine wizard present two options.
+•The quick create option allows the tenant to select a Hosting Plan, specify a name for the virtual machine, select the VM template and enter the password for the new virtual machine.
+•The custom create option displays the content of cloud library to the tenant, where he can select the Virtual Machine template for the new virtual machine.
+
+The new virtual machine wizard communicates to the Service Provider Foundation web service that communicates to System Center VMM and runs a new VM deployment job, based on the settings provided by the tenant in the wizard.
+
+13 CreateVMPortal
+
+The new virtual machines is displayed in the tenant portal and the progress matches the progress in System Center Virtual Machine Manager.
+
+14 Create VM VMM
+
+When the VM deployment in System Center VMM is completed, the tenant has the options to display the dashboard, some virtual machine settings and the networks and disks attached to the virtual machine.
+
+The dashboard show a usage graph for CPU, memory, storage and network that can be scoped to the last hour, the last day or the last month. In the beta this graph in not functional. The dashboard also displays the usage overview relative to the available resources in the hosting plan and a quick glance of some virtual machine settings (status, operating system, processors and IP addresses).
+
+15 VMDashboard
+
+The configure tab lets you adjust the name and description of the virtual machine and, if the VM template allows this, adjust the number of processors and memory assigned to the virtual machine.
+
+The Network tab displays the VM network(s) attached to the virtual machine. In the Beta you are unable to change these settings. The Disks tab displays the Disks attached to the virtual machine. In the Beta you are unable to add or remove disks.
+
+In the bottom menu the tenant has the options to start, stop, pause or connect to a virtual machine. When the tenant selects a running virtual machine that has an IP address configured and clicks on connect an popup will present an RDP file that you can run or save to disk. In the beta the RDP file will only contain the IP address configured in the Virtual Machine.
+
+16 rdp-file
+
+So you want to be a hoster?
+
+From a Service Provider perspective the Services Management Portal looks very promising. In the current Beta there is some functionality missing and compared to the cloud OS Windows Azure there are some features that need to be ported to the Service Management Portal.
+•TCP Endpoints. This would be a requirement. Integration of the Service Management Portal and the hosters firewall / load balancer. This functionality is available in Windows Azure and delegates firewall rules mapping the public IP and port to the virtual machine private IP and port.
+•Site to site VPN. Hybrid clouds are based on the principle of a single management environment for workloads running on different private, hosted and public clouds. For communication between these clouds site to site connectivity is a requirements. Multitenancy based on Network Virtualization enables organization to bring their own IP. Management of site to site connectivity with Network Virtualization gateway support for the tenant would be another requirements to really help Service Providers drive the adaption of cloud services.
+•VM Networks. A cloud in System Center VMM should be completely multitenant. A network is required when creating a hosting plan, this hosting plan has a one tot one mapping to a cloud in System Center VMM. I would suggest to create a logical network and attach it to a cloud. On top of this logical network create VM Networks with network virtualization that can not only be assigned to a single tenant but even be created by the tenant itself. In the Beta, all VM Networks created on top of the logical network assigned to the cloud are visible to all tenants.
+•Remote in to VM RDP Gateway with single sign on. The “connect to virtual machine” functionality in the Beta created an RDP file and injects the private IP address of the VM. To connect with this RDP file implies that the tenant has some kind of VPN connection. In Windows Azure there is a mapping with a TCP endpoint between a public IP and the private IP address of the Virtual Machine on a custom RDP port. Mark Russinovich indicates that future developments are expected in this area. It would be nice to see some kind of RD Gateway functionality. Maybe a single RD Gateway with single sign on enabled for the Service Management Portal tenant account. A multitenant RD Gateway.
+•Change owner of existing virtual machines. When the tenant creates a virtual machines from the Service Management Portal the owner in System Center VMM is set to the name of the tenant based backed with a GUID. It would be great to change the ownership of existing virtual machines to the GUID of the Tenant. It might be possible to do this with PowerShell.
+•Change SPF Registration URL and credentials. I have found myself reverting to a snapshot of my Service Management Portal and SQL Server VMs numerous times for testing different authentication scenarios. It would be much easier if the URL and the service account entered when registering SPF could be changed afterwards from the Service Management Portal admin site.
+
+Microsoft states that hosting Service Providers are critical in the adoption of cloud. With huge developments in technology driven from a multitenancy perspective, adjusting their licensing structure with License Mobility and now providing their fabulous Azure Portal for Windows Server they emphasize their commitment to hosting service provider. Their integrated platform enables transparent movement of virtual machines, services and applications between the private cloud, a hosted cloud and the public cloud with a unified management experience.
+
+For more information on check these videos
+
+Building a Next Generation Hosting Service Provider Cloud
+
+Enabling Hosted IaaS Clouds for Service Providers Using Microsoft System Center 2012 SP1 with Windows Server 2012
+
+Windows Azure Virtual Machines and Virtual Networks
