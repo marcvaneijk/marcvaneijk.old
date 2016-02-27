@@ -17,6 +17,8 @@ It was a very promising solution, but also had some shortcomings from a Service 
 
 A lot of great work has been done since the RTM version of Windows Azure for Windows Server. Not only have they implemented all these requirements for Service Providers, but they even pushed the envelope by implementing a lot of other great features. Because all these new functionalities deserve an easier and more clear name, the product is renamed to Windows Azure Pack.
 
+One Platform
+
 Microsoft has released the Preview bits for Windows Azure Pack for download through the Web Platform Installer that can be downloaded here.
 
 In the previous version (Windows Azure for Windows Server) the only way to connect to a virtual machine was by using the Remote Desktop Protocol and connect directly to the IP address of the virtual machine. This required that the virtual machine was running, RDP in the guest OS was enabled, firewall exclusions for RDP were in place and the virtual machine had a public IP address. This public IP address would then be injected in to an RDP file when a tenant used the connect button from the Service Management Portal.
@@ -51,6 +53,8 @@ The steps for configuring Console Connect for Windows Azure Pack preview, can be
 •Hyper-V hosts
 •Remote Desktop Gateway (only required for access from the internet)
 •Windows Azure Pack
+
+
 
 Certificate
 
@@ -123,8 +127,7 @@ We need to specify three values for the cmdlet.
 
 We can find the certificate thumbprint by running the following cmdlet.
 
-PS C:> $thumbprints = @(dir cert:localmachineMy | Where-Object { $_.subject -eq “CN=Remote Console Connect” } ).thumbprint 
-
+PS C:> $thumbprints = @(dir cert:localmachineMy | Where-Object { $_.subject -eq “CN=Remote Console Connect” } ).thumbprint
 PS C:> $thumbprints
 
 In my lab environment the Remote Desktop Gateway is located in a separate domain from the Hyper-V hosts and there is no name resolution from the DMZ domain to the management domain. In this blog I will configure Console Connect to use the IP address of the host to connect to.
@@ -132,7 +135,6 @@ In my lab environment the Remote Desktop Gateway is located in a separate domain
 Run the following cmdlets to configure System Center Service Provider Foundation 2012 R2 to use the certificate to create claims tokens.
 
 PS C:> import-module spfadmin
-
 PS C:> Set-SCSPFVmConnectGlobalSettings -AccessTokenLifetimeInMinutes 5 -CertificateThumbprint 9D726C513A9A5D358CE13F5E1682052C61A4C7DF -HostIdentityType IPv4
 
 You can verify your settings by running the cmdlet.
@@ -143,53 +145,29 @@ In the Windows Azure Pack preview bits there is a known issue with the RDP file 
 
 After installer URL rewrite on the System Center Service Provider Foundation 2012 R2 server open IIS manager, select the SPF website and open the URL rewrite feature. Select Add rule to start the Add rule wizard. Select to create a blank Outbound rule, give it a temporary name, type some text in the pattern field (we will replace these settings in a second) and select apply. Open the web.config file located in the SPF folder with notepad. If you did a default installation the web.config file is located in C:inetpubSPF. Replace the temporary outbound rule you just created with the following:
 
-
 <outboundRules>
-
 <clear />
-
 <rule name=”Fix gatewayaccesstoken” preCondition=”VMConsole RDP File”>
-
 <match filterByTags=”None” pattern=”gatewayeaccesstoken” />
-
 <conditions logicalGrouping=”MatchAll” trackAllCaptures=”true” />
-
 <action type=”Rewrite” value=”gatewayaccesstoken” />
-
 </rule>
-
 <rule name=”Fix gatewaycredentialssource” preCondition=”VMConsole RDP File”>
-
 <match filterByTags=”None” pattern=”gatewaycredentialssource:i:4″ />
-
 <conditions logicalGrouping=”MatchAll” trackAllCaptures=”true” />
-
 <action type=”Rewrite” value=”gatewaycredentialssource:i:5″ />
-
 </rule>
-
 <rule name=”Fix gatewayprofileusagemethod” preCondition=”VMConsole RDP File”>
-
 <match filterByTags=”None” pattern=”gatewayprofileusagemethod:i:0″ />
-
 <conditions logicalGrouping=”MatchAll” trackAllCaptures=”true” />
-
 <action type=”Rewrite” value=”gatewayprofileusagemethod:i:1″ />
-
 </rule>
-
 <preConditions>
-
 <preCondition name=”VMConsole RDP File”>
-
 <add input=”{REQUEST_URI}” pattern=”^.*(/VMConnection)$” />
-
 <add input=”{RESPONSE_CONTENT_TYPE}” pattern=”^application/x-rdp$” />
-
 </preCondition>
-
 </preConditions>
-
 </outboundRules>
 
 Save the web.config file and perform an IISReset.
@@ -209,23 +187,17 @@ Restart the Hyper-V Virtual Machine Management Service after importing the certi
 When authenticating tokens Hyper-V will only accept tokens that are signed using specific certificates and hashing algorithms. The TrustedIssuerCertificateHashes property is an array of certificate thumbprints. To configure the TrustedIssuerCertificateHashes property use the following cmdlet.
 
 $Server = “RES-HVT01.res.local”
-
 $Thumbprint = “9D726C513A9A5D358CE13F5E1682052C61A4C7DF”
-
 $TSData = Get-WmiObject -computername $Server -NameSpace “rootvirtualizationv2” -Class “Msvm_TerminalServiceSettingData”
-
-$TSClass = Get-WmiObject -computername $Server -NameSpace “rootvirtualizationv2” -Class “Msvm_TerminalService” 
-
+$TSClass = Get-WmiObject -computername $Server -NameSpace “rootvirtualizationv2” -Class “Msvm_TerminalService”
 $TSData.TrustedIssuerCertificateHashes = $Thumbprint
-
 $JobResult = $TSClass.ModifyServiceSettings($($TSData.GetText(‘CimDTD20’), $null))
 
 Replace the $Server variable with the FQDN of the host where you are running the script on.
 
 Replace the $Thumbprint variable the thumbprint of the certificate we create earlier. The cmdlet to retrieve the thumbprint is the same that we used before
 
-PS C:> $thumbprints = @(dir cert:localmachineMy | Where-Object { $_.subject -eq “CN=Remote Console Connect” } ).thumbprint 
-
+PS C:> $thumbprints = @(dir cert:localmachineMy | Where-Object { $_.subject -eq “CN=Remote Console Connect” } ).thumbprint
 PS C:> $thumbprints
 
 Remote Desktop Gateway
@@ -241,32 +213,24 @@ regsvr32 “C:Program FilesMicrosoft System Center 2012 R2Virtual Machine Manage
 When authenticating tokens the Remote Desktop Gateway will only accept tokens that are signed using specific certificates and hashing algorithms. The TrustedIssuerCertificateHashes property is an array of certificate thumbprints. This configuration is performed by setting the TrustedIssuerCertificate properties on the WMI FedAuthSettings class by using the following cmdlet.
 
 $Server = “rdgw.contoso.com”
-
-$Thumbprint = “9D726C513A9A5D358CE13F5E1682052C61A4C7DF “
-
+$Thumbprint = “9D726C513A9A5D358CE13F5E1682052C61A4C7DF ”
 $TSData = Get-WmiObject -computername $Server -NameSpace “rootTSGatewayFedAuth2” -Class “FedAuthSettings”
-
 $TSData.TrustedIssuerCertificates = $Thumbprint
-
 $TSData.Put() 
 
 Replace the $Server variable with the FQDN of the host where you are running the script on.
 
 Replace the $Thumbprint variable the thumbprint of the certificate we create earlier. The cmdlet to retrieve the thumbprint is the same that we used before
 
-PS C:> $thumbprints = @(dir cert:localmachineMy | Where-Object { $_.subject -eq “CN=Remote Console Connect” } ).thumbprint 
-
+PS C:> $thumbprints = @(dir cert:localmachineMy | Where-Object { $_.subject -eq “CN=Remote Console Connect” } ).thumbprint
 PS C:> $thumbprints
 
 The Authentication plugin should be set with the following PowerShell cmdlet.
 
 $g = Get-WmiObject -Namespace rootCIMV2TerminalServices -Class Win32_TSGatewayServerSettings
-
-$g.SetAuthenticationPlugin(“FedAuthAuthenticationPlugin”)
-
-$g.SetAuthorizationPlugin(“FedAuthAuthorizationPlugin”)
-
-$g.RecycleRpcApplicationPools()
+ $g.SetAuthenticationPlugin(“FedAuthAuthenticationPlugin”)
+ $g.SetAuthorizationPlugin(“FedAuthAuthorizationPlugin”)
+ $g.RecycleRpcApplicationPools()
 
 And finally create this registry key on the Remote Desktop Gateway server
 
