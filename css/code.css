@@ -1,10 +1,13 @@
 /* single word in normal text */
 code {
 background-color:  #f2f2f2;
+12px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+}
 
 /* codeblock */
 }
 .highlight  { 
   background: #f2f2f2; 
   padding: 10px;
+  12px Consolas, "Liberation Mono", Menlo, Courier, monospace;
 }
