@@ -8,8 +8,9 @@ code.highlighter-rouge {
 
 /* codeblock */
 
-.highlight  { 
+div.highlighter-rouge  { 
   background: #f2f2f2; 
+  padding: 20px;
   font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
   font-size: 14px;
 }
