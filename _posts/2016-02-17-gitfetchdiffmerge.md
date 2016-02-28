@@ -20,6 +20,7 @@ Git fetch origin master
 <img src="/images/2016-02-17/02-Fetch.png" width="600">
 
 The fetch command does not make any changes to your local clone yet. You can first evaluate the changes by running
+<!--more-->
 
 ```
 Git diff master origin
