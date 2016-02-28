@@ -15,30 +15,30 @@ Instead of pull (which does the fetch and merge), we can just fetch the changes 
 
 Git fetch origin master
 
-02 Fetch
+<img src="/images/2016-02-17/02-Fetch.png" width="400">
 
 The fetch command does not make any changes to your local clone yet. You can first evaluate the changes by running
 
 Git diff master origin
 
-03 Diff
+<img src="/images/2016-02-17/03-Diff.png" width="400">
 
 This will compare your master branch to the origin (your repository in GitHub). As you can see from the output we can now first solve the conflict manually, do a Git add and a commit and then merge. If you try to merge without solving the conflict first by running
 
 Git merge origin master
 
-04 MergeFailed
+<img src="/images/2016-02-17/04-MergeFailed.png" width="400">
 
 You will end up in the same position as the pull request. When you open the README.md file you’ll notice the same issue.
 
-05 Merge1
+<img src="/images/2016-02-17/05-Merge1.png" width="400">
 
 You resolve a conflict by editing the file to manually merge the parts of the file that Git had trouble merging. This may mean discarding either your changes or someone else’s or doing a mix of the two. You will also need to delete the ‘<<<<<<<‘, ‘=======’, and ‘>>>>>>>’ in the file.
 
-06 Merge2
+<img src="/images/2016-02-17/06-Merge2.png" width="400">
 
 Next perform an Git add and a Git commit.
 
-07 Commit
+<img src="/images/2016-02-17/07-Commit.png" width="400">
 
 After pushing your clone to GitHub you have successfully merged the local changes and the repository is in sync with your local clone. By using Git Fetch, Diff and Merge you are able to interact with your files at each step. Git Pull performs these steps in a single action.
