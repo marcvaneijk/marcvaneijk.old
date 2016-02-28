@@ -1,6 +1,7 @@
 /* single word in normal text */
 code {
-  background-color:  #f2f2f2;
+  background-color: #f2f2f2;
+  padding: 5px;
   font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
   font-size: 14px;
 }
