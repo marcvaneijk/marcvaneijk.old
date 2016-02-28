@@ -5,7 +5,7 @@ author: Marc van Eijk
 title: Azure Resource Manager – Git Fetch, Diff and Merge
 tags:
 ---
-As a follow up to my earlier blog Azure Resource Manager – Getting started with GitHub, I got asked how to look at the differences between a repository in GitHub and your local clone before merging all the changes.
+As a follow up to my earlier blog [Azure Resource Manager – Getting started with GitHub](/2016/02/03/githubstart), I got asked how to look at the differences between a repository in GitHub and your local clone before merging all the changes.
 
 As an alternative to Git pull you can also perform the individual commands (fetch and merge). This will allow you to get the changes, evaluate potential conflicts and solve them first, before you merge. Let’s start with the same example as in Azure Resource Manager – Getting started with GitHub. We have a repository in GitHub with a README.md file already in there and we create a local clone. After we make a change to the README.md file locally, we also make a change to the file directly on GitHub.
 
