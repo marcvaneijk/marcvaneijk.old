@@ -5,7 +5,7 @@ author: Marc van Eijk
 title: Azure Resource Manager – Validate all template functions
 tags:
 ---
-In your deployment templates for Azure Resource Manager, you can use all kind of template functions. These functions can perform a variety of actions, from retrieving information to calculating numbers and changing string values. You can find a description of these template functions (including some examples) here: https://azure.microsoft.com/en-us/documentation/articles/resource-group-template-functions/
+In your deployment templates for Azure Resource Manager, you can use all kind of template functions. These functions can perform a variety of actions, from retrieving information to calculating numbers and changing string values. You can find a description of these template functions (including some examples) [here](https://azure.microsoft.com/en-us/documentation/articles/resource-group-template-functions/)
 
 The list of functions retrieved from the article at the time of writing this blogpost are grouped in the following categories.
 
@@ -20,36 +20,40 @@ The list of functions retrieved from the article at the time of writing this blo
 - mul
 - sub
 
-String functions
-•base64
-•concat
-•padLeft
-•replace
-•split
-•string
-•Substring
-•toLower
-•toUpper
-•Trim
-•uniqueString
-•Uri
+**String functions**
 
-Array functions
-•Concat
-•Length
+- base64
+- concat
+- padLeft
+- replace
+- split
+- string
+- substring
+- toLower
+- toUpper
+- trim
+- uniqueString
+- uri
 
-Deployment value functions
-•deployment
-•Parameters
-•Variables
+**Array functions**
 
-Resource functions
-•listkeys
-•providers
-•reference
-•resourceGroup
-•resourceId
-•Subscription
+- concat
+- length
+
+**Deployment value functions**
+
+- deployment
+- parameters
+- variables
+
+**Resource functions**
+
+- listkeys
+- providers
+- reference
+- resourceGroup
+- resourceId
+- subscription
 
 Based the template functions documentation I have created five ARM deployment templates, that will execute each function for a given category. The templates will not create any resources (unless necessary for the function). You can use the output section see the result of the functions. The templates can be found in my GitHub repository here:
 
