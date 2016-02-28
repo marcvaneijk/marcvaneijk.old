@@ -1,5 +1,5 @@
 /* single word in normal text */
-code .highlighter-rouge {
+code {
   background-color: #f2f2f2;
   padding: 5px;
   font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
@@ -10,7 +10,6 @@ code .highlighter-rouge {
 
 .highlight  { 
   background: #f2f2f2; 
-  padding: 15px;
   font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
   font-size: 14px;
 }
