@@ -9,7 +9,7 @@ As a follow up to my earlier blog [Azure Resource Manager – Getting started wi
 
 As an alternative to Git pull you can also perform the individual commands (fetch and merge). This will allow you to get the changes, evaluate potential conflicts and solve them first, before you merge. Let’s start with the same example as in Azure Resource Manager – Getting started with GitHub. We have a repository in GitHub with a README.md file already in there and we create a local clone. After we make a change to the README.md file locally, we also make a change to the file directly on GitHub.
 
-![](/images/2016-02-17/01-LocalEdit.png)
+<img src="/images/2016-02-17/01-LocalEdit.png" width="200">
 
 Instead of pull (which does the fetch and merge), we can just fetch the changes from the origin.
 
