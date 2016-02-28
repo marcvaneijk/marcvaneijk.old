@@ -9,15 +9,16 @@ In your deployment templates for Azure Resource Manager, you can use all kind of
 
 The list of functions retrieved from the article at the time of writing this blogpost are grouped in the following categories.
 
-Numeric functions
-•add
-•copyIndex
-•div
-•int
-•length
-•mod
-•mul
-•sub
+**Numeric functions**
+
+- add
+- copyIndex
+- div
+- int
+- length
+- mod
+- mul
+- sub
 
 String functions
 •base64
