@@ -1,7 +1,6 @@
-/* single word in normal text */
-code.highlighter-rouge {
-  background-color: #f2f2f2;
-  padding: 5px;
+/* code font */
+
+code {
   font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
   font-size: 14px;
 }
@@ -11,6 +10,13 @@ code.highlighter-rouge {
 div.highlighter-rouge  { 
   background: #f2f2f2; 
   padding: 20px;
-  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
-  font-size: 14px;
 }
+
+/* single word in normal text */
+
+code.highlighter-rouge {
+  background-color: #f2f2f2;
+  padding: 5px;
+}
+
+
