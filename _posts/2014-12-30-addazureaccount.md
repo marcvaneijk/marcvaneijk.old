@@ -15,9 +15,9 @@ The sharp observer will notice that someone at Microsoft needs to put a penny in
 
 You can use your Microsoft account or Organizational account to login without the need of any management certificate or publish settings file. A description of both account types can be found [here](http://msdn.microsoft.com/en-us/subscriptions/dn531048.aspx).
 
-Organizational account is an account created by an organization’s administrator to enable a member of the organization access to all Microsoft cloud services such as Microsoft Azure, Windows Intune or Office 365. An Organizational account can take the form of a user’s organizational email address, such as username@orgname.com, when an organization federates or synchronizes its Active Directory accounts with Azure Active Directory.
-
-Microsoft account, created by a user for personal use, is the new name for what used to be called “Windows Live ID”. The Microsoft account is the combination of an email address and a password that a user uses to sign in to all consumer-oriented Microsoft products and cloud services such as Outlook (Hotmail), Messenger, OneDrive, MSN, Windows Phone or Xbox LIVE. If a user uses an email address and password to sign in to these or other services, then the user already has a Microsoft account. But the user can also sign up for a new one at any time.
+> Organizational account is an account created by an organization’s administrator to enable a member of the organization access to all Microsoft cloud services such as Microsoft Azure, Windows Intune or Office 365. An Organizational account can take the form of a user’s organizational email address, such as username@orgname.com, when an organization federates or synchronizes its Active Directory accounts with Azure Active Directory.
+> 
+> Microsoft account, created by a user for personal use, is the new name for what used to be called “Windows Live ID”. The Microsoft account is the combination of an email address and a password that a user uses to sign in to all consumer-oriented Microsoft products and cloud services such as Outlook (Hotmail), Messenger, OneDrive, MSN, Windows Phone or Xbox LIVE. If a user uses an email address and password to sign in to these or other services, then the user already has a Microsoft account. But the user can also sign up for a new one at any time.
 
 I have two different accounts. One account is an Organizational account and the other is a Microsoft account.
 
