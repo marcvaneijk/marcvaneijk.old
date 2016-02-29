@@ -25,7 +25,7 @@ https://github.com/Azure/AzureStack-QuickStart-Templates/blob/master/Sample%20RE
 
 If you are not sure how to get it over to your own repository, just click on the “Raw” button on the top left of the menu bar and you can copy and paste it into your own README.md file.
 
-094be8c
+<img src="/images/2016-02-10/094be8c.jpg" width="600">
 
 You can also do this the GitHub way. If you are completely new to GitHub, have a look at [this blog](/2016/02/03/githubstart.html) to get started.
 
