@@ -142,18 +142,18 @@ The repository we created in our GitHub account is only available on the hosted 
 
 Open the command line on the local machine. When you clone a repository from the command line, Git will create the clone in the current path. First browse to the folder where you want the clone created. Each clone will git its own folder, so you just need a root folder (e.g. c:\templates). Browse to the root folder.
 
-18 Clone1
+<img src="/images/2016-02-03/18-Clone1.png" width="700">
 
 Next we need lookup the Git endpoint of our GitHub repository. You can find the endpoint by browsing GitHub (if you are not signed in, sign in with the credentials you created earlier). Select our first repository. On the top the endpoint for our repository is displayed. You can click the copy Icon on the right (or directly copy the URI).
 
-19 Clone2
+<img src="/images/2016-02-03/19-Clone2.png" width="700">
 
 Type “git clone <the repository endpoint>” in you command line. 
 ```
 git clone https://github.com/marcvaneijkdemo/MyFirstRepository.git
 ```
 
-20 Clone3
+<img src="/images/2016-02-03/20-Clone3.png" width="700">
 
 We’ll get a warning that we are cloning an empty repository. You can ignore that, because we are doing just that!
 
@@ -172,11 +172,11 @@ Now let’s see how cloning in GitHub Desktop works.
 
 There are two ways to clone a repository with GitHub Desktop. You can open GitHub Desktop, Click the plus icon on the top left and select clone. The UI connects to your GitHub account (remember you specified your GitHub credentials in GitHub Desktop earlier) and show the repositories on your account. Select the repository you want to clone and click “Clone <RepositoryName>”. You are prompted to select a local path for you clone. The default location is the path we specified in the installation of GitHub Desktop earlier. You can also select a different path. In the folder you select, a subfolder is created with the name of the repository. This folder only contains a hidden .git folder that is used by git for versioning data.
 
-21 GitHubD clone1
+<img src="/images/2016-02-03/21-GitHubD-clone1.png" width="700">
 
 It also possible to browse GitHub, select your repository and click the “Set up in Desktop” button.
 
-22 GitHubD clone2
+<img src="/images/2016-02-03/22-GitHubD-clone2.png" width="700">
 
 The rest of the steps are the same as cloning the repository directly from GitHub Desktop.
 
@@ -186,7 +186,7 @@ Now that we have a local copy of our repository let’s make some changes to it.
 
 If you create a README file in the root of your repository, GitHub will automatically render the content of the file on the start page of your repository. You can create a README in plain text or use markdown. Markdown allows you to enhance your text. Let’s start with a super simple example using plain text. Open Windows Explorer and browse to the folder of your cloned repository. Create a new text file in the folder. Add a description about your repository and save the file. Rename the file, including the file extension, to README.md (README in uppercase and md in lowercase).
 
-23 README1
+<img src="/images/2016-02-03/23-README1.png" width="700">
 
 Now that we made some changes to our local clone, we need to sync that to our repository on GitHub.
 
@@ -198,7 +198,7 @@ To sync the changes we have made locally to our repository in GitHub we use a co
 
 Open a command prompt and change the path to the local repository folder
 
-24 GitPush1
+<img src="/images/2016-02-03/24-GitPush1.png" width="700">
 
 When we cloned the repository Git created a hidden folder called .get in the repository folder. This hidden folder is used by Git for versioning, but also contains some information about the source repository (called origin). We can get the remote endpoint that are currently configured for this local clone.
 
@@ -206,7 +206,7 @@ When we cloned the repository Git created a hidden folder called .get in the rep
 git remote –v
 ```
 
-25 GitPush2
+<img src="/images/2016-02-03/25-GitPush2.png" width="700">
 
 You will see two entries with the name origin (the source of the clone). A synchronization always is a one way process. One entry is for retrieving updates from GitHub to your local clone (fetch) and one entry is for syncing your local changes to the repository on GitHub (push). Both entries are configured with the public endpoint of your repository. We can use the alias original in our push command. But before we can push the changes to our repository we need to update the local index (in the hidden .git folder) with the changes. You can add changed files individually (be specifying the filename), or add all changes in the folder (by specifying a dot) to the index.
 
@@ -214,7 +214,7 @@ You will see two entries with the name origin (the source of the clone). A synch
 git add .
 ```
 
-26 GitPush3
+<img src="/images/2016-02-03/26-GitPush3.png" width="700">
 
 The changes in the updated index can be recorded in a snapshot of our local clone. The snapshot is called a commit (you are committing the changes). Git provides you with the option to select a commit of the local clone to work with and based on its versioning system, it will revert the local clone to the moment in time snapshot of your folder. You can understand that a commit is imported, because if you made changes to the local clone that are destructive to your work, you can just revert to the last working commit and resume your work from there. When you commit you need to specify a comment. These comments are very important as they will inform you and other GitHub users of the changes you made in this commit when looking at it later, without revisiting all the actual code you changed. Make sure you specify a descriptive comment.
 
@@ -222,25 +222,25 @@ The changes in the updated index can be recorded in a snapshot of our local clon
 git commit -m “added README.md”
 ```
 
-27 GitPush4
+<img src="/images/2016-02-03/27-GitPush4.png" width="700">
 
 The snapshot we just created is still on the local clone. We can resume working on the local clone, by adding, changing or deleting files and folder. Recording the changes in more commits, by running the same “git commit” command (each with their own comment). All these changes and commits are on your local machine. Nobody but you is able to access the folder and if your machine crashes, all your work is gone. To sync your work to your repository in GitHub we need to “push” the commits. Before we push our changes to GitHub, it is crucial to understand that the content on your GitHub repository might have changed while you were working with the local clone. You might have changes files directly on GitHub or other users might have contributed to your code (which we will cover later). But if you have a file that is changed on GitHub and the same file in your clone that you changed locally, what change is authoritive? Git does not know. To prevent this issue you need to get the latest version from GitHub first before you push your local changes to it. There are two ways to do this with Git. We can either fetch and merge or we can pull. Pull is a combination of (fetch and merge in one action). Pull seems to be the logical thing to do right? But there is a caveat. Let’s explain with an example.
 
 Assume we have a repository with a README.md file already in there. We create a local clone. After we make a change to the README.md file locally.
 
-28 GitConflict1
+<img src="/images/2016-02-03/28-GitConflict1.png" width="700">
 
 We also make a change to the file directly on GitHub
 
-29 GitConflict2
+<img src="/images/2016-02-03/29-GitConflict2.png" width="700">
 
 Now remember, mu GitHub repository and the local clone do not sync automatically. Doing a pull will result a conflict for this file.
 
-30 GitConflict3
+<img src="/images/2016-02-03/30-GitConflict3.png" width="700">
 
 You can see that the pull request does an auto-merge of README.md (pull is a combination of fetch and merge). And it notifies us there is a merge conflict in README.md. The merge is performed in the local clone. The content of the README.md is updated by Git with the conflicting values.
 
-31 GitConflict4
+<img src="/images/2016-02-03/31-GitConflict4.png" width="700">
 
 The auto-merge will only update the conflicting code within a file. All none conflicting code is not touched.
 
@@ -248,11 +248,11 @@ If you want more control over the merging process you can use the fetch and merg
 
 You resolve a conflict by editing the file to manually merge the parts of the file that git had trouble merging. This may mean discarding either your changes or someone else’s or doing a mix of the two. You will also need to delete the ‘<<<<<<<‘, ‘=======’, and ‘>>>>>>>’ in the file.
 
-32 GitConflict5
+<img src="/images/2016-02-03/32-GitConflict5.png" width="700">
 
 Next perform an `git add` and a `git commit`.
 
-33 GitConflict6
+<img src="/images/2016-02-03/33-GitConflict6.png" width="700">
 
 We already saw that Git created an alias for the endpoint of our repository called origin. By running the following command we will push the master branch into the origin.
 
@@ -260,13 +260,13 @@ We already saw that Git created an alias for the endpoint of our repository call
 git push origin master
 ```
 
-34 GitPush
+<img src="/images/2016-02-03/34-GitPush.png" width="700">
 
 You can read this line as push into origin (our source repository on GitHub) the master. The master you say? What is the master? The master is the name of a branch. We’ll cover branches later in this blog. Just know for now that each repository has a branch called master and could potentially contain more branches.
 
 If we now take a look at our repository on GitHub we can see that the start page has been updated. It shows the content of the repository (the README.md file) and it also displays the content of the README.md file directly below the contents of the repository (with the changes we made locally). The endpoint of the repository (we used for creating the clone with Git) and the download to GitHub desktop button are moved to the top of the repository). The comment is displayed for the files that where changed in this commit.
 
-35 GitConflict7
+<img src="/images/2016-02-03/35-GitConflict7.png" width="700">
 
 It might seem like a lot of steps to go through. But if we summarize the steps, it’s just four lines of code.
 
@@ -281,59 +281,59 @@ Git push origin master
 
 GitHub Desktop provides you with a UI to perform the same steps for committing and pushing your changes. After you create the README.md file in your empty local clone, the GitHub Desktop will pick up these changes and display them in the client.
 
-36 GitHubD Push1
+<img src="/images/2016-02-03/36-GitHubD-Push1.png" width="700">
 
 You can even click on the file and the changes you made will be visible (in green what you added and in red what you deleted)
 
-37 GitHubD Push2
+<img src="/images/2016-02-03/37-GitHubD-Push2.png" width="700">
 
 There is no need to add the files to the index. GitHub client will do that for you. You will need to commit and push the changes. All you need to do to make a commit, after you made changes to the local clone, is to specify a title (comment) and a description for the commit and click “Commit to master”.
 
-38 GitHubD Push3
+<img src="/images/2016-02-03/38-GitHubD-Push3.png" width="700">
 
 On the top right of the GitHub desktop you will see a new moment in time (commit) in the timeline. Clicking on a circle in that “timeline” shows you the changes made in that commit. Clicking on the last icon (most right circle), presents the current state.
 
-39 GitHubD Sync
+<img src="/images/2016-02-03/39-GitHubD-Sync.png" width="700">
 
 The last step to take is to push the commit to GitHub. You can do that by clicking the “Sync” button on the top right of GitHub Desktop. If it is the first time you are pushing to a new repository, the button will be called “Publish”. For any subsequent pushes the button is called Sync.
 
-40 GitHubD Publish
+<img src="/images/2016-02-03/40-GitHubD-Publish.png" width="700">
 
 There is an important difference with the command line Git client here. Clicking the Sync button will not only push the local changes to GitHub, but it will first pull possible changes from GitHub first. These possible changes might be caused by you editing files in the repository directly in GitHub. If that is the case, GitHub will notify you that a conflict exists.
 
-41 GitHubD Conflict1
+<img src="/images/2016-02-03/41-GitHubD-Conflict1.png" width="700">
 
 It will then show what files has a conflict and what the conflict is.
 
-42 GitHubD Conflict2
+<img src="/images/2016-02-03/42-GitHubD-Conflict2.png" width="700">
 
 If we look at the content of the file, we can see that the conflicts has been marked in the content of the file too.
 
-43 GitHubD Conflict3
+<img src="/images/2016-02-03/43-GitHubD-Conflict3.png" width="700">
 
 We can solve this conflict, the same way as described in the Git procedure. Edit the file to manually to merge the parts of the file that GitHub had trouble merging. This may mean discarding either your changes or someone else’s or doing a mix of the two. You will also need to delete the ‘<<<<<<<‘, ‘=======’, and ‘>>>>>>>’ in the file.
 
-44 GitHubD Conflict4
+<img src="/images/2016-02-03/44-GitHubD-Conflict4.png" width="700">
 
 Save the file. GitHub will pick up the new changes.
 
-45 GitHubD Conflict5
+<img src="/images/2016-02-03/45-GitHubD-Conflict5.png" width="700">
 
 Make a new commit.
 
-46 GitHubD Conflict6
+<img src="/images/2016-02-03/46-GitHubD-Conflict6.png" width="700">
 
 And sync to GitHub by clicking the “Sync” button on the top right. Note the icon of the commit is different, because of the merge.
 
-47 GitHubD Conflict7
+<img src="/images/2016-02-03/47-GitHubD-Conflict7.png" width="700">
 
 The Sync now completes successfully and the README.md file on the GitHub repository contains the final edits we just made locally.
 
-48 GitHubD Conflict8
+<img src="/images/2016-02-03/48-GitHubD-Conflict8.png" width="700">
 
 There is much more possible with the commit, push and pull commands, but this should give you enough for basic operations. It is very important to commit and push frequently. That will ensure your work is safe.
 
-49 fire
+<img src="/images/2016-02-03/49-fire.png" width="700">
 
 ## Enhance the README
 
