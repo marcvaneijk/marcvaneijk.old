@@ -13,7 +13,7 @@ For most situations I use Microsoft Azure Active Directory authentication. The p
 
 The sharp observer will notice that someone at Microsoft needs to put a penny in a jar every time the Add-Azure cmdlet is used.
 
-You can use your Microsoft account or Organizational account to login without the need of any management certificate or publish settings file. A description of both account types can be found here.
+You can use your Microsoft account or Organizational account to login without the need of any management certificate or publish settings file. A description of both account types can be found [here](http://msdn.microsoft.com/en-us/subscriptions/dn531048.aspx).
 
 Organizational account is an account created by an organization’s administrator to enable a member of the organization access to all Microsoft cloud services such as Microsoft Azure, Windows Intune or Office 365. An Organizational account can take the form of a user’s organizational email address, such as username@orgname.com, when an organization federates or synchronizes its Active Directory accounts with Azure Active Directory.
 
@@ -21,18 +21,13 @@ Microsoft account, created by a user for personal use, is the new name for what 
 
 I have two different accounts. One account is an Organizational account and the other is a Microsoft account.
 
+<img src="/images/2014-12-30/02-msn.png" width="700"> The Microsoft account is used for creating a subscription in Azure.
 
-<img src="/images/2014-12-30/02-msn.png" width="700">
-
-The Microsoft account is used for creating a subscription in Azure.
-
-<img src="/images/2014-12-30/03-marcvaneijk.com_.png" width="700">
-The Organizational account is used for creating an office 365 subscription. I also created a Azure subscription with this account.
+<img src="/images/2014-12-30/03-marcvaneijk.com_.png" width="700"> The Organizational account is used for creating an office 365 subscription. I also created a Azure subscription with this account.
 
 Besides these two personal accounts I also have a business email address.
 
-<img src="/images/2014-12-30/04-inovativ.png" width="700">
-This business email address is not enabled for any Microsoft services whatsoever.
+<img src="/images/2014-12-30/04-inovativ.png" width="700"> This business email address is not enabled for any Microsoft services whatsoever.
 
 For provisioning a resource group through PowerShell I executed the Add-AzureAccount cmdlet and authenticated with my Microsoft account.
 
@@ -40,17 +35,15 @@ For provisioning a resource group through PowerShell I executed the Add-AzureAcc
 
 The cmdlet returns an ID, Type, Subscriptions and Tenants. To interact with Azure Resource Manager you need to switch to the Azure Resource Manager module by running the following cmdlet.
  
-PowerShell
+```
 Switch-AzureMode -Name AzureResourceManager
-
-Switch-AzureMode -Name AzureResourceManager
+```
 
 To retrieve a list of the currently available  Azure Resource Manager templates.
  
-PowerShell
+```
 Get-AzureResourceGroupGalleryTemplate
-
-Get-AzureResourceGroupGalleryTemplate
+```
 
 But instead of getting a list of templates, I got an error.
 
@@ -60,10 +53,9 @@ Your Azure credentials have not been set up or have expired, please run Add-Azur
 
 To retrieve the information of the account used in for session run
 
-PowerShell
+```
 Get-AzureAccount
-
-Get-AzureAccount
+```
 
 The output of the command confused me. The ID was set to my business email address.
 
@@ -75,10 +67,9 @@ As specified before, this account is not enabled for any Microsoft services what
 
 I started by removing all associated environments, subscriptions and accounts in the PowerShell session by running
 
-PowerShell
+```
 Clear-AzureProfile
-
-Clear-AzureProfile
+```
 
 Performed the same Add-AzureAccount procedure and validation with my Microsoft account again. It resulted in the same user ID mismatch. Is this a problem with the Azure PowerShell module, my machine or something in my subscription? Quickly deployed a new VM from our Windows Azure Pack lab environment and installed the latest PowerShell (0.8.11) module on it. Performed the Add-AzureAccount on the new VM with the same User ID mismatch as result. So the issue was not caused by machine.
 
@@ -110,6 +101,6 @@ Since this email address was not enabled for Microsoft services whatsoever, it w
 
 Unlike my own Office 365 subscription, I do not have access to the user administration pages of the microsoft.onmicrosoft.com directory (would be nice dough). To prevent the user mismatch with Add-AzureAccount just create a new user in your Azure AD, add that user as a co-administrator to the subscription and use that user for authenticating in the Add-Azure cmdlet. That was the easy way.
 
-I took the hard way. Reached out to one of the PMs owning the Azure PowerShell module. I explained my findings to him by sharing my screen in a Lync session. Two days later the issue was fixed. Kudos!! The fix is added in the latest version of the Azure PowerShell module (0.8.12) that you can download with the Web Platform Installer.
+I took the hard way. Reached out to one of the PMs owning the Azure PowerShell module. I explained my findings to him by sharing my screen in a Lync session. Two days later the issue was [fixed](https://github.com/Azure/azure-powershell/compare/334b96ace8ee2db5b204d7b79ebfdde3a865f934...v0.8.12-December2014). Kudos!! The fix is added in the latest version of the Azure PowerShell module (0.8.12) that you can download with the Web Platform Installer.
 
 Happy new year!!
