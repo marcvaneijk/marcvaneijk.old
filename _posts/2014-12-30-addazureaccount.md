@@ -26,7 +26,7 @@ I have two different accounts. One account is an Organizational account and the 
 
 The Microsoft account is used for creating a subscription in Azure.
 
-<img src="/images/2014-12-30/03-marcvaneijk.com.png" width="700">
+<img src="/images/2014-12-30/03-marcvaneijk.com_.png" width="700">
 The Organizational account is used for creating an office 365 subscription. I also created a Azure subscription with this account.
 
 Besides these two personal accounts I also have a business email address.
