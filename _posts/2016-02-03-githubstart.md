@@ -34,6 +34,7 @@ Besides the deployment of the resources Microsoft Azure and Microsoft Azure Stac
 ## Collaboration
 
 When I started working with ARM Templates over a year ago, I quickly understood the basic template language. Some simple templates, like creating a storageAccount or a virtualNetwork, helped with that understanding. I stored the scripts on my OneDrive, so I could easily access them from anywhere. Really great for myself, but then I had some friends from the community looking for some samples. Sending them an email with my script, resulted in two copies of the same script. They were editing their own version and so was I. That wasn’t a really good experience. By that time Microsoft published a set of quickstart templates on GitHub. The first reaction I had was GitHub = Developer. I was able to go the URI of the quickstart templates open a template and copy/paste in my own environment for further editing. A great location to look at these samples, but I didn’t have a clue how to contribute to these templates. I did see other people adding their templates and contributing to other templates.
+<!--more-->
 
 ## What is GitHub
 
