@@ -24,8 +24,8 @@ Azure Resource Manager was announced at Build in April, 2014. This introduced a 
 ## Template orchestration
 
 Azure Resource Manager uses templates to orchestrate the deployment of resources in Microsoft Azure and Microsoft Azure Stack. These templates are configured in JSON (JavaScript Object Notation) language. The templates are declarative and idempotent.
-•Declarative. You define the end state and the dependencies of the resources that comprise your application in the template. The platform converts the declarative template to imperative code that deploys your resources
-•Idempotent. After you deployed your resources with a template and make an update to it, you can rerun the updated template to the same resource group. The updated resources will be added by the deployment.
+- Declarative. You define the end state and the dependencies of the resources that comprise your application in the template. The platform converts the declarative template to imperative code that deploys your resources
+- Idempotent. After you deployed your resources with a template and make an update to it, you can rerun the updated template to the same resource group. The updated resources will be added by the deployment.
 
 Besides the deployment of the resources Microsoft Azure and Microsoft Azure Stack provide you with consistent VM extensions. A VM extension allows you to pass scripts to the Operating System. A great example of this is the PowerShell DSC VM extension. PowerShell DSC is also Declarative and idempotent. The VM extension is a resource in a JSON template and you can create dependencies on these resources as well. So if you want to deploy a complete multitier application (for instance a SharePoint farm), you can deploy that as one integral process. This forms a solid foundation for IT PROs and DEVs to bundle their knowledge and drastically improve the agility of their efforts.
 
@@ -42,9 +42,9 @@ GitHub is a web-based Git repository hosting service. I’ll try to simplify wit
 ## Signup on GitHub
 
 To get started with GitHub, you will need a GitHub account. Browse to http://www.github.com. You’ll need to enter
-•a username (this name must be unique on GitHub and will be visible to all GitHub users),
-•an email address (this email address will be used to validate your account and receive notification, your email address will not be visible to all GitHub users)
-•a password (the username and the password are used to sign in to GitHub and for contributing)
+- a username (this name must be unique on GitHub and will be visible to all GitHub users),
+- an email address (this email address will be used to validate your account and receive notification, your email address will not be visible to all GitHub users)
+- a password (the username and the password are used to sign in to GitHub and for contributing)
 
 When you have submitted the values, you can select a plan.
 
@@ -75,8 +75,8 @@ When you click “create repository” you are redirected to the repository star
 ## Clients
 
 There are two common clients you can use to interact with GitHub.
-•Git is the engine of the local version control system. Git provides a command line interface and is the only tool that allows you to run all Git commands.
-•Github Desktop is an application with a graphical UI that allows you to perform all basic Git activities without a command line.
+- Git is the engine of the local version control system. Git provides a command line interface and is the only tool that allows you to run all Git commands.
+- Github Desktop is an application with a graphical UI that allows you to perform all basic Git activities without a command line.
 
 For the purpose of this blog we’ll look at the operations from the perspective of each tool. I’ll describe each procedure for Git console and for Git Desktop. You do not need both clients. Based on your preference you can install and use the client that works best for you.
 
@@ -148,7 +148,10 @@ Next we need lookup the Git endpoint of our GitHub repository. You can find the 
 
 19 Clone2
 
-Type “git clone <the repository endpoint>” in you command line. In this example “git clone https://github.com/marcvaneijkdemo/MyFirstRepository.git”
+Type “git clone <the repository endpoint>” in you command line. 
+```
+git clone https://github.com/marcvaneijkdemo/MyFirstRepository.git
+```
 
 20 Clone3
 
@@ -156,11 +159,12 @@ We’ll get a warning that we are cloning an empty repository. You can ignore th
 
 If you browse to the current path in Windows Explorer, you will notice that a new folder with the repository name. This folder only contains a hidden .git folder that is used by git for versioning data.
 
-Not too bad right? Just command and you created a clone.
+Not too bad right? Just a single command and you created a clone.
 
+```
 ## git clone <the repository endpoint>
-
 Git clone https://github.com/marcvaneijkdemo/MyFirstRepository.git
+```
 
 Now let’s see how cloning in GitHub Desktop works.
 
@@ -198,19 +202,25 @@ Open a command prompt and change the path to the local repository folder
 
 When we cloned the repository Git created a hidden folder called .get in the repository folder. This hidden folder is used by Git for versioning, but also contains some information about the source repository (called origin). We can get the remote endpoint that are currently configured for this local clone.
 
+```
 git remote –v
+```
 
 25 GitPush2
 
 You will see two entries with the name origin (the source of the clone). A synchronization always is a one way process. One entry is for retrieving updates from GitHub to your local clone (fetch) and one entry is for syncing your local changes to the repository on GitHub (push). Both entries are configured with the public endpoint of your repository. We can use the alias original in our push command. But before we can push the changes to our repository we need to update the local index (in the hidden .git folder) with the changes. You can add changed files individually (be specifying the filename), or add all changes in the folder (by specifying a dot) to the index.
 
+```
 git add .
+```
 
 26 GitPush3
 
 The changes in the updated index can be recorded in a snapshot of our local clone. The snapshot is called a commit (you are committing the changes). Git provides you with the option to select a commit of the local clone to work with and based on its versioning system, it will revert the local clone to the moment in time snapshot of your folder. You can understand that a commit is imported, because if you made changes to the local clone that are destructive to your work, you can just revert to the last working commit and resume your work from there. When you commit you need to specify a comment. These comments are very important as they will inform you and other GitHub users of the changes you made in this commit when looking at it later, without revisiting all the actual code you changed. Make sure you specify a descriptive comment.
 
+```
 git commit -m “added README.md”
+```
 
 27 GitPush4
 
@@ -240,13 +250,15 @@ You resolve a conflict by editing the file to manually merge the parts of the fi
 
 32 GitConflict5
 
-Next perform an git add and a git commit.
+Next perform an `git add` and a `git commit`.
 
 33 GitConflict6
 
 We already saw that Git created an alias for the endpoint of our repository called origin. By running the following command we will push the master branch into the origin.
 
+```
 git push origin master
+```
 
 34 GitPush
 
@@ -258,13 +270,12 @@ If we now take a look at our repository on GitHub we can see that the start page
 
 It might seem like a lot of steps to go through. But if we summarize the steps, it’s just four lines of code.
 
+```
 Git add .
-
 Git commit -m “your comment about the changes”
-
 Git pull origin master
-
 Git push origin master
+```
 
 ### Push with Github Desktop
 
@@ -360,7 +371,9 @@ Start by creating a fork of the repository you want to contribute to. Then creat
 
 Copy the endpoint URI and open a command prompt. Change the current path to the directory where you want the clone directory to be created and run
 
+```
 Git clone <endpoint of the fork>
+```
 
 This will make a local clone of the fork. Just as with the clone of your own repository Git creates to aliases (one for fetch and one for push) called origin pointing to the endpoint of the repository on GitHub.
 
@@ -368,9 +381,10 @@ This will make a local clone of the fork. Just as with the clone of your own rep
 
 But we do not have any reference to the source (also called upstream) repository. To add a reference to the upstream repository run
 
+```
 ## git remote add upstream <endpoint of the upstream repository>
-
 git remote add upstream https://github.com/marcvaneijk/RepositoryInAnotherAccount.git
+```
 
 54 PR3
 
@@ -382,15 +396,18 @@ Let’s make a change locally. I’ll add a file to the local clone of the fork.
 
 The procedure to contribute to the repository of the other GitHub user is almost the same as contributing to you own repository.
 
+```
 Git add .
-
 Git commit -m “Added initial version of NewFile.txt”
+```
 
 56 PR5
 
 Instead of pulling the latest updates from our fork (which we have not changed), we will get latest updates of the upstream repository.
 
+```
 Git pull upstream master
+```
 
 57 PR6
 
@@ -398,23 +415,25 @@ Now in this case it is much more likely that code in the upstream is changed. Be
 
 We solve the conflict in the exact same way as was explained earlier in this blog. Next we need to update our fork with the changes with the push command (this push contains our edits and the last update from the upstream).
 
+```
 Git push origin master
+```
 
 58 PR7
 
 To summarize the code we just executed
 
 ```
-## Fork the repository from another GitHub account
+# Fork the repository from another GitHub account
 Git clone <endpoint of the fork>
 Git remote add upstream <endpoint of the upstream repository>
 
-## Make changes
+# Make changes
 Git add .
 Git commit -m “Added initial version of NewFile.txt”
 Git pull upstream master
 
-## Solve potential conflicts, rerun Git add and Git commit
+# Solve potential conflicts, rerun Git add and Git commit
 Git push origin master
 ```
 
@@ -488,29 +507,35 @@ You have seen me mention the master numerous times throughout this blog. You can
 
 Open a command prompt change the current path to your local clone. In this example we will use the MyFirstRepository clone. The see all the available brances in this clone run
 
+```
 Git branch
+```
 
 72 GitBranch1
 
 Since we have not create any additional braches yet, the master is the only branch. It is also the active branch, hence it is displayed in green. To create a new branch run the following command.
 
-## Git branch <name of the branch>
-
+```
+# Git branch <name of the branch>
 Git branch myfeature
+```
 
 73 GitBranch2
 
 This creates a new branch called my feature. If we run the command to retrieve all the branches, we can see that the new branch called myfeature now also exists, but master is still the current branch. To select another branch run the following command
 
+```
 ## Git checkout <name of the branch you want to make current>
-
 Git checkout myfeature
+```
 
 74 GitBranch3
 
 Please note that you are note able to checkout to another branch without committing your changes to the current active branch first. If we now retrieve the braches again
 
+```
 Git branch
+```
 
 75 GitBranch4
 
@@ -520,15 +545,18 @@ We can see that the myfeature branch is the current active branch. To give you a
 
 Next we need to add and commit the changes in our branch.
 
+```
 Git add .
-
 Git commit -m “new textfile in branch”
+```
 
 77 GitBranch6
 
 Now that we have comitted the changes to our branch, lets change the branch to master.
 
+```
 Git checkout master
+```
 
 78 GitBranch7
 
@@ -559,13 +587,13 @@ When you browse to the pull request on GitHub, you can now see that the commits 
 ## Summary
 
 The public GitHub repositories with ARM templates usually have a folder per deployment to improve the repository structure. If you are contributing to a public repository the following workflow is strongly advised.
-•Create a fork
-•Clone the fork locally
-•Create a branch for a deployment you a recontributing to
-•Select the branch
-•Make your changes locally, commit on edit type
-•Push to your fork
-•Do a pull request
-•If you want to contribute on another deployment, create a new branch and select it.
+- Create a fork
+- Clone the fork locally
+- Create a branch for a deployment you a recontributing to
+- Select the branch
+- Make your changes locally, commit on edit type
+- Push to your fork
+- Do a pull request
+- If you want to contribute on another deployment, create a new branch and select it.
 
 It was a long post, but I hope that it will save you a lot of time trying to fit the pieces togheter. Now it’s time to make some contributions on GitHub. Have fun!
