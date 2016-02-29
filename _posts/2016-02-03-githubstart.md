@@ -11,7 +11,7 @@ https://github.com/Azure/azure-quickstart-templates
 
 This repository contains over 250 different deployment templates to use with Azure Resource Manager.
 
-<img src="/images/2016-02-03/awesome.png" width="700">
+<img src="/images/2016-02-03/Awesome.png" width="700">
 
 If a deployment template in this repository also complies with certain requirements, they are even displayed on a gallery on the public Microsoft Azure website.
 
