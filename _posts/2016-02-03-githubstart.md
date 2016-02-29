@@ -186,7 +186,7 @@ Now that we have a local copy of our repository let’s make some changes to it.
 
 If you create a README file in the root of your repository, GitHub will automatically render the content of the file on the start page of your repository. You can create a README in plain text or use markdown. Markdown allows you to enhance your text. Let’s start with a super simple example using plain text. Open Windows Explorer and browse to the folder of your cloned repository. Create a new text file in the folder. Add a description about your repository and save the file. Rename the file, including the file extension, to README.md (README in uppercase and md in lowercase).
 
-<img src="/images/2016-02-03/23-README1.png" width="700">
+<img src="/images/2016-02-03/23-README11.png" width="700">
 
 Now that we made some changes to our local clone, we need to sync that to our repository on GitHub.
 
