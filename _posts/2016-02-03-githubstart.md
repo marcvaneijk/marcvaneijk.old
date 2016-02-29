@@ -50,13 +50,11 @@ To get started with GitHub, you will need a GitHub account. Browse to http://www
 
 When you have submitted the values, you can select a plan.
 
-01 Plan
+<img src="/images/2016-02-03/01-Plan.png" width="700">
 
 The free plan is the default value and we’ll start with that one. We don’t need an organization yet either, so leave that checkbox unchecked. Click “Finish sign up” on the bottom of the page. You will be redirected to your GitHub start page.
 
-02 Start
-
- 
+<img src="/images/2016-02-03/02-Start.png" width="700">
 
 Before you start doing anything in GitHub open your email account first. You should have received and email from GitHub for validating your email address. Click the verify email address button in your email. You will be redirected to your start page in GitHub.
 
@@ -64,7 +62,7 @@ Before you start doing anything in GitHub open your email account first. You sho
 
 Now that we an account we can start. I suggest you start by creating a repository. A repository is a container (a folder) for storing your files. The easiest way to create a repository is to click the + icon on the top right of your start page.
 
-03 New Repo
+<img src="/images/2016-02-03/03-New-Repo.png" width="700">
 
 Select to create a new repository. You’ll need to specify a name for the repository. That name must be unique within your own account. The description is optional, but it is useful to enter one. This will help other GitHub user to quickly identify the purpose and content of your repository. Be default each repository you create is public. This means that anyone in the world (even without a GitHub account) can see your repository and its content. You can select to make the repository private. A private repository is hidden for anyone but you. You can give access to your private repository to individual GitHub users. But to create a private repository you will need to upgrade your GitHub account to a paid plan. We’ll select public for now. To give a more detailed explanation of your repository you can create a readme file. Later in this blog I’ll look at the readme in more detail. We’ll skip it for now (don’t enable the checkbox).
 
