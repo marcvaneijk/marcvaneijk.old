@@ -27,7 +27,7 @@ If you are not sure how to get it over to your own repository, just click on the
 
 094be8c
 
-You can also do this the GitHub way. If you are completely new to GitHub, have a look at [this blog](/2016/02/03/githubstart) to get started.
+You can also do this the GitHub way. If you are completely new to GitHub, have a look at [this blog](/2016/02/03/githubstart.html) to get started.
 
 Thanks to Charles and Victor for reviewing.
 
