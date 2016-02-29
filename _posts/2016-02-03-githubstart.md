@@ -66,11 +66,11 @@ Now that we an account we can start. I suggest you start by creating a repositor
 
 Select to create a new repository. You’ll need to specify a name for the repository. That name must be unique within your own account. The description is optional, but it is useful to enter one. This will help other GitHub user to quickly identify the purpose and content of your repository. Be default each repository you create is public. This means that anyone in the world (even without a GitHub account) can see your repository and its content. You can select to make the repository private. A private repository is hidden for anyone but you. You can give access to your private repository to individual GitHub users. But to create a private repository you will need to upgrade your GitHub account to a paid plan. We’ll select public for now. To give a more detailed explanation of your repository you can create a readme file. Later in this blog I’ll look at the readme in more detail. We’ll skip it for now (don’t enable the checkbox).
 
-04 New Repo name
+<img src="/images/2016-02-03/04-New-Repo-name.png" width="700">
 
 When you click “create repository” you are redirected to the repository start page. So… now what? Before we interact with the repository I need to explain in what way we can interact with our web-based repository. You cannot upload a file from the browser into the repository. You will need a client for that.
 
-05 New Repo default
+<img src="/images/2016-02-03/05-New-Repo-default.png" width="700">
 
 ## Clients
 
@@ -84,53 +84,53 @@ For the purpose of this blog we’ll look at the operations from the perspective
 
 To install the Git client browse to http://www.git-scm.com/ and select to download the latest source release.
 
-06 Git Download
+<img src="/images/2016-02-03/06-Git-Download.png" width="700">
 
 Start the setup wizard. Accept the License, leave the defaults in the “Select Components” screen.
 
-07 Git Iinstall1
+<img src="/images/2016-02-03/07-Git-Iinstall1.png" width="700">
 
 In the Adjusting your PATH environment select “Use Git from the Windows Command Prompt”
 
-08 Git Iinstall2
+<img src="/images/2016-02-03/08-Git-Iinstall2.png" width="700">
 
 In the “Configuring the line ending conversions” screen select “Checkout as-is, commit as-is”
 
-09 Git Iinstall3
+<img src="/images/2016-02-03/09-Git-Iinstall3.png" width="700">
 
 In the “Configuring the terminal emulator to use with Git Bash” select “Use Windows’ default console window”
 
-10 Git Iinstall4
+<img src="/images/2016-02-03/10-Git-Iinstall4.png" width="700">
 
 Leave the checkmark unchecked on the “Configuring experimental performance tweaks” screen.
 
-11 Git Iinstall5
+<img src="/images/2016-02-03/11-Git-Iinstall5.png" width="700">
 
 After the installation completes open a command prompt. Type Git in the console and hit enter. You’ll notice that the PATH variable has been updated so you are able to run Git directly without changing the folder location (although is still might be useful to do that, as we will see later in this blog).
 
-12 Git commandline
+<img src="/images/2016-02-03/12-Git-commandline.png" width="700">
 
 ### Git Desktop
 
 To install GitHub Desktop browse to https://desktop.github.com/ and select to download GitHub Desktop.
 
-13 GitHubD download
+<img src="/images/2016-02-03/13-GitHubD-download.png" width="700">
 
 The installation will start by downloading the rest of the software (just over 100MB). When the file is downloaded and the installation is complete GitHub Desktop will open.
 
-14 GitHubD start
+<img src="/images/2016-02-03/14-GitHubD-start.png" width="700">
 
 Before we add a repository we need to configure some additional settings. Select Options by clicking on the icon that is in the right top corner.
 
-15 GitHubD options1
+<img src="/images/2016-02-03/15-GitHubD-options1.png" width="700">
 
 In the options screen select the Add account. In the login screen that opens specify the GitHub username and password that you created earlier in this blog.
 
-16 GitHubD options2
+<img src="/images/2016-02-03/16-GitHubD-options2.png" width="700">
 
 Specify an email address in the “Configure git” entry. The Clone path is used to story the local copies of your GitHub content. Make sure the “Clone path” matches the location you want to locally store the templates you will be working on. You will notice later in this blog that you can override this location. You can consider this path as the default value.
 
-17 GitHubD options3
+<img src="/images/2016-02-03/17-GitHubD-options3.png" width="700">
 
 Save the settings. Now that we have both clients in place we can start working with our repository.
 
