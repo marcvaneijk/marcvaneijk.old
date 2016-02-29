@@ -49,7 +49,7 @@ The VMM library must contain a sysprepped Operating System virtual hard disk, wi
 
 With the release or System Center R2 support for differencing disks is added to Virtual Machine Manager. The properties of a Hyper-V host contains a Placement Paths tab.
 
-<img src="/images/2015-02-11/Placement Paths.png" width="700">
+<img src="/images/2015-02-11/Placement-Paths.png" width="700">
 
 When you deploy your very first VM Role with only an Operating system disk, VMM is used to locate the sysprepped virtual hard disk in the library and copy that file to the location that is configured in the Placement Paths for the host selected through the intelligent placement process in VMM. If no default parent disk path is set, the location for the parent disk is defined through VMM intelligent placement.
 
