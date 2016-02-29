@@ -17,11 +17,11 @@ https://azure.microsoft.com/en-us/documentation/templates/
 
 In this blog we’ll go step by step, to get you started with contributing on GitHub. I have worked my way through many blogs, finding a piece of the puzzle in each. This blog is long, but if you just walk through it step by step, you can contribute to your own repositories, other repositories and even the azure-quickstart-templates repository. So you can have your own template (with your name, and photo) shining on the public Microsoft Azure website for everybody to deploy to their Microsoft Azure subscription.
 
-Azure Resource Manager
+## Azure Resource Manager
 
 Azure Resource Manager was announced at Build in April, 2014. This introduced a series of major improvements to Microsoft Azure. It fundamentally changed the platform and enabled a lot of new capabilities which empowered organizations of any type and size to use the enterprise grade platform for all their needs. Azure Resource Manager (ARM for short) enforced a common contract for all resource providers, which allows you to reuse your tooling, scripts and knowledge for any type of resource. Azure Resource Manager also introduced features like RBAC, Template Orchestration, Tagging, Auditing, Resource group and resource locks. It’s a couple of words in a single sentence but these capabilities make a world of difference in the platform.
 
-Template orchestration
+## Template orchestration
 
 Azure Resource Manager uses templates to orchestrate the deployment of resources in Microsoft Azure and Microsoft Azure Stack. These templates are configured in JSON (JavaScript Object Notation) language. The templates are declarative and idempotent.
 •Declarative. You define the end state and the dependencies of the resources that comprise your application in the template. The platform converts the declarative template to imperative code that deploys your resources
@@ -29,17 +29,17 @@ Azure Resource Manager uses templates to orchestrate the deployment of resources
 
 Besides the deployment of the resources Microsoft Azure and Microsoft Azure Stack provide you with consistent VM extensions. A VM extension allows you to pass scripts to the Operating System. A great example of this is the PowerShell DSC VM extension. PowerShell DSC is also Declarative and idempotent. The VM extension is a resource in a JSON template and you can create dependencies on these resources as well. So if you want to deploy a complete multitier application (for instance a SharePoint farm), you can deploy that as one integral process. This forms a solid foundation for IT PROs and DEVs to bundle their knowledge and drastically improve the agility of their efforts.
 
-Collaboration
+## Collaboration
 
 When I started working with ARM Templates over a year ago, I quickly understood the basic template language. Some simple templates, like creating a storageAccount or a virtualNetwork, helped with that understanding. I stored the scripts on my OneDrive, so I could easily access them from anywhere. Really great for myself, but then I had some friends from the community looking for some samples. Sending them an email with my script, resulted in two copies of the same script. They were editing their own version and so was I. That wasn’t a really good experience. By that time Microsoft published a set of quickstart templates on GitHub. The first reaction I had was GitHub = Developer. I was able to go the URI of the quickstart templates open a template and copy/paste in my own environment for further editing. A great location to look at these samples, but I didn’t have a clue how to contribute to these templates. I did see other people adding their templates and contributing to other templates.
 
-What is GitHub
+## What is GitHub
 
 Before you get started with GitHub is important to understand what it is and why you should use it. To understand GitHub you should first understand what Git is. Git is a Version Control System (VCS) records changes to a file or set of files over time so that you can recall specific versions later. Git is a local command line application that allows you to work locally (on your machine) with multiple versions of one ore multiple files. With the ARM templates in mind, Git can add versioning to the edits you are making to the local template over time. Which is great but still does not allow you to collaborate with other people. Your files are stored locally on your machine. This is where GitHub comes in.
 
 GitHub is a web-based Git repository hosting service. I’ll try to simplify with an example. Instead of storing the folder with your ARM templates locally on your machine, you can store the templates in a folder on GitHub. GitHub is based on the Git engine, so you still have versioning of your files, but you can now also collaborate with other people (since they can access your folder in GitHub too.
 
-Signup on GitHub
+## Signup on GitHub
 
 To get started with GitHub, you will need a GitHub account. Browse to http://www.github.com. You’ll need to enter
 •a username (this name must be unique on GitHub and will be visible to all GitHub users),
@@ -58,7 +58,7 @@ The free plan is the default value and we’ll start with that one. We don’t n
 
 Before you start doing anything in GitHub open your email account first. You should have received and email from GitHub for validating your email address. Click the verify email address button in your email. You will be redirected to your start page in GitHub.
 
-Repositories
+## Repositories
 
 Now that we an account we can start. I suggest you start by creating a repository. A repository is a container (a folder) for storing your files. The easiest way to create a repository is to click the + icon on the top right of your start page.
 
@@ -72,7 +72,7 @@ When you click “create repository” you are redirected to the repository star
 
 05 New Repo default
 
-Clients
+## Clients
 
 There are two common clients you can use to interact with GitHub.
 •Git is the engine of the local version control system. Git provides a command line interface and is the only tool that allows you to run all Git commands.
@@ -80,7 +80,7 @@ There are two common clients you can use to interact with GitHub.
 
 For the purpose of this blog we’ll look at the operations from the perspective of each tool. I’ll describe each procedure for Git console and for Git Desktop. You do not need both clients. Based on your preference you can install and use the client that works best for you.
 
-Git
+### Git
 
 To install the Git client browse to http://www.git-scm.com/ and select to download the latest source release.
 
@@ -110,7 +110,7 @@ After the installation completes open a command prompt. Type Git in the console 
 
 12 Git commandline
 
-Git Desktop
+### Git Desktop
 
 To install GitHub Desktop browse to https://desktop.github.com/ and select to download GitHub Desktop.
 
@@ -134,11 +134,11 @@ Specify an email address in the “Configure git” entry. The Clone path is use
 
 Save the settings. Now that we have both clients in place we can start working with our repository.
 
-Clone
+## Clone
 
 The repository we created in our GitHub account is only available on the hosted web service. We need to great a copy of this repository locally first. We do this by cloning the repository. A clone is a moment is time local copy of the repository from GitHub. Changes in the source repository in GitHub or changes in the local repository will not automatically sync.
 
-Clone a repository with Git
+### Clone a repository with Git
 
 Open the command line on the local machine. When you clone a repository from the command line, Git will create the clone in the current path. First browse to the folder where you want the clone created. Each clone will git its own folder, so you just need a root folder (e.g. c:\templates). Browse to the root folder.
 
@@ -164,7 +164,7 @@ Git clone https://github.com/marcvaneijkdemo/MyFirstRepository.git
 
 Now let’s see how cloning in GitHub Desktop works.
 
-Clone a repository with GitHub Desktop
+### Clone a repository with GitHub Desktop
 
 There are two ways to clone a repository with GitHub Desktop. You can open GitHub Desktop, Click the plus icon on the top left and select clone. The UI connects to your GitHub account (remember you specified your GitHub credentials in GitHub Desktop earlier) and show the repositories on your account. Select the repository you want to clone and click “Clone <RepositoryName>”. You are prompted to select a local path for you clone. The default location is the path we specified in the installation of GitHub Desktop earlier. You can also select a different path. In the folder you select, a subfolder is created with the name of the repository. This folder only contains a hidden .git folder that is used by git for versioning data.
 
@@ -178,7 +178,7 @@ The rest of the steps are the same as cloning the repository directly from GitHu
 
 Now that we have a local copy of our repository let’s make some changes to it. The best thing to do next is to create a good description for your repository. You do that with a README.md file.
 
-README.md
+## README.md
 
 If you create a README file in the root of your repository, GitHub will automatically render the content of the file on the start page of your repository. You can create a README in plain text or use markdown. Markdown allows you to enhance your text. Let’s start with a super simple example using plain text. Open Windows Explorer and browse to the folder of your cloned repository. Create a new text file in the folder. Add a description about your repository and save the file. Rename the file, including the file extension, to README.md (README in uppercase and md in lowercase).
 
@@ -186,11 +186,11 @@ If you create a README file in the root of your repository, GitHub will automati
 
 Now that we made some changes to our local clone, we need to sync that to our repository on GitHub.
 
-Push
+## Push
 
 To sync the changes we have made locally to our repository in GitHub we use a command called “Push”. First we will look at the steps to push the changes with the Git client.
 
-Push with Git
+### Push with Git
 
 Open a command prompt and change the path to the local repository folder
 
@@ -266,7 +266,7 @@ Git pull origin master
 
 Git push origin master
 
-Push with Github Desktop
+### Push with Github Desktop
 
 GitHub Desktop provides you with a UI to perform the same steps for committing and pushing your changes. After you create the README.md file in your empty local clone, the GitHub Desktop will pick up these changes and display them in the client.
 
@@ -324,13 +324,13 @@ There is much more possible with the commit, push and pull commands, but this sh
 
 49 fire
 
-Enhance the README
+## Enhance the README
 
 By adding a README.md file, our GitHub repository is updated with a simple description. Besides adding a more detailed description, it is also a good idea to explain in what way other people on GitHub should contribute to your repository. Do you have any naming conventions, folder structure requirements, etc. These details help other contributors to prepare their local work in line with your guidelines. Besides adding these details to you README.md you can also use markdown to enhance the display of your content. You can find a quick guide to markdown here https://guides.github.com/features/mastering-markdown/
 
 After you updated the README.md file locally, you can repeat the same procedure (with either Git or GitHub Desktop) to update the file to your GitHub repository.
 
-Fork
+## Fork
 
 It is possible to create a copy of the repository from another GitHub account in your own GitHub account. This copy is called a fork. A fork is a moment is time copy created on GitHub. When you fork a repository the reference to the original repository is recorded in the fork and in the source repository. Since the fork is in your own account, you have the permissions to push to it directly. This allows you to make changes to the code without interfering with the source repository.
 
@@ -344,7 +344,7 @@ Creating the fork in your account takes a couple of seconds. After the fork is c
 
 A fork is a moment in time copy created in your GitHub account, before you can edit the files you need to clone the fork to your local machine. The steps to clone the fork to your local machine are exactly the same as the steps described earlier to clone a repository.
 
-Pull request
+## Pull request
 
 In the examples used so far you are the author of all the content and it is stored in your GitHub account that you have full access to. What makes GitHub really interesting is that you are able to contribute to repositories of other GitHub users and other GitHub users are able to contribute to your repositories. The primary difference between your repository and a repository of another GitHub account, is that you have access to push commits into your repository and you do not have that access to repository in another GitHub account.
 
@@ -352,7 +352,7 @@ Instead of pushing commits into a repository of another GitHub account, you subm
 
 To start contributing to a repository in another GitHub account you need to fork that repository to your account, clone the fork to your local machine, add files/folders or updates to the existing files, commit and send a pull request to merge your updates to the source directory.
 
-Pull request with Git
+### Pull request with Git
 
 Start by creating a fork of the repository you want to contribute to. Then create a clone of the fork on your local machine. Get the repository endpoint by browsing to the start page of the fork in your GitHub account.
 
@@ -404,23 +404,19 @@ Git push origin master
 
 To summarize the code we just executed
 
+```
 ## Fork the repository from another GitHub account
-
 Git clone <endpoint of the fork>
-
 Git remote add upstream <endpoint of the upstream repository>
 
 ## Make changes
-
 Git add .
-
 Git commit -m “Added initial version of NewFile.txt”
-
 Git pull upstream master
 
 ## Solve potential conflicts, rerun Git add and Git commit
-
 Git push origin master
+```
 
 The last step we need to perform is to create a pull request. When working with Git command line we will make that pull request directly from GitHub. Open a browser, browse to github.com and sign in with your github credentials. Browse to the fork we just pushed the changes to.
 
@@ -442,7 +438,7 @@ You are now redirected to the account of the upstream repository. The page opens
 
 The owner of the upstream repository is notified that a new pull-request is awaiting his review. This process (fork, clone, commit, push and pull-request is complete integrated within GitHub Desktop.
 
-Pull request with GitHub Desktop
+### Pull request with GitHub Desktop
 
 Start by creating a fork of the repository you want to contribute to. Then create a clone of the fork on your local machine You can either click on the Download to GitHub Desktop button on start page of the fork in your GitHub account
 
@@ -484,11 +480,11 @@ When the pull request completes, GitHub Desktop provides you with a link to see 
 
 This will bring up the same page as we saw earlier, when we submitted the pull request directly on GitHub.
 
-Branches
+## Branches
 
 You have seen me mention the master numerous times throughout this blog. You can think of a branch as an independent line of development. There is always one default branch in a repository. You can create multiple branches. This if useful when you are working a specific feature of the total project. You create a branch of the master for the changes to the feature. You can push and test your commits to the branch, without touching the original code in the master branch. When your code is complete and tested, you can merge the branch into the master.
 
-Branching with Git
+### Branching with Git
 
 Open a command prompt change the current path to your local clone. In this example we will use the MyFirstRepository clone. The see all the available brances in this clone run
 
@@ -542,7 +538,7 @@ After the current branch has been configured to master, the folder is in its ori
 
 If we were to change the branch to myfeature again. The NewTextFileInBranch.txt would be present again. Each branch will have its own version of the truth.
 
-Branching with GitHub Desktop
+### Branching with GitHub Desktop
 
 GitHub Desktop also allows you to create branches. Open GitHub Desktop and select a repository. For this example we will use the “RepositoryInAnotherAccount”. Which is the local clone of the fork we used for the example with the pull-request.On the top menu the is an account (next to the name of the branch). If you hover over that icon it will say “Create a new branch”. Click that icon.
 
@@ -560,7 +556,7 @@ When you browse to the pull request on GitHub, you can now see that the commits 
 
 84 GitHBranch4
 
-Summary
+## Summary
 
 The public GitHub repositories with ARM templates usually have a folder per deployment to improve the repository structure. If you are contributing to a public repository the following workflow is strongly advised.
 •Create a fork
