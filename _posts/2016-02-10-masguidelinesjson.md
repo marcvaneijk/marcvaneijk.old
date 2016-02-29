@@ -12,11 +12,12 @@ https://github.com/Azure/AzureStack-QuickStart-Templates
 GitHub will automatically render and display the content of the README file. Just scroll to the bottom of the page.
 
 The README.md contains information the following topics.
-•What repository?
-•Contribution Guide
-•Azure Resource Manager limitations in Microsoft Azure Stack Technical Preview
-•API Versions for Resource Providers
-•Guidelines for Microsoft Azure Stack deployment templates (with samples)
+
+- What repository?
+- Contribution Guide
+- Azure Resource Manager limitations in Microsoft Azure Stack Technical Preview
+- API Versions for Resource Providers
+- Guidelines for Microsoft Azure Stack deployment templates (with samples)
 
 Besides the README.md file I also added a sample README.md that you can use as a reference for your own deployment template. The link is mentioned in the README.md file but you can also access is directly.
 
@@ -26,9 +27,7 @@ If you are not sure how to get it over to your own repository, just click on the
 
 094be8c
 
-You can also do this the GitHub way. If you are completely new to GitHub, have a look at this blog to get started.
-
-
+You can also do this the GitHub way. If you are completely new to GitHub, have a look at [this blog](/2016/02/03/githubstart.md) to get started.
 
 Thanks to Charles and Victor for reviewing.
 
