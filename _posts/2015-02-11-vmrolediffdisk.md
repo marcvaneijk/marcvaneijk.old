@@ -85,9 +85,9 @@ Despite the many challenges with the differencing disk configuration of the VM R
 
 With the release of Update Rollup 5 for Virtual Machine Manager, Microsoft has made the necessary changes to allow you to choose your disk configuration. You can use still use differencing disks, but it is now also possible to use a dedicated disk configuration for each virtual machine instance. The choice is made by you and configured at the VMM cloud level. This functionality does not have any affect in VMM unless you use it in combination with the VM Role.
 
-One of the most important reasons Microsoft has enabled this update is because you voted for this feedback on the user voice. If you want to influence the priorities of the product group you can vote on existing suggestions or submit your own suggestions here.
-Windows Azure Pack: http://feedback.azure.com/forums/255259-azure-pack
-Virtual Machine Manager: https://systemcentervmm.uservoice.com/forums/280803-general-vmm-feedback
+One of the most important reasons Microsoft has enabled this update is because you voted for [this feedback](http://feedback.azure.com/forums/255259-azure-pack/suggestions/6036538-option-to-select-between-differencing-disk-or-dedion) on the user voice. If you want to influence the priorities of the product group you can vote on existing suggestions or submit your own suggestions here.
+- Windows Azure Pack: http://feedback.azure.com/forums/255259-azure-pack
+- Virtual Machine Manager: https://systemcentervmm.uservoice.com/forums/280803-general-vmm-feedback
 
 ## How to enable dedicated disks
 
@@ -111,7 +111,7 @@ Add the newly created custom property as an assigned property. Verify the object
 
 Click OK to submit and assign the new custom property.
 
-The final step is to specify a false value for this custom property.
+The final step is to specify a `false` value for this custom property.
 
 <img src="/images/2015-02-11/Custom-Property-value.png" width="700">
 
