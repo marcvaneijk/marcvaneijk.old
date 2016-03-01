@@ -55,7 +55,7 @@ When you have submitted the values, you can select a plan.
 
 <img src="/images/2016-02-03/01-Plan.png" width="700">
 
-The free plan is the default value and we’ll start with that one. We don’t need an organization yet either, so leave that checkbox unchecked. Click “Finish sign up” on the bottom of the page. You will be redirected to your GitHub start page.
+The free plan is the default value and we’ll start with that one. We don’t need an organization yet either, so leave that checkbox unchecked. Click **Finish sign up** on the bottom of the page. You will be redirected to your GitHub start page.
 
 <img src="/images/2016-02-03/02-Start.png" width="700">
 
@@ -71,7 +71,7 @@ Select to create a new repository. You’ll need to specify a name for the repos
 
 <img src="/images/2016-02-03/04-New-Repo-name.png" width="700">
 
-When you click “create repository” you are redirected to the repository start page. So… now what? Before we interact with the repository I need to explain in what way we can interact with our web-based repository. You cannot upload a file from the browser into the repository. You will need a client for that.
+When you click **create repository** you are redirected to the repository start page. So… now what? Before we interact with the repository I need to explain in what way we can interact with our web-based repository. You cannot upload a file from the browser into the repository. You will need a client for that.
 
 <img src="/images/2016-02-03/05-New-Repo-default.png" width="700">
 
@@ -86,27 +86,27 @@ For the purpose of this blog we’ll look at the operations from the perspective
 
 ### Git
 
-To install the Git client browse to http://www.git-scm.com/ and select to download the latest source release.
+To install the Git client browse to <http://www.git-scm.com/> and select to download the latest source release.
 
 <img src="/images/2016-02-03/06-Git-Download.png" width="700">
 
-Start the setup wizard. Accept the License, leave the defaults in the “Select Components” screen.
+Start the setup wizard. Accept the License, leave the defaults in the **Select Components** screen.
 
 <img src="/images/2016-02-03/07-Git-Iinstall1.png" width="700">
 
-In the Adjusting your PATH environment select “Use Git from the Windows Command Prompt”
+In the Adjusting your PATH environment select **Use Git from the Windows Command Prompt**
 
 <img src="/images/2016-02-03/08-Git-Iinstall2.png" width="700">
 
-In the “Configuring the line ending conversions” screen select “Checkout as-is, commit as-is”
+In the **Configuring the line ending conversions* screen select **Checkout as-is, commit as-is**
 
 <img src="/images/2016-02-03/09-Git-Iinstall3.png" width="700">
 
-In the “Configuring the terminal emulator to use with Git Bash” select “Use Windows’ default console window”
+In the **Configuring the terminal emulator to use with Git Bash** select **Use Windows’ default console window**
 
 <img src="/images/2016-02-03/10-Git-Iinstall4.png" width="700">
 
-Leave the checkmark unchecked on the “Configuring experimental performance tweaks” screen.
+Leave the checkmark unchecked on the **Configuring experimental performance tweaks** screen.
 
 <img src="/images/2016-02-03/11-Git-Iinstall5.png" width="700">
 
@@ -116,7 +116,7 @@ After the installation completes open a command prompt. Type Git in the console 
 
 ### Git Desktop
 
-To install GitHub Desktop browse to https://desktop.github.com/ and select to download GitHub Desktop.
+To install GitHub Desktop browse to <https://desktop.github.com/> and select to download GitHub Desktop.
 
 <img src="/images/2016-02-03/13-GitHubD-download.png" width="700">
 
@@ -124,15 +124,15 @@ The installation will start by downloading the rest of the software (just over 1
 
 <img src="/images/2016-02-03/14-GitHubD-start.png" width="700">
 
-Before we add a repository we need to configure some additional settings. Select Options by clicking on the icon that is in the right top corner.
+Before we add a repository we need to configure some additional settings. Open the options by clicking on the icon that is in the right top corner.
 
 <img src="/images/2016-02-03/15-GitHubD-options1.png" width="700">
 
-In the options screen select the Add account. In the login screen that opens specify the GitHub username and password that you created earlier in this blog.
+In the options screen select the **Add account**. In the login screen that opens specify the **GitHub username** and **password** that you created earlier in this blog.
 
 <img src="/images/2016-02-03/16-GitHubD-options2.png" width="700">
 
-Specify an email address in the “Configure git” entry. The Clone path is used to story the local copies of your GitHub content. Make sure the “Clone path” matches the location you want to locally store the templates you will be working on. You will notice later in this blog that you can override this location. You can consider this path as the default value.
+Specify an email address in the **Configure git** entry. The Clone path is used to story the local copies of your GitHub content. Make sure the **Clone path** matches the location you want to locally store the templates you will be working on. You will notice later in this blog that you can override this location. You can consider this path as the default value.
 
 <img src="/images/2016-02-03/17-GitHubD-options3.png" width="700">
 
@@ -174,11 +174,11 @@ Now let’s see how cloning in GitHub Desktop works.
 
 ### Clone a repository with GitHub Desktop
 
-There are two ways to clone a repository with GitHub Desktop. You can open GitHub Desktop, Click the plus icon on the top left and select clone. The UI connects to your GitHub account (remember you specified your GitHub credentials in GitHub Desktop earlier) and show the repositories on your account. Select the repository you want to clone and click “Clone <RepositoryName>”. You are prompted to select a local path for you clone. The default location is the path we specified in the installation of GitHub Desktop earlier. You can also select a different path. In the folder you select, a subfolder is created with the name of the repository. This folder only contains a hidden .git folder that is used by git for versioning data.
+There are two ways to clone a repository with GitHub Desktop. You can open GitHub Desktop, Click the plus icon on the top left and select clone. The UI connects to your GitHub account (remember you specified your GitHub credentials in GitHub Desktop earlier) and show the repositories on your account. Select the repository you want to clone and click **Clone <RepositoryName>**. You are prompted to select a local path for you clone. The default location is the path we specified in the installation of GitHub Desktop earlier. You can also select a different path. In the folder you select, a subfolder is created with the name of the repository. This folder only contains a hidden .git folder that is used by git for versioning data.
 
 <img src="/images/2016-02-03/21-GitHubD-clone1.png" width="700">
 
-It also possible to browse GitHub, select your repository and click the “Set up in Desktop” button.
+It also possible to browse GitHub, select your repository and click the **Set up in Desktop** button.
 
 <img src="/images/2016-02-03/22-GitHubD-clone2.png" width="700">
 
@@ -196,7 +196,7 @@ Now that we made some changes to our local clone, we need to sync that to our re
 
 ## Push
 
-To sync the changes we have made locally to our repository in GitHub we use a command called “Push”. First we will look at the steps to push the changes with the Git client.
+To sync the changes we have made locally to our repository in GitHub we use a command called `Push`. First we will look at the steps to push the changes with the Git client.
 
 ### Push with Git
 
@@ -228,7 +228,7 @@ git commit -m “added README.md”
 
 <img src="/images/2016-02-03/27-GitPush4.png" width="700">
 
-The snapshot we just created is still on the local clone. We can resume working on the local clone, by adding, changing or deleting files and folder. Recording the changes in more commits, by running the same “git commit” command (each with their own comment). All these changes and commits are on your local machine. Nobody but you is able to access the folder and if your machine crashes, all your work is gone. To sync your work to your repository in GitHub we need to “push” the commits. Before we push our changes to GitHub, it is crucial to understand that the content on your GitHub repository might have changed while you were working with the local clone. You might have changes files directly on GitHub or other users might have contributed to your code (which we will cover later). But if you have a file that is changed on GitHub and the same file in your clone that you changed locally, what change is authoritive? Git does not know. To prevent this issue you need to get the latest version from GitHub first before you push your local changes to it. There are two ways to do this with Git. We can either fetch and merge or we can pull. Pull is a combination of (fetch and merge in one action). Pull seems to be the logical thing to do right? But there is a caveat. Let’s explain with an example.
+The snapshot we just created is still on the local clone. We can resume working on the local clone, by adding, changing or deleting files and folder. Recording the changes in more commits, by running the same `git commit` command (each with their own comment). All these changes and commits are on your local machine. Nobody but you is able to access the folder and if your machine crashes, all your work is gone. To sync your work to your repository in GitHub we need to `push` the commits. Before we push our changes to GitHub, it is crucial to understand that the content on your GitHub repository might have changed while you were working with the local clone. You might have changes files directly on GitHub or other users might have contributed to your code (which we will cover later). But if you have a file that is changed on GitHub and the same file in your clone that you changed locally, what change is authoritive? Git does not know. To prevent this issue you need to get the latest version from GitHub first before you push your local changes to it. There are two ways to do this with Git. We can either `fetch` and `merge` or we can `pull`. Pull is a combination of (fetch and merge in one action). Pull seems to be the logical thing to do right? But there is a caveat. Let’s explain with an example.
 
 Assume we have a repository with a README.md file already in there. We create a local clone. After we make a change to the README.md file locally.
 
@@ -238,7 +238,7 @@ We also make a change to the file directly on GitHub
 
 <img src="/images/2016-02-03/29-GitConflict2.png" width="700">
 
-Now remember, mu GitHub repository and the local clone do not sync automatically. Doing a pull will result a conflict for this file.
+Now remember, my GitHub repository and the local clone do not sync automatically. Doing a pull will result a conflict for this file.
 
 <img src="/images/2016-02-03/30-GitConflict3.png" width="700">
 
@@ -299,7 +299,7 @@ On the top right of the GitHub desktop you will see a new moment in time (commit
 
 <img src="/images/2016-02-03/39-GitHubD-Sync.png" width="700">
 
-The last step to take is to push the commit to GitHub. You can do that by clicking the “Sync” button on the top right of GitHub Desktop. If it is the first time you are pushing to a new repository, the button will be called “Publish”. For any subsequent pushes the button is called Sync.
+The last step to take is to push the commit to GitHub. You can do that by clicking the **Sync** button on the top right of GitHub Desktop. If it is the first time you are pushing to a new repository, the button will be called **Publish**. For any subsequent pushes the button is called Sync.
 
 <img src="/images/2016-02-03/40-GitHubD-Publish.png" width="700">
 
@@ -315,7 +315,7 @@ If we look at the content of the file, we can see that the conflicts has been ma
 
 <img src="/images/2016-02-03/43-GitHubD-Conflict3.png" width="700">
 
-We can solve this conflict, the same way as described in the Git procedure. Edit the file to manually to merge the parts of the file that GitHub had trouble merging. This may mean discarding either your changes or someone else’s or doing a mix of the two. You will also need to delete the ‘<<<<<<<‘, ‘=======’, and ‘>>>>>>>’ in the file.
+We can solve this conflict, the same way as described in the Git procedure. Edit the file to manually to merge the parts of the file that GitHub had trouble merging. This may mean discarding either your changes or someone else’s or doing a mix of the two. You will also need to delete the `<<<<<<<`, `=======`, and `>>>>>>>` in the file.
 
 <img src="/images/2016-02-03/44-GitHubD-Conflict4.png" width="700">
 
@@ -327,7 +327,7 @@ Make a new commit.
 
 <img src="/images/2016-02-03/46-GitHubD-Conflict6.png" width="700">
 
-And sync to GitHub by clicking the “Sync” button on the top right. Note the icon of the commit is different, because of the merge.
+And sync to GitHub by clicking the **Sync** button on the top right. Note the icon of the commit is different, because of the merge.
 
 <img src="/images/2016-02-03/47-GitHubD-Conflict7.png" width="700">
 
@@ -341,7 +341,7 @@ There is much more possible with the commit, push and pull commands, but this sh
 
 ## Enhance the README
 
-By adding a README.md file, our GitHub repository is updated with a simple description. Besides adding a more detailed description, it is also a good idea to explain in what way other people on GitHub should contribute to your repository. Do you have any naming conventions, folder structure requirements, etc. These details help other contributors to prepare their local work in line with your guidelines. Besides adding these details to you README.md you can also use markdown to enhance the display of your content. You can find a quick guide to markdown here https://guides.github.com/features/mastering-markdown/
+By adding a README.md file, our GitHub repository is updated with a simple description. Besides adding a more detailed description, it is also a good idea to explain in what way other people on GitHub should contribute to your repository. Do you have any naming conventions, folder structure requirements, etc. These details help other contributors to prepare their local work in line with your guidelines. Besides adding these details to you README.md you can also use markdown to enhance the display of your content. You can find a quick guide to markdown here <https://guides.github.com/features/mastering-markdown/>
 
 After you updated the README.md file locally, you can repeat the same procedure (with either Git or GitHub Desktop) to update the file to your GitHub repository.
 
@@ -349,7 +349,7 @@ After you updated the README.md file locally, you can repeat the same procedure 
 
 It is possible to create a copy of the repository from another GitHub account in your own GitHub account. This copy is called a fork. A fork is a moment is time copy created on GitHub. When you fork a repository the reference to the original repository is recorded in the fork and in the source repository. Since the fork is in your own account, you have the permissions to push to it directly. This allows you to make changes to the code without interfering with the source repository.
 
-To fork a repository browse to the repository in another GitHub account. Click the “Fork” icon on the right top of the repository start page.
+To fork a repository browse to the repository in another GitHub account. Click the **Fork** icon on the right top of the repository start page.
 
 <img src="/images/2016-02-03/50-Fork1.png" width="700">
 
@@ -379,7 +379,7 @@ Copy the endpoint URI and open a command prompt. Change the current path to the 
 Git clone <endpoint of the fork>
 ```
 
-This will make a local clone of the fork. Just as with the clone of your own repository Git creates to aliases (one for fetch and one for push) called origin pointing to the endpoint of the repository on GitHub.
+This will make a local clone of the fork. Just as with the clone of your own repository Git creates to aliases (one for `fetch` and one for `push`) called **origin** pointing to the endpoint of the repository on GitHub.
 
 <img src="/images/2016-02-03/53-PR2.png" width="700">
 
@@ -392,7 +392,7 @@ git remote add upstream https://github.com/marcvaneijk/RepositoryInAnotherAccoun
 
 <img src="/images/2016-02-03/54-PR3.png" width="700">
 
-When you now do a Git remote -v you will notice you two additional aliases (fetch and push) called upstream. You can use fetch (or pull as explained earlier) to update your clone. You cannot use push to push changes directly to the upstream server. You will need to submit a pull-request for that.
+When you now do a `Git remote -v` you will notice you two additional aliases (`fetch` and `push`) called **upstream**. You can use `fetch` (or `pull` as explained earlier) to update your clone. You cannot use `push` to push changes directly to the upstream server. You will need to submit a pull-request for that.
 
 Let’s make a change locally. I’ll add a file to the local clone of the fork.
 
@@ -441,15 +441,15 @@ Git pull upstream master
 Git push origin master
 ```
 
-The last step we need to perform is to create a pull request. When working with Git command line we will make that pull request directly from GitHub. Open a browser, browse to github.com and sign in with your github credentials. Browse to the fork we just pushed the changes to.
+The last step we need to perform is to create a pull request. When working with Git command line we will make that pull request directly from GitHub. Open a browser, browse to <github.com> and sign in with your github credentials. Browse to the fork we just pushed the changes to.
 
 <img src="/images/2016-02-03/59-PR8.png" width="700">
 
-On the start page of the fork, click the green “New pull request” icon. That will open a page to compare the differences between the fork and the upstream repository.
+On the start page of the fork, click the green **New pull request** icon. That will open a page to compare the differences between the fork and the upstream repository.
 
 <img src="/images/2016-02-03/60-PR9.png" width="700">
 
-You can see that the is one new file (called NewFile.txt) that is on the fork, but not on the upstream. Click the green “create pull request” button.
+You can see that the is one new file (called NewFile.txt) that is on the fork, but not on the upstream. Click the green **create pull request** button.
 
 <img src="/images/2016-02-03/61-PR10.png" width="700">
 
@@ -459,7 +459,7 @@ You are now redirected to the account of the upstream repository. The page opens
 
 <img src="/images/2016-02-03/62-PR11.png" width="700">
 
-The owner of the upstream repository is notified that a new pull-request is awaiting his review. This process (fork, clone, commit, push and pull-request is complete integrated within GitHub Desktop.
+The owner of the upstream repository is notified that a new pull-request is awaiting his review. This process (`fork`, `clone`, `commit`, `push` and `pull-request` is complete integrated within GitHub Desktop.
 
 ### Pull request with GitHub Desktop
 
@@ -485,7 +485,7 @@ Commit the change to the master.
 
 <img src="/images/2016-02-03/67-GH-PR5.png" width="700">
 
-And sync (pull and push) the changes to the fork in GitHub.
+And sync (`pull` and `push`) the changes to the fork in GitHub.
 
 <img src="/images/2016-02-03/68-GH-Sync.png" width="700">
 
@@ -517,7 +517,7 @@ Git branch
 
 <img src="/images/2016-02-03/72-GitBranch1.png" width="700">
 
-Since we have not create any additional braches yet, the master is the only branch. It is also the active branch, hence it is displayed in green. To create a new branch run the following command.
+Since we have not create any additional braches yet, the master is the only branch. It is also the active branch, hence it is displayed in green. To create a new branch run the following command
 
 ```
 # Git branch <name of the branch>
@@ -572,7 +572,7 @@ If we were to change the branch to myfeature again. The NewTextFileInBranch.txt 
 
 ### Branching with GitHub Desktop
 
-GitHub Desktop also allows you to create branches. Open GitHub Desktop and select a repository. For this example we will use the “RepositoryInAnotherAccount”. Which is the local clone of the fork we used for the example with the pull-request.On the top menu the is an account (next to the name of the branch). If you hover over that icon it will say “Create a new branch”. Click that icon.
+GitHub Desktop also allows you to create branches. Open GitHub Desktop and select a repository. For this example we will use the **RepositoryInAnotherAccount**. Which is the local clone of the fork we used for the example with the pull-request.On the top menu the is an account (next to the name of the branch). If you hover over that icon it will say **Create a new branch**. Click that icon.
 
 <img src="/images/2016-02-03/80-GitHBranch1.png" width="700">
 
@@ -591,6 +591,7 @@ When you browse to the pull request on GitHub, you can now see that the commits 
 ## Summary
 
 The public GitHub repositories with ARM templates usually have a folder per deployment to improve the repository structure. If you are contributing to a public repository the following workflow is strongly advised.
+
 - Create a fork
 - Clone the fork locally
 - Create a branch for a deployment you a recontributing to
