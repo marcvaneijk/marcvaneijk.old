@@ -12,9 +12,11 @@
 }
 
 /* max image size in content */
+
 p img {max-width: 100%;}
 
 /* hyperlinks */
+
 a {
   text-decoration: none;
   color: #1e73be;
@@ -59,7 +61,8 @@ table {
 }
 
 tr {
-  border-bottom: 1px #505050;
+  border-bottom-width: 1px;
+  border-bottom-color: #F8F8F8;
 }
 
 tr:nth-child(even) {
