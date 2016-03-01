@@ -24,7 +24,10 @@ When you verify the registration status in the admin portal after running the cm
 
 <img src="/images/2014-03-19/Register-SMA.png" width="720">
 
-But the Automation tab in the VM Clouds presented the same surprise again. After poking around with some get- cmdlets and verifying it against a working environment I found a solution. The Service Provider Foundation database is unaware of the Service Management Endpoint. I’m still looking at the root cause, but you can use the some cmdlets on the SPF server to update the SPF database with the endpoint information.
+But the Automation tab in the VM Clouds presented the same surprise again. 
+<!--more-->
+
+After poking around with some get- cmdlets and verifying it against a working environment I found a solution. The Service Provider Foundation database is unaware of the Service Management Endpoint. I’m still looking at the root cause, but you can use the some cmdlets on the SPF server to update the SPF database with the endpoint information.
 
 If you encounter the issue described in this blog, make sure you have the SMA endpoint registered in Windows Azure Pack and run the following cmdlets on the SPF server.
 
