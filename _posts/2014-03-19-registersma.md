@@ -9,19 +9,18 @@ During a recent Windows Azure Pack deployment at a customer site I encountered a
 
 You must first register SMA
 
-We seen some other interesting issues in this environment so I tied this inconsistency to the same list. 
+We seen some other interesting issues in this environment so I tied this inconsistency to the same list.
 
-My fellow MVP Kristian Nese recently published a blogpost explaining how to re-register SPF in Windows Azure Pack. You can actually use the same cmdlets to unregister SMA (or other resource providers) as well. I unregistered the SMA endpoint on the Windows Azure Pack server with the following cmdlets. 
+My fellow MVP Kristian Nese recently published a blogpost explaining [how to re-register SPF in Windows Azure Pack](http://kristiannese.blogspot.no/2014/01/troubleshooting-windows-azure-pack-re.html). You can actually use the same cmdlets to unregister SMA (or other resource providers) as well. I unregistered the SMA endpoint on the Windows Azure Pack server with the following cmdlets.
 
+```
 $Credential = Get-Credential
-
-$Token = Get-MgmtSvcToken -Type Windows –AuthenticationSite https://yourauthenticationsite:30072 – ClientRealm http://azureservices/AdminSite -User $Credential -DisableCertificateValidation
-
+$Token = Get-MgmtSvcToken -Type Windows –AuthenticationSite https://yourauthenticationsite:30072 -ClientRealm http://azureservices/AdminSite -User $Credential -DisableCertificateValidation
 Get-MgmtSvcResourceProvider -AdminUri “https://localhost:30004″ -Token $Token -DisableCertificateValidation -name “Automation”
-
 Remove-MgmtSvcResourceProvider -AdminUri “https://localhost:30004″ -Token $Token -DisableCertificateValidation -Name “Automation” -InstanceId “the instance ID you got from Get-MgmtSvcResourceProvider“
+```
 
-When you verify the registration status in the admin portal after running the cmdlets you should be able to perform the registration again. I successfully registered the SMA endpoint again in the admin portal. 
+When you verify the registration status in the admin portal after running the cmdlets you should be able to perform the registration again. I successfully registered the SMA endpoint again in the admin portal.
 
 Register SMA
 
@@ -29,20 +28,17 @@ But the Automation tab in the VM Clouds presented the same surprise again. After
 
 If you encounter the issue described in this blog, make sure you have the SMA endpoint registered in Windows Azure Pack and run the following cmdlets on the SPF server.
 
+```
 import-module spfadmin
-
 Get-SCSpfStamp | fl
-
 $stamp = get-SCSpfStamp –name “Name of the Stamp you got from the Get-SCSpfStamp”
-
 New-SCSpfServer –name “IaasAutomation” –ServerType None –Stamps $stamp
-
 $Server = Get-SCSpfServer –name “IaasAutomation”
-
 New-SCSpfSetting –Name EndpointURL –SettingType EndpointconnectionString –Value “https://YourSmaEndpoint:9090/” –Server $Server
+```
 
-The admin portal should now reflect the changes we made.
+After a refresh the admin portal should now reflect the changes we made.
 
 After SPF cmdlets
 
-Yesterday I got a call from Darryl van der Peijl who was deploying a new lab environment and he encountered the exact same issue.If you also see this issue please add a comment to this blog or ping me on twitter @_marcvaneijk
+Yesterday I got a call from [Darryl van der Peijl](http://www.darrylvanderpeijl.nl/) who was deploying a new lab environment and he encountered the exact same issue.If you also see this issue please add a comment to this blog or ping me on twitter [@_marcvaneijk](http://twitter.com/_marcvaneijk)
