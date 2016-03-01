@@ -36,6 +36,10 @@ a:hover {
   color: #666666;
 }
 
+blockquote {
+  font-style: italic;
+}
+
 /* Index */
 .contentIndexUl {
   padding: 0px;
