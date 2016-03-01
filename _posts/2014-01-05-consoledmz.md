@@ -21,7 +21,7 @@ Eh.. the underlying host. But is that secure? A tenant connecting to a host? Fro
 
 Yeah, it is secure! Microsoft has taken several steps to enforce security. The RD Gateway is adjusted so it can only be used for Remote Console. The settings in each RDP file that is generated is signed with a hash based on a certificate that is configured on the VMM server. The time that the RDP file is valid to initiate the session is limited and configurable by the admin. When a tenant select the Console button, access to the virtual machine for this tenant is verified and the RDP file will only be created if the tenant has the required permissions. The RDP file contains credentials that only grant access to this specific VM on the host, not to any other VMs on the host.
 
-Configuring this functionality in the preview bits required quite some customization. With the GA of Windows Azure Pack the process of configuring Remote Console has been changed. You can find the steps to configure Remote Console in System Center 2012 R2 on Technet.
+Configuring this functionality in the preview bits required quite some customization. With the GA of Windows Azure Pack the process of configuring Remote Console has been changed. You can find the steps to configure Remote Console in System Center 2012 R2 on [Technet](http://technet.microsoft.com/en-us/library/dn469415.aspx).
 
 The connection between the Remote Desktop Gateway server and the Hyper-V host can be configured based on FQDN or based on IP. This setting is used when the RDP file is generated. Based on the settings the FQDN or the IP address of the Hyper-V host is added to the RDP file so the RD Gateway knows to what Hyper-V host the vmconnect session must be initiated.
 
@@ -51,7 +51,7 @@ I got in touch with the product team and together with Ashley Travers (SDET) we 
 
 The Hyper-V host will present a self-signed certificate that contains the FQDN of the Hyper-V host. When you configure Remote Console with the VMConnectHostIdentificationMode parameter to FQDN the certificate provided by the Hyper-V host will match the initial request containing the FQDN. The tenant is prompted with the self-signed cert of the Hyper-V host and after accepting the security warning the console session is created. Configuring Remote Console with the VMConnectHostIdentificationMode parameter to IP the certificate provided by the Hyper-V host will not match the initial request containing the IP address. The error An authentication error occurred (0x607) is presented to the tenant and the console session fails.
 
-Ashley pointed out that the line authentication level:i:0 in the RDP is used for this setting. You can look at the content of the auto generated RDP file by opening it with notepad. The entry authentication level:i:0 was present in the auto generated RDP file in the preview bits. In RTM the auto generated RDP file was slimmed down for performance but unfortunately resulted in this scenario.
+Ashley pointed out that the line [authentication level:i:0](http://technet.microsoft.com/en-us/library/cc781387(v=WS.10).aspx) in the RDP is used for this setting. You can look at the content of the auto generated RDP file by opening it with notepad. The entry authentication level:i:0 was present in the auto generated RDP file in the preview bits. In RTM the auto generated RDP file was slimmed down for performance but unfortunately resulted in this scenario.
 
 ## Custom Hyper-V Certificate
 
@@ -122,7 +122,7 @@ While this is a workaround for a small lab environment, it is not a solid approa
 
 ## URL Rewrite
 
-In my previous blog on Windows Azure Pack Console Connect, URL Rewrite was used to alter the RDP file that was created. Richard Rundle (Program Manager at Microsoft and owner of the Remote Console feature in Windows Azure Pack) pointed out URL Rewrite as a possible approach to add the line authentication level:i:0 to the auto generated RDP file. Now, why didn’t I think of that.
+In my previous blog on [Windows Azure Pack Console Connect](/2013/09/10/wapconsole), URL Rewrite was used to alter the RDP file that was created. Richard Rundle (Program Manager at Microsoft and owner of the Remote Console feature in Windows Azure Pack) pointed out URL Rewrite as a possible approach to add the line authentication level:i:0 to the auto generated RDP file. Now, why didn’t I think of that.
 
 As usual what seemed a simple thing turned out to be a little more complicated.
 
