@@ -8,8 +8,8 @@ tags: Powershell, Tenant Public API, VM Role, Windows Azure
 Two months ago I published a [blog](/2014/06/11/tenantpublicapi) on the Windows Azure Pack Tenant Public API. This API allows you to interact with your cloud services using PowerShell over the internet and certificate authentication. The Microsoft Azure PowerShell module provided cmdlets for Windows Azure Pack as well. As you might remember from that blog was the lack of VM Role cmdlets. There was a workaround that worked but was somewhat complex to configure and maintain.
 
 A new version of the Microsoft Azure PowerShell module has been released. This new version also contains various new cmdlets  for Windows Azure Pack. 
-- New-WAPackCloudService 
-- Get-WAPackCloudService 
+* New-WAPackCloudService 
+* Get-WAPackCloudService 
 - Remove-WAPackCloudService 
 - New-WAPackVMRole 
 - Get-WAPackVMRole 
