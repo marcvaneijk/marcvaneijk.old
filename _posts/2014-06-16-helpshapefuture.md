@@ -15,7 +15,7 @@ You can find the Azure Pack user voice site [here](http://feedback.azure.com/for
 720
 ```
 
-<img src="/images/2014-06-16/01-General.png" width="720">
+<img src="/images/2014-06-16/01-General.png">
 
 Sign in to track your submitted ideas and comments.
 
