@@ -7,7 +7,7 @@ tags: CloudVMRoleSizeProfile, Marc van Eijk, Service Template, VM Role, VM templ
 ---
 In Windows Azure Pack you can deploy standalone virtual machines, which are directly mapped to VM Templates in Virtual Machine Manager. The VM Templates are limited to deploy an Operating System, without applications. The VM Template allows you to configure the number of CPUs and the amount of Memory assigned to it. Since the standalone Virtual Machine in Windows Azure Pack is a direct mapping to the VM Template in Virtual Machine Manager, a virtual machine that is deployed by a tenant will be configured according to the size you specified in the VM template. If you would like to give a tenant the possibility to change the number of CPUs and amount of Memory assigned to virtual machine you can define hardware profiles in Virtual Machine Manager and add them to the plan that the tenant has a subscription on.
 
-00 Standalone Virtual Machine
+<img src="/images/2014-03-09/00-Standalone-Virtual-Machine.png" width="720">
 
 Virtual Machine Manager also provides Service Templates. Service Templates use VM Templates as building blocks and add a lot of functionality on top of them. Scale-up, Scale-out, application integration, relation to deployed instances and versioning, just to name a few.
 
@@ -17,7 +17,7 @@ The VM Role consists of two parts. The Resource Definition is imported in to Win
 
 When you deploy your first VM Role, you will notice that the available sizes for the virtual machine are populated automatically.
 
-Untitled
+<img src="/images/2014-03-09/Untitled.png" width="720">
 
 The predefined list contains the following sizes.
 
@@ -43,7 +43,7 @@ The list of VM sizes for the VM Role are predefined in Virtual Machine Manager. 
 Get-CloudVMRoleSizeProfile | ft Name, Description, CpuCount, MemoryInMB –AutoSize
 ```
 
-02 Get-CloudVMRoleSizeProfile
+<img src="/images/2014-03-09/02-Get-CloudVMRoleSizeProfile.png" width="720">
 
 If you want to make changes to the predefined list it might me a good idea to first export the existing values. You can export the values in CSV format by running the following cmdlet (make sure the folder exists before running the cmdlet).
 
@@ -51,11 +51,11 @@ If you want to make changes to the predefined list it might me a good idea to fi
 Get-CloudVMRoleSizeProfile | Export-Csv c:\export\DefaultCloudVMRoleSizeProfiles.txt
 ```
 
-03 Export
+<img src="/images/2014-03-09/03-Export.png" width="720">
 
 If you want to restore the default values at some point in time (for whatever reason), you can use the values from the generated file.
 
-04 Csv
+<img src="/images/2014-03-09/04-Csv.png" width="720">
 
 I will add a VM size with the following values as an example. Take note that the Name parameter can only contain alphabet letters, numbers, underscores(_), and dashes(-) and has a maximum value of 100 characters.
 
@@ -71,11 +71,11 @@ Use the following cmdlet to add this VM size
 New-CloudVMRoleSizeProfile -Name "KillerVM" -Description "This VM will empty your creditcard in a couple of minutes" -CPUCount 32 -MemoryMB 131072
 ```
 
-05 New-CloudVMRoleSizeProfile
+<img src="/images/2014-03-09/05-New-CloudVMRoleSizeProfile.png" width="720">
 
 Logon to the admin portal and deploy a new VM Role. The new VM size will show up as an option.
 
-06 NewSizeinPortal
+<img src="/images/2014-03-09/06-NewSizeinPortal.png" width="720">
 
 To remove an existing VM size run the following command. Replace the Name value with the entry you would like to remove.
 
@@ -83,7 +83,7 @@ To remove an existing VM size run the following command. Replace the Name value 
 Get-CloudVMRoleSizeProfile -Name "KillerVM" | Remove-CloudVMRoleSizeProfile
 ```
 
-07 Remove-CloudVMRoleSizeProfile
+<img src="/images/2014-03-09/07-Remove-CloudVMRoleSizeProfile.png" width="720">
 
 The built-in CloudVMRoleSizeProfiles cannot be removed with the Remove-CloudVMRoleSizeProfile. It is possible to change these built-in profiles with the Set-CloudVMRoleSizeProfile. You are able to set CpuCount, MemoryInMB and Description. The name cannot be changed. To change the CpuCount, MemoryInMB and Description for the built-in ExtraLarge profile run the following cmdlet
 
