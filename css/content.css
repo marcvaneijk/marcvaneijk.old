@@ -45,19 +45,21 @@ blockquote {
   font-style: italic;
 }
 
+/* table */
+
 table {
   text-align: left;
   width: 100%;
   border-collapse: collapse;
  }
  
+ thead {
+    background-color: #1e73be;
+    color: #ffffff;
+}
+ 
 tr:nth-child(even) {
   background-color: #f2f2f2
-}
-
-thead {
-    background-color: #4CAF50;
-    color: white;
 }
 
 /* Index */
