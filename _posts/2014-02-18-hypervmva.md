@@ -15,7 +15,7 @@ Even if you cannot attend the live event, [register today](http://aka.ms/virtDC)
 
 MVA
 
-Topics 
+**Topics** 
 
 - Introduction to Microsoft Virtualization
 - Host Configuration
