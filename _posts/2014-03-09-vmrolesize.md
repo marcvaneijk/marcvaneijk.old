@@ -16,6 +16,7 @@ With the release of Windows Azure Pack a new feature called the VM Role was intr
 The VM Role consists of two parts. The Resource Definition is imported in to Windows Azure Pack and contains the fields to build up the deployment wizard and map to the Resource Extension. The Resource Extension is imported in to Virtual Machine Manager and contains the application logic. Virtual Machine Manager does not provide a Graphical User Interface for The Resource Extension. You can create new or edit existing Resource Definition and Resource Extension files with the [VM Role Authoring Tool](https://vmroleauthor.codeplex.com/).
 
 When you deploy your first VM Role, you will notice that the available sizes for the virtual machine are populated automatically.
+<!--more-->
 
 <img src="/images/2014-03-09/Untitled.png" width="720">
 
