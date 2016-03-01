@@ -14,6 +14,7 @@ div.highlighter-rouge  {
 
 pre { 
   white-space: pre; overflow: auto; 
+  margin: 0px;
 }
 
 /* single word in normal text */
