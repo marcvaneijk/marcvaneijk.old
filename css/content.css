@@ -24,7 +24,6 @@ a:hover {
   color: #1a1a1a;
 }
 
-
 .contentTitle {
   font-size: 30px;
   color: #1e73be;
@@ -51,6 +50,7 @@ table {
   text-align: left;
   width: 100%;
   border-collapse: collapse;
+  font-size: 12px;
  }
  
  thead {
