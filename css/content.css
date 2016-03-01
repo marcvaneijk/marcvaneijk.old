@@ -11,8 +11,10 @@
   color: #3a3a3a;
 }
 
+/* max image size in content */
 p img {max-width: 100%;}
 
+/* hyperlinks */
 a {
   text-decoration: none;
   color: #1e73be;
@@ -21,6 +23,7 @@ a {
 a:hover {
   color: #1a1a1a;
 }
+
 
 .contentTitle {
   font-size: 30px;
@@ -41,6 +44,10 @@ a:hover {
 blockquote {
   font-style: italic;
 }
+
+table {
+  text-align: left;
+ }
 
 /* Index */
 .contentIndexUl {
