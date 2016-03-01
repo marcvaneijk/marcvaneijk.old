@@ -53,11 +53,11 @@ table {
   width: 100%;
   border-collapse: collapse;
   font-size: 12px;
- }
+}
  
- thead {
-    background-color: #505050;
-    color: #ffffff;
+thead {
+  background-color: #505050;
+  color: #ffffff;
 }
 
 tr {
