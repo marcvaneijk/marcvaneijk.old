@@ -57,10 +57,10 @@ The list of functions retrieved from the article at the time of writing this blo
 
 Based the template functions documentation I have created five ARM deployment templates, that will execute each function for a given category. The templates will not create any resources (unless necessary for the function). You can use the output section see the result of the functions. The templates can be found in my GitHub repository here:
 
-https://github.com/marcvaneijk/arm/tree/master/000-patterns
+<https://github.com/marcvaneijk/arm/tree/master/000-patterns>
 
 Besides the documentation I have also used the GitHub repo by Ryan Jones with a lot of great examples on template functions, containing a template per function.
 
-https://github.com/rjmax/ArmExamples
+<https://github.com/rjmax/ArmExamples>
 
 These five templates successfully deploy to Microsoft Azure and can be useful to test a function and see the result. Because the templates do not deploy any resources, you can see the output in a couple of seconds.
