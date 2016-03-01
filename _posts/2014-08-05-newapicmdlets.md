@@ -35,4 +35,4 @@ The VM Role is a custom configuration that can consist of many required and opti
 
 If we take a look at the ResourceDefinition of an existing VM Role there is still some configuration requirement, but it is a huge improvement compared the previous procedure.
 
-<img src="/images/22014-08-05/02resdef.png" width="700">
+<img src="/images/2014-08-05/02resdef.png" width="700">
