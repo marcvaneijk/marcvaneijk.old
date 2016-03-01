@@ -20,6 +20,7 @@ You can use your Microsoft account or Organizational account to login without th
 > Microsoft account, created by a user for personal use, is the new name for what used to be called “Windows Live ID”. The Microsoft account is the combination of an email address and a password that a user uses to sign in to all consumer-oriented Microsoft products and cloud services such as Outlook (Hotmail), Messenger, OneDrive, MSN, Windows Phone or Xbox LIVE. If a user uses an email address and password to sign in to these or other services, then the user already has a Microsoft account. But the user can also sign up for a new one at any time.
 
 I have two different accounts. One account is an Organizational account and the other is a Microsoft account.
+<!--more-->
 
 <img src="/images/2014-12-30/02-msn.png" width="700"> The Microsoft account is used for creating a subscription in Azure.
 
