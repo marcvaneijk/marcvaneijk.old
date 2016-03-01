@@ -12,6 +12,10 @@ div.highlighter-rouge  {
   padding: 15px;
 }
 
+pre { 
+  white-space: pre; overflow: auto; 
+}
+
 /* single word in normal text */
 
 code.highlighter-rouge {
