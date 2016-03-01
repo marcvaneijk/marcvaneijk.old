@@ -7,7 +7,7 @@ tags:
 ---
 You might be totally new to GitHub, maybe you have already worked with it a little or you might even consider yourself a more advanced user and work with GitHub frequently. If you have looked at GitHub before you might have noticed that Microsoft is increasingly using it for multiple purposes. The documentation for Microsoft Azure is hosted on GitHub. This means that you are able to contribute to that documentation (in a controlled fashion of course). Besides documentation, you will also find a lot of GitHub repositories that contain code for interacting with different Microsoft products. A very good example of this is the azure-quickstart-templates repository.
 
-https://github.com/Azure/azure-quickstart-templates
+<https://github.com/Azure/azure-quickstart-templates>
 
 This repository contains over 250 different deployment templates to use with Azure Resource Manager.
 
@@ -15,7 +15,7 @@ This repository contains over 250 different deployment templates to use with Azu
 
 If a deployment template in this repository also complies with certain requirements, they are even displayed on a gallery on the public Microsoft Azure website.
 
-https://azure.microsoft.com/en-us/documentation/templates/
+<https://azure.microsoft.com/en-us/documentation/templates/>
 
 In this blog we’ll go step by step, to get you started with contributing on GitHub. I have worked my way through many blogs, finding a piece of the puzzle in each. This blog is long, but if you just walk through it step by step, you can contribute to your own repositories, other repositories and even the azure-quickstart-templates repository. So you can have your own template (with your name, and photo) shining on the public Microsoft Azure website for everybody to deploy to their Microsoft Azure subscription.
 
