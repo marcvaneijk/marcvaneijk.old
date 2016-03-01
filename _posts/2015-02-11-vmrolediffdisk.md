@@ -8,6 +8,7 @@ tags: Dedicated Disks, Differencing Disks, IaaS, Marc van Eijk, VM Role, Windows
 Windows Azure Pack was released in October 2013 and allows you to provide cloud services that are running in your own datacenter. Since its release we have deployed a lot Cloud OS environments. Most if not all deployments contained or were centered around Infrastructure As A Service.
 
 To enable infrastructure as a service in your datacenter you need a couple of components.
+
 - Windows Azure Pack
 - System Center Service Provider Foundation
 - System Center Virtual Machine Manager
@@ -16,6 +17,7 @@ To enable infrastructure as a service in your datacenter you need a couple of co
 As a tenant in the Windows Azure Pack portal you can interact with virtual machines and virtual networks.
 
 For deploying virtual machines you can choose between two methods.
+
 - Stand alone virtual machine
 - VM Role
 
@@ -28,6 +30,7 @@ The stand alone virtual machine is a one to one mapping to a VM Template in Virt
 ### VM Role
 
 The other method Windows Azure Pack provides to deploy virtual machines is the VM Role. The VM Role uses the service template engine in Virtual Machine Manager and combines that with a customizable deployment wizard in Windows Azure Pack. On top of the stand alone virtual machine method the VM Role provides the following capabilities
+
 - Application deployment in the virtual machine as an integral part of the deployment process
 - Customizable deployment wizard
 - Better interaction capabilities with Service Management Automation
@@ -37,7 +40,7 @@ The other method Windows Azure Pack provides to deploy virtual machines is the V
 
 Stand alone virtual machine or the VM Role? Now this looks like an easy choice. And every customers reaction to this comparison is similar. The VM Role it is.
 
-But…. There is one important thing to point out. The VM Role uses differencing disks.
+But…, there is one important thing to point out. The VM Role uses differencing disks.
 
 ## Differencing disks
 
@@ -87,8 +90,9 @@ Despite the many challenges with the differencing disk configuration of the VM R
 With the release of Update Rollup 5 for Virtual Machine Manager, Microsoft has made the necessary changes to allow you to choose your disk configuration. You can use still use differencing disks, but it is now also possible to use a dedicated disk configuration for each virtual machine instance. The choice is made by you and configured at the VMM cloud level. This functionality does not have any affect in VMM unless you use it in combination with the VM Role.
 
 One of the most important reasons Microsoft has enabled this update is because you voted for [this feedback](http://feedback.azure.com/forums/255259-azure-pack/suggestions/6036538-option-to-select-between-differencing-disk-or-dedion) on the user voice. If you want to influence the priorities of the product group you can vote on existing suggestions or submit your own suggestions here.
-- Windows Azure Pack: http://feedback.azure.com/forums/255259-azure-pack
-- Virtual Machine Manager: https://systemcentervmm.uservoice.com/forums/280803-general-vmm-feedback
+
+- Windows Azure Pack: <http://feedback.azure.com/forums/255259-azure-pack>
+- Virtual Machine Manager: <https://systemcentervmm.uservoice.com/forums/280803-general-vmm-feedback>
 
 ## How to enable dedicated disks
 
@@ -132,10 +136,5 @@ A lot of people at Microsoft have been very helpful in getting a fitting garage 
 
 ## More Information
 
-Description of the security update for Update Rollup 5 for System Center 2012 R2 Virtual Machine Manager
-
-http://support2.microsoft.com/kb/3023195/en-us
-
-VM Role Series on Building Clouds Blog
-
-http://blogs.technet.com/b/privatecloud/archive/tags/marc+van+eijk/default.aspx
+- [Description of the security update for Update Rollup 5 for System Center 2012 R2 Virtual Machine Manager](http://support2.microsoft.com/kb/3023195/en-us)
+- [VM Role Series on Building Clouds Blog](http://blogs.technet.com/b/privatecloud/archive/tags/marc+van+eijk/default.aspx)
