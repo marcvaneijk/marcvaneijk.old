@@ -13,6 +13,10 @@ You can find the Azure Pack user voice site [here](http://feedback.azure.com/for
 
 <img src="/images/2014-06-16/01-General.png" width="710">
 
+```
+710
+```
+
 Sign in to track your submitted ideas and comments.
 
 When you would like to submit a new suggestion, type in one or more relevant keyword. This will automatically filter the already submitted items. If somebody else already submitted the same suggestion, it allows you to vote on that suggestion. As a signed in user you will have a total of 10 votes. With these votes you can submit new suggestions or vote on existing ones.
@@ -23,10 +27,18 @@ When you vote for existing items, you can choose to give 1, 2, or 3 votes for mo
 
 <img src="/images/2014-06-16/02-Vote-for-exisiting-idea.png" width="720">
 
+```
+720
+```
+
 ## Submit a new suggestion
 
 To submit a new suggestion, provide the title for the suggestion and optionally enter a description and category. Select to attach a file if that helps to explain the suggestion and choose how many votes you would like to put on this suggestion.
 
 <img src="/images/2014-06-16/03-Post-new-idea.png" width="730">
+
+```
+730
+```
 
 Help shape Windows Azure Pack with the [user voice](http://feedback.azure.com/forums/255259-azure-pack)
