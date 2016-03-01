@@ -5,7 +5,7 @@ author: Marc van Eijk
 title: Windows Azure Pack Remote Console with the RD gateway in a DMZ
 tags: Console Connect, Marc van Eijk, Remote Console, WAP, WAP Wiki, Windows Azure Pack
 ---
-For the preview bits of Windows Azure Pack I did a blog post on connecting to a virtual machine through a console connection. The Windows Azure Pack tenant site actually allows two ways to connect to a virtual machine. The dashboard tab of a virtual machine in the tenant site present a button connect on the bottom bar. If the remote console functionality is enabled in the plan for the tenant , this button will display two options.
+For the preview bits of Windows Azure Pack I did a [blog post](/2013/09/10/wapconsole) on connecting to a virtual machine through a console connection. The Windows Azure Pack tenant site actually allows two ways to connect to a virtual machine. The dashboard tab of a virtual machine in the tenant site present a button connect on the bottom bar. If the remote console functionality is enabled in the plan for the tenant , this button will display two options.
 
 01 Remote Console
 
