@@ -153,6 +153,7 @@ Next we need lookup the Git endpoint of our GitHub repository. You can find the 
 <img src="/images/2016-02-03/19-Clone2.png" width="700">
 
 Type `git clone <the repository endpoint>` in you command line. 
+
 ```
 git clone https://github.com/marcvaneijkdemo/MyFirstRepository.git
 ```
