@@ -26,6 +26,7 @@ Azure Resource Manager was announced at Build in April, 2014. This introduced a 
 ## Template orchestration
 
 Azure Resource Manager uses templates to orchestrate the deployment of resources in Microsoft Azure and Microsoft Azure Stack. These templates are configured in JSON (JavaScript Object Notation) language. The templates are declarative and idempotent.
+
 - Declarative. You define the end state and the dependencies of the resources that comprise your application in the template. The platform converts the declarative template to imperative code that deploys your resources
 - Idempotent. After you deployed your resources with a template and make an update to it, you can rerun the updated template to the same resource group. The updated resources will be added by the deployment.
 
@@ -45,6 +46,7 @@ GitHub is a web-based Git repository hosting service. I’ll try to simplify wit
 ## Signup on GitHub
 
 To get started with GitHub, you will need a GitHub account. Browse to http://www.github.com. You’ll need to enter
+
 - a username (this name must be unique on GitHub and will be visible to all GitHub users),
 - an email address (this email address will be used to validate your account and receive notification, your email address will not be visible to all GitHub users)
 - a password (the username and the password are used to sign in to GitHub and for contributing)
@@ -76,6 +78,7 @@ When you click “create repository” you are redirected to the repository star
 ## Clients
 
 There are two common clients you can use to interact with GitHub.
+
 - Git is the engine of the local version control system. Git provides a command line interface and is the only tool that allows you to run all Git commands.
 - Github Desktop is an application with a graphical UI that allows you to perform all basic Git activities without a command line.
 
@@ -149,7 +152,7 @@ Next we need lookup the Git endpoint of our GitHub repository. You can find the 
 
 <img src="/images/2016-02-03/19-Clone2.png" width="700">
 
-Type “git clone <the repository endpoint>” in you command line. 
+Type `git clone <the repository endpoint>` in you command line. 
 ```
 git clone https://github.com/marcvaneijkdemo/MyFirstRepository.git
 ```
@@ -247,7 +250,7 @@ The auto-merge will only update the conflicting code within a file. All none con
 
 If you want more control over the merging process you can use the fetch and merge commands individually instead of the combined pull command. I have created a blog with a step by step for git fetch and merge here.
 
-You resolve a conflict by editing the file to manually merge the parts of the file that git had trouble merging. This may mean discarding either your changes or someone else’s or doing a mix of the two. You will also need to delete the ‘<<<<<<<‘, ‘=======’, and ‘>>>>>>>’ in the file.
+You resolve a conflict by editing the file to manually merge the parts of the file that git had trouble merging. This may mean discarding either your changes or someone else’s or doing a mix of the two. You will also need to delete the `<<<<<<<`, `=======`, and `>>>>>>>` in the file.
 
 <img src="/images/2016-02-03/32-GitConflict5.png" width="700">
 
