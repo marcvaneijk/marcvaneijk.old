@@ -33,7 +33,7 @@ In this example
 SQL01\hypervu,10001
 ```
 
-Custom SQL port
+<img src="/images/2014-07-23/07-Commit.png" width="700">
 
 ## SQL Authentication
 
@@ -49,7 +49,7 @@ If Microsoft wasn’t comfortable using SQL authentication, they wouldn’t run 
 
 Image taken from the new Microsoft Azure Portal that is in preview.
 
-Azure SQL 
+<img src="/images/2014-07-23/07-Commit.png" width="700">
 
 ## More Information
 
