@@ -11,7 +11,7 @@ You can help shape the future of Windows Azure Pack. The Windows Azure Pack team
 
 You can find the Azure Pack user voice site [here](http://feedback.azure.com/forums/255259-azure-pack)
 
-01 General
+<img src="/images/2016-02-17/01-General.png" width="710">
 
 Sign in to track your submitted ideas and comments.
 
@@ -21,12 +21,12 @@ When you would like to submit a new suggestion, type in one or more relevant key
 
 When you vote for existing items, you can choose to give 1, 2, or 3 votes for more weight. You are able to change your assigned votes afterwards. When suggestions are closed, the votes you assigned to that suggestion are available again.
 
-02 Vote for exisiting idea
+<img src="/images/2016-02-17/02-Vote-for-exisiting-idea.png" width="720">
 
 ## Submit a new suggestion
 
 To submit a new suggestion, provide the title for the suggestion and optionally enter a description and category. Select to attach a file if that helps to explain the suggestion and choose how many votes you would like to put on this suggestion.
 
-03 Post new idea
+<img src="/images/2016-02-17/03-Post-new-idea.png" width="730">
 
 Help shape Windows Azure Pack with the [user voice](http://feedback.azure.com/forums/255259-azure-pack)
