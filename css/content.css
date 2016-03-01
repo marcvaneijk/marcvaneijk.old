@@ -54,7 +54,7 @@ table {
   text-align: left;
   width: 100%;
   border-collapse: collapse;
-  font-size: 12px;
+  font-size: 14px;
 }
  
 thead {
@@ -64,11 +64,11 @@ thead {
 
 tr {
   border-bottom-width: 1px;
-  border-bottom-color: #F8F8F8;
+  border-bottom-color: #f2f2f2;
 }
 
 tr:nth-child(even) {
-  background-color: #f2f2f2;
+  background-color: #F8F8F8;
 }
 
 /* Index */
