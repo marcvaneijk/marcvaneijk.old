@@ -72,7 +72,11 @@ tr:nth-child(even) {
   background-color: #F8F8F8;
 }
 
-th, td {
+th {
+  padding: 5px;
+}
+
+td {
   padding: 5px;
 }
 
