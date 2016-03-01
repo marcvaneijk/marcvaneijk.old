@@ -68,7 +68,7 @@ Amount of Memory | 131072
 Use the following cmdlet to add this VM size
 
 ```
-New-CloudVMRoleSizeProfile -Name “KillerVM” -Description “This VM will empty your creditcard in a couple of minutes” -CPUCount 32 -MemoryMB 131072
+New-CloudVMRoleSizeProfile -Name "KillerVM" -Description "This VM will empty your creditcard in a couple of minutes" -CPUCount 32 -MemoryMB 131072
 ```
 
 05 New-CloudVMRoleSizeProfile
@@ -80,15 +80,15 @@ Logon to the admin portal and deploy a new VM Role. The new VM size will show up
 To remove an existing VM size run the following command. Replace the Name value with the entry you would like to remove.
 
 ```
-Get-CloudVMRoleSizeProfile -Name “KillerVM” | Remove-CloudVMRoleSizeProfile
+Get-CloudVMRoleSizeProfile -Name "KillerVM" | Remove-CloudVMRoleSizeProfile
 ```
 
 07 Remove-CloudVMRoleSizeProfile
 
-**Update August 9 2014**. The built-in CloudVMRoleSizeProfiles cannot be removed with the Remove-CloudVMRoleSizeProfile. It is possible to change these built-in profiles with the Set-CloudVMRoleSizeProfile. You are able to set CpuCount, MemoryInMB and Description. The name cannot be changed. To change the CpuCount, MemoryInMB and Description for the built-in ExtraLarge profile run the following cmdlet
+The built-in CloudVMRoleSizeProfiles cannot be removed with the Remove-CloudVMRoleSizeProfile. It is possible to change these built-in profiles with the Set-CloudVMRoleSizeProfile. You are able to set CpuCount, MemoryInMB and Description. The name cannot be changed. To change the CpuCount, MemoryInMB and Description for the built-in ExtraLarge profile run the following cmdlet
 
 ```
-Get-CloudVMRoleSizeProfile -name ExtraLarge | Set-CloudVMRoleSizeProfile -CPUCount 10 -Description “Some Other Description” -MemoryMB 28672
+Get-CloudVMRoleSizeProfile -name ExtraLarge | Set-CloudVMRoleSizeProfile -CPUCount 10 -Description "Some Other Description" -MemoryMB 28672
 ```
 
 ## More Information
