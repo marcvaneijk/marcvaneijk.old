@@ -36,6 +36,7 @@ In this design the RD Gateway can resolve the Hyper-V hosts on FQDN so you can u
 ## Production environment
 
 Any serious Service Provider will require all publicly accessible services to be placed in a DMZ. Besides placing all Windows Azure Pack components in a separate site and preferably in a separate domain, the RD gateway also needs to be placed in the DMZ. The RD Gateway is not able to resolve the Hyper-V hosts based on FQDN without a DNS conditional forwarder from the DMZ domain to the management domain. This also requires allowing DNS traffic from the DMZ domain to the management domain.
+<!--more-->
 
 Remote console can also be configured to connect to the Hyper-V host on IP address. For the DMZ design, this is actually a great solution. It does not require a DNS conditional forwarder or DNS traffic allowed through the firewall. The only port that is required is TCP 2179 (for vmconnect) from the RD Gateway in the DMZ domain to the Hyper-V hosts in the management domain. In the preview of Windows Azure Pack this configuration worked excellent.
 
