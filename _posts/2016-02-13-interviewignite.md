@@ -17,5 +17,5 @@ I met with my good friend Carsten Rachfahl and had a chat about Microsoft Azure 
 
 I also had to opportunity to present in two sessions at Ignite.
 
-- Taking advantage of Identity capabilities in the Azure Pack (session by Shriram Natarajan)
-- Troubleshooting Windows Azure Pack Providers
+- [Taking advantage of Identity capabilities in the Azure Pack](https://channel9.msdn.com/events/Ignite/2015/BRK3483) (session by Shriram Natarajan)
+- [Troubleshooting Windows Azure Pack Providers](https://channel9.msdn.com/events/Ignite/2015/BRK3465)
