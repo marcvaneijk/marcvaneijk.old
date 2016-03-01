@@ -7,7 +7,7 @@ tags: Marc van Eijk, Service Management Automation, Service Provider Foundation,
 ---
 During a recent Windows Azure Pack deployment at a customer site I encountered an issue with the registration of Service Management Automation. I have done the installation and configuration numerous times without issues before. I performed the same steps at this site and the registration of SMA completed successfully. But when I wanted to link a runbook to an action in the VM Clouds resource provider I was treated with the following surprise. As you can see in the screenshot, the resource provider Automation shows the 27 sample runbooks.
 
-You must first register SMA
+<img src="/images/2014-03-19/You-must-first-register-SMA.png" width="720">
 
 We seen some other interesting issues in this environment so I tied this inconsistency to the same list.
 
@@ -22,7 +22,7 @@ Remove-MgmtSvcResourceProvider -AdminUri “https://localhost:30004″ -Token $T
 
 When you verify the registration status in the admin portal after running the cmdlets you should be able to perform the registration again. I successfully registered the SMA endpoint again in the admin portal.
 
-Register SMA
+<img src="/images/2014-03-19/Register-SMA.png" width="720">
 
 But the Automation tab in the VM Clouds presented the same surprise again. After poking around with some get- cmdlets and verifying it against a working environment I found a solution. The Service Provider Foundation database is unaware of the Service Management Endpoint. I’m still looking at the root cause, but you can use the some cmdlets on the SPF server to update the SPF database with the endpoint information.
 
@@ -39,6 +39,6 @@ New-SCSpfSetting –Name EndpointURL –SettingType EndpointconnectionString –
 
 After a refresh the admin portal should now reflect the changes we made.
 
-After SPF cmdlets
+<img src="/images/2014-03-19/After-SPF-cmdlets.png" width="720">
 
 Yesterday I got a call from [Darryl van der Peijl](http://www.darrylvanderpeijl.nl/) who was deploying a new lab environment and he encountered the exact same issue.If you also see this issue please add a comment to this blog or ping me on twitter [@_marcvaneijk](http://twitter.com/_marcvaneijk)
