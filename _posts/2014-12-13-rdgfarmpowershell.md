@@ -16,6 +16,7 @@ He had asked me a couple of times if I had a solution to complete his masterwork
 Carsten is a smart man. He has been struggling with this issue for a couple of months and it was going to complete his masterwork. He had looked at all the possible angles already.
 
 Stubborn as I am I started looking at the PowerShell cmdlets available in the RemoteDesktop PowerShell module. I needed an environment to test with. The VM Role in our Windows Azure Pack environment came to the rescue and let me build a domain controller and two member servers in just a couple of minutes. The two member servers are called MVE-RDG1 and MVE-RDG2.
+<!--more-->
 
 ## PowerShell cmdlet
 
