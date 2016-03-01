@@ -13,7 +13,7 @@ Microsoft virtualization experts Symon Perriman and Matt McSpirit demonstrate ho
 
 Even if you cannot attend the live event, [register today](http://aka.ms/virtDC) anyway and you will get an email once we release the videos for on-demand replay!  
 
-MVA
+<img src="/images/2014-02-18/MVA.png" width="720">
 
 **Topics** 
 
