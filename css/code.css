@@ -9,12 +9,12 @@ code {
 
 div.highlighter-rouge  { 
   background: #f2f2f2; 
-  padding: 15px;
 }
 
 pre { 
   white-space: pre; overflow: auto; 
   margin: 0px;
+  padding: 15px;
 }
 
 /* single word in normal text */
