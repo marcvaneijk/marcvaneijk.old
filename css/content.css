@@ -60,6 +60,7 @@ table {
 thead {
   background-color: #505050;
   color: #ffffff;
+  padding: 15px;
 }
 
 tr {
