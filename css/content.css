@@ -13,7 +13,9 @@
 
 /* max image size in content */
 
-p img {max-width: 100%;}
+p img {
+  max-width: 100%;
+}
 
 /* hyperlinks */
 
