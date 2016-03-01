@@ -15,7 +15,7 @@ You can find the Azure Pack user voice site [here](http://feedback.azure.com/for
 730
 ```
 
-<img src="/images/2014-06-16/01-General.png" width="730">
+<img src="/images/2014-06-16/01-General.png" width="724">
 
 Sign in to track your submitted ideas and comments.
 
