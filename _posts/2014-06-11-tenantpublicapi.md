@@ -7,7 +7,7 @@ tags: API, Marc van Eijk, Microsoft Azure, Powershell, PublishSettings, Tenant P
 ---
 Microsoft Azure and Windows Azure Pack are like two circles. These circles are moving towards each other and are already overlapping on certain parts. The CloudOS vision is those two circles completely merged into one.
 
-Circles
+<img src="/images/2014-06-11/Circles.png" width="720">
 
 So, when you work with Windows Azure Pack it is very interesting to keep an eye on Microsoft Azure, the public cloud solution from Microsoft. This gives a good idea of the features that are coming to Windows Azure Pack, but also gives more insight in the features that are already available in Windows Azure Pack today. In this blog we will cover a feature that is not very well known but can be very useful. The Windows Azure Pack Tenant Public API.
 
@@ -21,7 +21,7 @@ Unfortunately in this release of Windows Azure Pack you need access to the Windo
 
 Microsoft Azure provides a powerful scripting environment with Azure PowerShell. It allows tenants to interact with the services in their Microsoft Azure subscription with PowerShell cmdlets. These cmdlets can be run from a remote client. The client authenticates to the services in the subscription by using certificates. As you expect from Microsoft Azure it works after some easy steps to get the certificates configured correctly.
 
-WAPack
+<img src="/images/2014-06-11/WAPack.png" width="720">
 
 If you have a closer look at the cmdlets within the Azure PowerShell module you will notice that there are also cmdlets that contain WAPack in their name. This looks promising. 
 
@@ -43,11 +43,11 @@ By default the Windows Server and Windows Client Ooperating system contain a pre
 
 Instead of accepting the license terms, click the link “click here to see additional software to be installed and review the associated Microsoft license terms” In the popup click the “Direct Download Link”
 
-WEBPI
+<img src="/images/2014-06-11/WEBPI.png" width="720">
 
 The download should now only contain the Windows Azure PowerShell module (about 8-9 MB in size).
 
-Download
+<img src="/images/2014-06-11/Download.png" width="720">
 
 Install this module.
 
@@ -59,15 +59,15 @@ To configure the certificates a publish settings file needs to be downloaded fro
 
 Select My Account in the left menu and open the Management Certificates entry. Verify that no certificates are present.
 
-NoCerts
+<img src="/images/2014-06-11/NoCerts.png" width="720">
 
 Now enter the URL for the Tenant Site again but append `/publishsettings` to it. In this example the URL is <https://manage.hyper-v.nu/publishsettings>. A custom page will be displayed and you are prompted to download a file. Download the file. Please note that this file contains the hash to create the certificate with the private key.
 
-DownloadPublishSettingsFile
+<img src="/images/2014-06-11/DownloadPublishSettingsFile.png" width="720">
 
 When the file is downloaded a certificate with a private key is hashed and configured within the downloaded file. The same certificate with only the public key is imported in to the Windows Azure Pack database. This certificate is now displayed in the tenant portal. My account > Management Certificates.
 
-Certs in Portal
+<img src="/images/2014-06-11/Certs-in-Portal.png" width="720">
 
 Open a PowerShell console on the client where the file was downloaded and where the Windows PowerShell module was also installed and run the following command.
 
@@ -78,7 +78,7 @@ Import-WAPackPublishSettingsFile "C:\<path of the downloaded file>\<name of the 
 
 This import process will create a certificate with the private key (containing the same thumbprint as the cert that was created in Windows Azure Pack) in the user personal certificate store. After importing the downloaded publishsettings file should be deleted (for security reasons).
 
-MMC
+<img src="/images/2014-06-11/MMC.png" width="720">
 
 You can now access the subscription in Windows Azure Pack with PowerShell based on certificate authentication. The certificate authentication is still valid after closing Internet Explorer, PowerShell or even a reboot.
 
@@ -207,7 +207,7 @@ $ResDef = $JSSerializer.DeserializeObject($GIResourceDEFJSON)
  
 The parameter names in the Hashtable from the following region must meet the names specified in the VM Role Resource definition. You can verify these values in the Authoring tool.
 
-Authoring Tool
+<img src="/images/2014-06-11/Authoring-Tool.png" width="720">
 
 ```
 #region SetResDefConfig
