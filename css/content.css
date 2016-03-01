@@ -72,8 +72,8 @@ tr:nth-child(even) {
   background-color: #F8F8F8;
 }
 
-td {
-    padding: 5px;
+th, td {
+  padding: 5px;
 }
 
 /* Index */
