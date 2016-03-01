@@ -18,6 +18,7 @@ The tenant portal experience is awesome, but there are scenarios where other met
 The first thing that comes to mind with this example is a combination of the VM Role and Service Management Automation. The VM Role allows you to deploy a virtual machine with an application. Service Management Automation enables scheduling of PowerShell workflows that can deploy the VM Roles for the tenant and run the regression tests as well.
 
 Unfortunately in this release of Windows Azure Pack you need access to the Windows Azure Pack Admin Site to edit or schedule an SMA runbook. This requires Admin interaction for each change in the runbook or each change in the schedule, which is not an option.
+<!--more-->
 
 Microsoft Azure provides a powerful scripting environment with Azure PowerShell. It allows tenants to interact with the services in their Microsoft Azure subscription with PowerShell cmdlets. These cmdlets can be run from a remote client. The client authenticates to the services in the subscription by using certificates. As you expect from Microsoft Azure it works after some easy steps to get the certificates configured correctly.
 
