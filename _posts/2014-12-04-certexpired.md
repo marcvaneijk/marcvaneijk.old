@@ -23,17 +23,22 @@ Working with some smart folks from the WAP PG, we were able to convert my non su
 
 ```
 $Passphrase = 'Ic@nN3verR3memberMyP@ssw0rd!'
+
 # 1. Acquire the current signing certificate thumbprint
 $setting = Get-MgmtSvcSetting -Namespace AuthSite -Name Authentication.SigningCertificateThumbprint
 $oldThumbprint = $setting.Value
+
 # 2. Remove the old certificate from the global config store
 # (You may need to provide additional connection string information)
 Set-MgmtSvcDatabaseSetting -Namespace AuthSite -Name Authentication.SigningCertificate -Value $null -Passphrase $Passphrase -Force
+
 # 3. Re-initialize the authentication service to generate a new signing certificate and reconfigure
 # (You may need to provide additional connection string information)
 Initialize-MgmtSvcFeature -Name AuthSite -Passphrase $Passphrase -Verbose
+
 # If you are using the membership auth site directly (without ADFS trust relationship), proceed with following steps.
 # If you are using ADFS with the Azure Pack, skip step 4 and go to your ADFS settings and have it "refresh" the federation metadata from the service.
+
 # 4. Update the relying party settings for the TenantSite
 $relyingPartySettings = @{
     Target = 'Tenant'
@@ -41,10 +46,13 @@ $relyingPartySettings = @{
 }
 # (You may need to provide additional connection string information)
 Set-MgmtSvcRelyingPartySettings @relyingPartySettings -DisableCertificateValidation
+
 # 5. (optional) Remove the old signing certificate no-longer in use
 Get-Item Cert:\LocalMachine\My\$oldThumbprint | Remove-Item -Force -Verbose
+
 # 6. Reset services to update any (old) cached configuration
 iisreset
+
 # 7. Attempt to login to TenantSite to verify service is working
 Start-Process "https://${env:COMPUTERNAME}:30081"
 ```
