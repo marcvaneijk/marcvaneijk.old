@@ -10,9 +10,11 @@ Installing Windows Azure Pack in a lab environment is relatively easy. You contr
 How different is this when you implement Windows Azure Pack in a Service Provider or Enterprise Organization environment. All kind of security requirements are in place. Each change in the environment is preceded by a request for change procedure. Planning, prerequisites and design documents are essential from the start of the project. If you have not invested in these upfront you will find yourself confronted with a new change each time that, in its turn, results in another RFC with accompanying handling time. Within a couple of days your teeth marks will be visible in the steering wheel of your car.
 
 (Previously) a prerequisite for Windows Azure Pack:
+
 - Windows Azure Pack requires a SQL server running in mixed authentication mode and the SQL instance must be running on the default SQL port 1433
 
 But the security policy at the Enterprise Organization or Service Provider dictates:
+
 - The SQL Server must be in Windows Authenticated mode only using a named instance and non-default SQL port
 
 Most deployments start with an installation in a development environment that reflect the production environment. In the development environment the SQL configuration that is required for Windows Azure Pack is tolerated but flagged. Once we move to production the RFC can possibly block the implementation.
