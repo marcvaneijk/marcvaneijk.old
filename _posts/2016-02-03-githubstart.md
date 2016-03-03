@@ -65,15 +65,15 @@ Before you start doing anything in GitHub open your email account first. You sho
 
 Now that we an account we can start. I suggest you start by creating a repository. A repository is a container (a folder) for storing your files. The easiest way to create a repository is to click the + icon on the top right of your start page.
 
-<img src="/images/2016-02-03/03-New-Repo.png" width="400">
+<img src="/images/2016-02-03/03-New-Repo.png" width="250">
 
 Select to create a new repository. You’ll need to specify a name for the repository. That name must be unique within your own account. The description is optional, but it is useful to enter one. This will help other GitHub user to quickly identify the purpose and content of your repository. Be default each repository you create is public. This means that anyone in the world (even without a GitHub account) can see your repository and its content. You can select to make the repository private. A private repository is hidden for anyone but you. You can give access to your private repository to individual GitHub users. But to create a private repository you will need to upgrade your GitHub account to a paid plan. We’ll select public for now. To give a more detailed explanation of your repository you can create a readme file. Later in this blog I’ll look at the readme in more detail. We’ll skip it for now (don’t enable the checkbox).
 
-<img src="/images/2016-02-03/04-New-Repo-name.png" width="700">
+<img src="/images/2016-02-03/04-New-Repo-name.png" width="720">
 
 When you click **create repository** you are redirected to the repository start page. So… now what? Before we interact with the repository I need to explain in what way we can interact with our web-based repository. You cannot upload a file from the browser into the repository. You will need a client for that.
 
-<img src="/images/2016-02-03/05-New-Repo-default.png" width="700">
+<img src="/images/2016-02-03/05-New-Repo-default.png" width="720">
 
 ## Clients
 
@@ -88,31 +88,31 @@ For the purpose of this blog we’ll look at the operations from the perspective
 
 To install the Git client browse to <http://www.git-scm.com/> and select to download the latest source release.
 
-<img src="/images/2016-02-03/06-Git-Download.png" width="700">
+<img src="/images/2016-02-03/06-Git-Download.png" width="300">
 
 Start the setup wizard. Accept the License, leave the defaults in the **Select Components** screen.
 
-<img src="/images/2016-02-03/07-Git-Iinstall1.png" width="700">
+<img src="/images/2016-02-03/07-Git-Iinstall1.png" width="400">
 
 In the Adjusting your PATH environment select **Use Git from the Windows Command Prompt**
 
-<img src="/images/2016-02-03/08-Git-Iinstall2.png" width="700">
+<img src="/images/2016-02-03/08-Git-Iinstall2.png" width="400">
 
 In the **Configuring the line ending conversions* screen select **Checkout as-is, commit as-is**
 
-<img src="/images/2016-02-03/09-Git-Iinstall3.png" width="700">
+<img src="/images/2016-02-03/09-Git-Iinstall3.png" width="400">
 
 In the **Configuring the terminal emulator to use with Git Bash** select **Use Windows’ default console window**
 
-<img src="/images/2016-02-03/10-Git-Iinstall4.png" width="700">
+<img src="/images/2016-02-03/10-Git-Iinstall4.png" width="400">
 
 Leave the checkmark unchecked on the **Configuring experimental performance tweaks** screen.
 
-<img src="/images/2016-02-03/11-Git-Iinstall5.png" width="700">
+<img src="/images/2016-02-03/11-Git-Iinstall5.png" width="400">
 
 After the installation completes open a command prompt. Type Git in the console and hit enter. You’ll notice that the PATH variable has been updated so you are able to run Git directly without changing the folder location (although is still might be useful to do that, as we will see later in this blog).
 
-<img src="/images/2016-02-03/12-Git-commandline.png" width="700">
+<img src="/images/2016-02-03/12-Git-commandline.png" width="720">
 
 ### Git Desktop
 
