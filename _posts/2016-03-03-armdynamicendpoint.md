@@ -2,7 +2,7 @@
 layout: post
 date: 2016-03-03
 author: Marc van Eijk
-title: Azure Resource Manager - remove hardcoded public endpoint and get them dynamically 
+title: Azure Resource Manager - get rid of hardcoded public endpoint in your templates and retrieve them dynamically 
 tags: Azure Resource Manager, ARM, blob, public endpoint, reference, concat
 published: false
 ---
@@ -27,17 +27,17 @@ If you use Storage in your template, Create a parameter to specify the storage n
 
 ```
 "parameters": {
-"storageNamespace": {
-  "type": "string",
-  "defaultValue": "core.windows.net",
-  "allowedValues": [
-    "core.windows.net",
-    "azurestack.local"
-  ],
-  "metadata": {
-    "description": "The endpoint namespace for storage"
-  }
-}
+	"storageNamespace": {
+		"type": "string",
+		"defaultValue": "core.windows.net",
+		"allowedValues": [
+			"core.windows.net",
+			"azurestack.local"
+		],
+		"metadata": {
+			"description": "The endpoint namespace for storage"
+		}
+ 	}
 }
 ```
 
@@ -45,7 +45,7 @@ Create a variable that concatenates the storageAccountname and the namespace to 
 
 ```
 "variables": {
-"diskUri":"[concat('http://',variables('storageAccountName'),'.blob.'parameters('storageEndpoint'),'/',variables('vmStorageAccountContainerName'),'/',variables('OSDiskName'),'.vhd')]"
+	"diskUri":"[concat('http://',variables('storageAccountName'),'.blob.'parameters('storageEndpoint'),'/',variables('vmStorageAccountContainerName'),'/',variables('OSDiskName'),'.vhd')]"
 }
 ```
 
@@ -55,21 +55,21 @@ Ryan Jones to the rescue. He pointed me to an example in his excellent GitHub re
 
 ```
 {
-	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-	"contentVersion": "1.0.0.0",
-	"parameters": {
-		"storageAccountName": {
-			"type": "String"
-		}
-	},
-	"variables": {},
-	"resources": [],
-	"outputs": {
-		"exampleOutput": {
-			"value": "[reference(concat('Microsoft.Storage/storageAccounts/', parameters('storageAccountName')),providers('Microsoft.Storage', 'storageAccounts').apiVersions[0])]",
-			"type" : "object"
-		}
+"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+"contentVersion": "1.0.0.0",
+"parameters": {
+	"storageAccountName": {
+		"type": "String"
 	}
+},
+"variables": {},
+"resources": [],
+"outputs": {
+	"exampleOutput": {
+		"value": "[reference(concat('Microsoft.Storage/storageAccounts/', parameters('storageAccountName')),providers('Microsoft.Storage', 'storageAccounts').apiVersions[0])]",
+		"type" : "object"
+	}
+}
 }
 ```
 
@@ -77,18 +77,17 @@ When you deploy this template, the output object contains (amongst other things)
 
 ```
 {
-  "accountType": "Standard_LRS",
-  
-  "creationTime": "2016-03-02T18:53:04.1286448Z",
-  "primaryEndpoints": {
-    "blob": "https://marcvaneijk.blob.core.windows.net/",
-    "file": "https://marcvaneijk.file.core.windows.net/",
-    "queue": "https://marcvaneijk.queue.core.windows.net/",
-    "table": "https://marcvaneijk.table.core.windows.net/"
-  },
-  "primaryLocation": "westeurope",
-  "provisioningState": "Succeeded",
-  "statusOfPrimary": "available"
+"accountType": "Standard_LRS",
+"creationTime": "2016-03-02T18:53:04.1286448Z",
+"primaryEndpoints": {
+	"blob": "https://marcvaneijk.blob.core.windows.net/",
+	"file": "https://marcvaneijk.file.core.windows.net/",
+	"queue": "https://marcvaneijk.queue.core.windows.net/",
+	"table": "https://marcvaneijk.table.core.windows.net/"
+},
+"primaryLocation": "westeurope",
+"provisioningState": "Succeeded",
+"statusOfPrimary": "available"
 }
 ```
 
@@ -101,10 +100,10 @@ Let's break up the reference into smaller pieces.
 ```
 [reference(
 	concat(
-	'Microsoft.Storage/storageAccounts/', 
-	parameters('storageAccountName')
+		'Microsoft.Storage/storageAccounts/', 
+		parameters('storageAccountName')
 	),
-	providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]
+		providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]
 	)
 ]
 ```
@@ -116,8 +115,8 @@ After some testing I managed to get a single namespace referenced and have the c
 ```
 [reference(
 	concat(
-	'Microsoft.Storage/storageAccounts/', 
-	parameters('storageAccountName')
+		'Microsoft.Storage/storageAccounts/', 
+		parameters('storageAccountName')
 	), 
 	providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]
 	)
@@ -145,61 +144,86 @@ Deploy a simple Windows VM to Azure Stack. This template also deploys a Virtual 
 The parameters section contains a parameter for the blob storage endpoint
 
 ```
-       "blobStorageEndpoint": {
-            "type": "string",
-            "defaultValue": "blob.azurestack.local",
-            "allowedValues": [
-                "blob.azurestack.local",
-                "blob.core.windows.net"
-            ],
-            "metadata": {
-                "description": "Blob storage endpoint"
-            }
-        },
+"blobStorageEndpoint": {
+	"type": "string",
+	"defaultValue": "blob.azurestack.local",
+	"allowedValues": [
+		"blob.azurestack.local",
+		"blob.core.windows.net"
+	],
+	"metadata": {
+		"description": "Blob storage endpoint"
+	}
+}
 ```
 
-The "blobStorageEndpoint" parameter is used in the osDisk property of the virtual machine resource.
+The `blobStorageEndpoint` parameter is used in the osDisk property of the virtual machine resource.
 
 ```
-                    "osDisk": {
-                        "name": "osdisk",
-                        "vhd": {
-                            "uri": "[concat('http://',parameters('newStorageAccountName'),'.', parameters('blobStorageEndpoint'), '/', variables('vmStorageAccountContainerName'),'/',variables('OSDiskName'),'.vhd')]"
-                        },
+"osDisk": {
+	"name": "osdisk",
+	"vhd": {
+		"uri": "[concat('http://',parameters('newStorageAccountName'),'.', parameters('blobStorageEndpoint'), '/', variables('vmStorageAccountContainerName'),'/',variables('OSDiskName'),'.vhd')]"
+	}
 ```
 
 Change the uri property to the following value.
 
 ```
-                   "osDisk": {
-                        "name": "osdisk",
-                      "vhd": {
-                        "uri": "[concat(reference(concat('Microsoft.Storage/storageAccounts/', parameters('newStorageAccountName')), providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]).primaryEndpoints.blob, variables('vmStorageAccountContainerName'),'/',variables('OSDiskName'),'.vhd')]"
-                      },
+"osDisk": {
+	"name": "osdisk",
+	"vhd": {
+		"uri": "[concat(reference(concat('Microsoft.Storage/storageAccounts/', parameters('newStorageAccountName')), providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]).primaryEndpoints.blob, variables('vmStorageAccountContainerName'),'/',variables('OSDiskName'),'.vhd')]"
+	}
 ```
 
-The second position that the "blobStorageEndpoint" parameter is used is in the diagnosticsProfile property of the virtual machine resource.
+The second position that the `blobStorageEndpoint` parameter is used is in the diagnosticsProfile property of the virtual machine resource.
 
 ```
- "diagnosticsProfile": {
-                    "bootDiagnostics": {
-                        "enabled": "true",
-                        "storageUri": "[concat('http://',parameters('newStorageAccountName'),'.', parameters('blobStorageEndpoint'))]"
-                    }
-                }
+"diagnosticsProfile": {
+	"bootDiagnostics": {
+		"enabled": "true",
+		"storageUri": "[concat('http://',parameters('newStorageAccountName'),'.', parameters('blobStorageEndpoint'))]"
+	}
+}
 ```
 
 Change the storageUri property to the following value.
 
 ```
-               "diagnosticsProfile": {
-                  "bootDiagnostics": {
-                    "enabled": "true",
-                    "storageUri": "[reference(concat('Microsoft.Storage/storageAccounts/', parameters('newStorageAccountName')), providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]).primaryEndpoints.blob]"
-                  }
-                }
+"diagnosticsProfile": {
+	"bootDiagnostics": {
+		"enabled": "true",
+		"storageUri": "[reference(concat('Microsoft.Storage/storageAccounts/', parameters('newStorageAccountName')), providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]).primaryEndpoints.blob]"
+	}
+}
 ```
 
-You can now delete the "blobStorageEndpoint" parameter as it is no longer used. You can now successfully deploy this template to Microsoft Azure and to Microsoft Azure Stack Technical Preview without specifying or even changing the public endpoints.
+You can now delete the `blobStorageEndpoint` parameter as it is no longer used. You can now successfully deploy this template to Microsoft Azure and to Microsoft Azure Stack Technical Preview without specifying or even changing the public endpoints.
 
-In this example I used the public endpoint for blob storage. But you can use the same expression for other public endpoints as well (e.g. keyVault). You just need to change the resource provider type, the resource type, the resource name, and the primaryEndpoint type in the reference expression. Start with Ryan's example to get the object and then specify the exact endpoint you want in a string.
+It is also possible to reference an existing resource from another resource group in the same subscription
+
+```
+{
+"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+"contentVersion": "1.0.0.0",
+"parameters": {
+	"storageAccountName": {
+		"type": "string"
+	},
+	"existingResourceGroup": {
+		"type": "string"
+	}
+},
+"variables": { },
+"resources": [ ],
+"outputs": {
+	"exampleOutput": {
+		"value": "[reference(resourceId(parameters('existingResourceGroup'), 'Microsoft.Storage/storageAccounts/', parameters('storageAccountName')), providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]).primaryEndpoints.blob]",
+		"type": "string"
+	}
+}
+}
+```
+
+In this example I used the public endpoint for blob storage. But you can use the same expression for other public endpoints (e.g. keyVault). You just need to change the resource provider type, the resource type, the resource name, and the primaryEndpoint type in the reference expression. Start with Ryan's example to get the object and then specify the exact endpoint you want in a string.
