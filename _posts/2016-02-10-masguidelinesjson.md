@@ -25,7 +25,7 @@ Besides the README.md file I also added a sample README.md that you can use as a
 
 If you are not sure how to get it over to your own repository, just click on the “Raw” button on the top left of the menu bar and you can copy and paste it into your own README.md file.
 
-<img src="/images/2016-02-10/094be8c.jpg" width="600">
+<img src="/images/2016-02-10/094be8c.jpg" width="500">
 
 You can also do this the GitHub way. If you are completely new to GitHub, have a look at [this blog](/2016/02/03/githubstart) to get started.
 
