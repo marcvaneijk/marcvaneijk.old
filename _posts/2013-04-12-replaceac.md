@@ -11,7 +11,7 @@ As you might have noticed from my previous blogs I have a great interest in Wind
 
 One slide caught my attention.
 
-AD Integration
+<img src="/images/2013-04-12/AD-Integration.png" width="720">
 
 In this slide Marc Umeno talks about an upcoming development in Windows Azure For Windows Server. In the current version user accounts are stored in an ASP.NET membership SQL database. This is a great solution for Service Providers, but (except for the Admin Site) there is no integration with Active Directory.
 
