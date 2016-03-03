@@ -8,7 +8,7 @@ published: false
 ---
 With the introduction of Microsoft Azure Stack technical preview, Microsoft is getting really close to one consistent platform. One of the key benefits of consistency it the ability you get to make your development efforts once and reuse them on the same platform independent of its physical location (being the public cloud Microsoft Azure, your service provider running  or own your datacenter running Microsoft Azure Stack.
 
-image
+<img src="/images/2016-03-03/jsontemplate.png" width="500">
 
 ## Create once, deploy everywhere.
 
@@ -23,7 +23,7 @@ No problem if you are deploying these templates to Microsoft Azure, of course. B
 
 There is an easy way to solve that. Just create a parameter for the endpoint. Define the allowedValues with the two public endpoints and replace the hardcoded values with the parameter. 
 
-Storage endpoint namespace
+### Storage endpoint namespace
 
 If you use Storage in your template, Create a parameter to specify the storage namespace. Set the default value of the parameter to core.windows.net. Additional endpoints can be specified in the allowed value property. That was even the guidance we settled on initially for the readme.md in the azurestack-quickstart-templates.
 
@@ -52,8 +52,11 @@ Create a variable that concatenates the storageAccountname and the namespace to 
 ```
 
 This works, but requires the person that deploys the template to select the endpoint namespace matching the environment he or her is deploying it to. Not really user friendly. With future preview releases we might even get the ability to specify our own public endpoint namespace. Which is great and what we want, but the allowedValues property the parameter can then no longer be defined, resulting in a blank string to type in for the person that deploys. We can do better than that right?
+<!--more-->
 
-Ryan Jones to the rescue. He pointed me to an example in his excellent GitHub repository https://github.com/rjmax/ArmExamples/blob/master/referenceSampleExternalResource.json
+[Ryan Jones](http://twitter.com/rjmax) to the rescue. He pointed me to an example in his excellent GitHub repository
+
+<https://github.com/rjmax/ArmExamples/blob/master/referenceSampleExternalResource.json>
 
 ```
 {
