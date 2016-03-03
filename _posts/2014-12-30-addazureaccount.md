@@ -9,7 +9,7 @@ Since a couple of months I’ve been getting my hands dirty with Azure Resource 
 
 For most situations I use Microsoft Azure Active Directory authentication. The procedure for logging on to your subscription is easy. Install the latest PowerShell module and run the Add-AzureAccount cmdlet. You will be prompted with a interactive login page.
 
-<img src="/images/2014-12-30/01-Logon.png" width="700">
+<img src="/images/2014-12-30/01-Logon.png" width="400">
 
 The sharp observer will notice that someone at Microsoft needs to put a penny in a jar every time the Add-Azure cmdlet is used.
 
@@ -22,17 +22,17 @@ You can use your Microsoft account or Organizational account to login without th
 I have two different accounts. One account is an Organizational account and the other is a Microsoft account.
 <!--more-->
 
-<img src="/images/2014-12-30/02-msn.png" width="700"> The Microsoft account is used for creating a subscription in Azure.
+<img src="/images/2014-12-30/02-msn.png" width="300"> The Microsoft account is used for creating a subscription in Azure.
 
-<img src="/images/2014-12-30/03-marcvaneijk.com_.png" width="700"> The Organizational account is used for creating an office 365 subscription. I also created a Azure subscription with this account.
+<img src="/images/2014-12-30/03-marcvaneijk.com_.png" width="300"> The Organizational account is used for creating an office 365 subscription. I also created a Azure subscription with this account.
 
 Besides these two personal accounts I also have a business email address.
 
-<img src="/images/2014-12-30/04-inovativ.png" width="700"> This business email address is not enabled for any Microsoft services whatsoever.
+<img src="/images/2014-12-30/04-inovativ.png" width="300"> This business email address is not enabled for any Microsoft services whatsoever.
 
 For provisioning a resource group through PowerShell I executed the Add-AzureAccount cmdlet and authenticated with my Microsoft account.
 
-<img src="/images/2014-12-30/05-Logon-Microsoft-Account.png" width="700">
+<img src="/images/2014-12-30/05-Logon-Microsoft-Account.png" width="400">
 
 The cmdlet returns an ID, Type, Subscriptions and Tenants. To interact with Azure Resource Manager you need to switch to the Azure Resource Manager module by running the following cmdlet.
  
