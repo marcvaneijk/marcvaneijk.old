@@ -1,0 +1,205 @@
+---
+layout: post
+date: 2016-03-03
+author: Marc van Eijk
+title: Azure Resource Manager - remove hardcoded public endpoint and get them dynamically 
+tags: Azure Resource Manager, ARM, blob, public endpoint, reference, concat
+published: false
+---
+With the introduction of Microsoft Azure Stack technical preview, Microsoft is getting really close to one consistent platform. One of the key benefits of consistency it the ability you get to make your development efforts once and reuse them on the same platform independent of its physical location (being the public cloud Microsoft Azure, your service provider running  or own your datacenter running Microsoft Azure Stack.
+
+Create once, deploy everywhere.
+
+I'm very passionate about this consistency. For the last half year I have been investing a lot of evenings and weekends contributing to an already rock solid solution, trying to make it even more better. I can assure you, there are a lot of people at Microsoft working on this consistency that are just as passionate. 
+
+If you are reading this you are probably familiar with the azure-quickstart-templates repository on GitHub. It contains over 250 templates (from basic examples to advanced nested templates).
+
+A challenge that makes the templates harder to deploy everywhere are hardcoded public endpoints. 
+If you do a quick search in the repository https://github.com/Azure/azure-quickstart-templates/search?l=json&q=core.windows.net&utf8=%E2%9C%93 you will notice that 260 entries have the storage endpoint hardcoded to core.windows.net in the template.
+
+No problem if you are deploying these templates to Microsoft Azure, of course. But what about deploying this template to a consistent Microsoft Azure Stack environment (either at a service provider or in your datacenter)? The public endpoint will be different. The current public endpoint for storage the Technical Preview of Microsoft Azure Stack is set to azurestack.local.
+
+There is an easy way to solve that. Just create a parameter for the endpoint. Define the allowedValues with the two public endpoints and replace the hardcoded values with the parameter. 
+
+Storage endpoint namespace
+
+If you use Storage in your template, Create a parameter to specify the storage namespace. Set the default value of the parameter to core.windows.net. Additional endpoints can be specified in the allowed value property. That was even the guidance we settled on initially for the readme.md in the azurestack-quickstart-templates.
+
+```
+"parameters": {
+"storageNamespace": {
+  "type": "string",
+  "defaultValue": "core.windows.net",
+  "allowedValues": [
+    "core.windows.net",
+    "azurestack.local"
+  ],
+  "metadata": {
+    "description": "The endpoint namespace for storage"
+  }
+}
+}
+```
+
+Create a variable that concatenates the storageAccountname and the namespace to a URI.
+
+```
+"variables": {
+"diskUri":"[concat('http://',variables('storageAccountName'),'.blob.'parameters('storageEndpoint'),'/',variables('vmStorageAccountContainerName'),'/',variables('OSDiskName'),'.vhd')]"
+}
+```
+
+This works, but requires the person that deploys the template to select the endpoint namespace matching the environment he or her is deploying it to. Not really user friendly. With future preview releases we might even get the ability to specify our own public endpoint namespace. Which is great and what we want, but the allowedValues property the parameter can then no longer be defined, resulting in a blank string to type in for the person that deploys. We can do better than that right?
+
+Ryan Jones to the rescue. He pointed me to an example in his excellent GitHub repository https://github.com/rjmax/ArmExamples/blob/master/referenceSampleExternalResource.json
+
+```
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"storageAccountName": {
+			"type": "String"
+		}
+	},
+	"variables": {},
+	"resources": [],
+	"outputs": {
+		"exampleOutput": {
+			"value": "[reference(concat('Microsoft.Storage/storageAccounts/', parameters('storageAccountName')),providers('Microsoft.Storage', 'storageAccounts').apiVersions[0])]",
+			"type" : "object"
+		}
+	}
+}
+```
+
+When you deploy this template, the output object contains (amongst other things) the public endpoint of the storage account that you specify. 
+
+```
+{
+  "accountType": "Standard_LRS",
+  
+  "creationTime": "2016-03-02T18:53:04.1286448Z",
+  "primaryEndpoints": {
+    "blob": "https://marcvaneijk.blob.core.windows.net/",
+    "file": "https://marcvaneijk.file.core.windows.net/",
+    "queue": "https://marcvaneijk.queue.core.windows.net/",
+    "table": "https://marcvaneijk.table.core.windows.net/"
+  },
+  "primaryLocation": "westeurope",
+  "provisioningState": "Succeeded",
+  "statusOfPrimary": "available"
+}
+```
+
+Now this is interesting. Before we start digging in a little deeper there is one important thing to understand. The reference expression is used to retrieve the public endpoint. Reference derives its value from a runtime state. So you can not use reference in a variable. But that is not going to be a problem.
+
+The next step is to get the value for a specific endpoint. For virtual machines this is the blob endpoint. I'll use that as an example since most templates with hardcoded endpoints are using them for storing virtual machine disks.
+
+Let's break up the reference into smaller pieces.
+
+```
+[reference(
+	concat(
+	'Microsoft.Storage/storageAccounts/', 
+	parameters('storageAccountName')
+	),
+	providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]
+	)
+]
+```
+
+The concat concatenates the value for the storage account specified in the parameter 'storageAccountName'. Providers point to the resource provider type and resource type you want to reference. The apiversion can be specified manually in the format '2015-06-15'. Or like Ryan cleverly did pick the latest (first in the array) apiVersion that is available for that provider. It doesn't really matter what apiVersion you are using, we are retrieving the public endpoint which is a static value for that environment, that is the same in all apiVersions.
+
+After some testing I managed to get a single namespace referenced and have the correct output in a string value. By adding the primaryEndpoint key and blob subkey to the string, by just looking at the output of the object earlier.
+
+```
+[reference(
+	concat(
+	'Microsoft.Storage/storageAccounts/', 
+	parameters('storageAccountName')
+	), 
+	providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]
+	)
+	.primaryEndpoints.blob
+]
+```
+
+Putting everything back together.
+
+```
+"value": "[reference(concat('Microsoft.Storage/storageAccounts/', parameters('storageAccountName')), providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]).primaryEndpoints.blob]",
+"type" : "string"
+```
+
+If you want to reference a different endpoint than blob (e.g. the table endpoint), all you need to do is replace blob with table.
+
+Now how can we use this expression in real production deployment template?
+
+Let's take this template as an example
+
+<https://github.com/Azure/AzureStack-QuickStart-Templates/tree/master/101-simple-windows-vm>
+
+Deploy a simple Windows VM to Azure Stack. This template also deploys a Virtual Network (with DNS), Public IP address, Network Security Group, and a Network Interface. This template takes a minimum amount of parameters and deploys a Windows VM, with the appropriate DNS setting for the Azure Stack POC environment.
+
+The parameters section contains a parameter for the blob storage endpoint
+
+```
+       "blobStorageEndpoint": {
+            "type": "string",
+            "defaultValue": "blob.azurestack.local",
+            "allowedValues": [
+                "blob.azurestack.local",
+                "blob.core.windows.net"
+            ],
+            "metadata": {
+                "description": "Blob storage endpoint"
+            }
+        },
+```
+
+The "blobStorageEndpoint" parameter is used in the osDisk property of the virtual machine resource.
+
+```
+                    "osDisk": {
+                        "name": "osdisk",
+                        "vhd": {
+                            "uri": "[concat('http://',parameters('newStorageAccountName'),'.', parameters('blobStorageEndpoint'), '/', variables('vmStorageAccountContainerName'),'/',variables('OSDiskName'),'.vhd')]"
+                        },
+```
+
+Change the uri property to the following value.
+
+```
+                   "osDisk": {
+                        "name": "osdisk",
+                      "vhd": {
+                        "uri": "[concat(reference(concat('Microsoft.Storage/storageAccounts/', parameters('newStorageAccountName')), providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]).primaryEndpoints.blob, variables('vmStorageAccountContainerName'),'/',variables('OSDiskName'),'.vhd')]"
+                      },
+```
+
+The second position that the "blobStorageEndpoint" parameter is used is in the diagnosticsProfile property of the virtual machine resource.
+
+```
+ "diagnosticsProfile": {
+                    "bootDiagnostics": {
+                        "enabled": "true",
+                        "storageUri": "[concat('http://',parameters('newStorageAccountName'),'.', parameters('blobStorageEndpoint'))]"
+                    }
+                }
+```
+
+Change the storageUri property to the following value.
+
+```
+               "diagnosticsProfile": {
+                  "bootDiagnostics": {
+                    "enabled": "true",
+                    "storageUri": "[reference(concat('Microsoft.Storage/storageAccounts/', parameters('newStorageAccountName')), providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]).primaryEndpoints.blob]"
+                  }
+                }
+```
+
+You can now delete the "blobStorageEndpoint" parameter as it is no longer used. You can now successfully deploy this template to Microsoft Azure and to Microsoft Azure Stack Technical Preview without specifying or even changing the public endpoints.
+
+In this example I used the public endpoint for blob storage. But you can use the same expression for other public endpoints as well (e.g. keyVault). You just need to change the resource provider type, the resource type, the resource name, and the primaryEndpoint type in the reference expression. Start with Ryan's example to get the object and then specify the exact endpoint you want in a string.
