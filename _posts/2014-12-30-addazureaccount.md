@@ -22,13 +22,16 @@ You can use your Microsoft account or Organizational account to login without th
 I have two different accounts. One account is an Organizational account and the other is a Microsoft account.
 <!--more-->
 
-<img src="/images/2014-12-30/02-msn.png" width="300"> The Microsoft account is used for creating a subscription in Azure.
+<img src="/images/2014-12-30/02-msn.png" width="200"> 
+The Microsoft account is used for creating a subscription in Azure.
 
-<img src="/images/2014-12-30/03-marcvaneijk.com_.png" width="300"> The Organizational account is used for creating an office 365 subscription. I also created a Azure subscription with this account.
+<img src="/images/2014-12-30/03-marcvaneijk.com_.png" width="200"> 
+The Organizational account is used for creating an office 365 subscription. I also created a Azure subscription with this account.
 
 Besides these two personal accounts I also have a business email address.
 
-<img src="/images/2014-12-30/04-inovativ.png" width="300"> This business email address is not enabled for any Microsoft services whatsoever.
+<img src="/images/2014-12-30/04-inovativ.png" width="200"> 
+This business email address is not enabled for any Microsoft services whatsoever.
 
 For provisioning a resource group through PowerShell I executed the Add-AzureAccount cmdlet and authenticated with my Microsoft account.
 
