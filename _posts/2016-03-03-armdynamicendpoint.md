@@ -8,7 +8,9 @@ published: false
 ---
 With the introduction of Microsoft Azure Stack technical preview, Microsoft is getting really close to one consistent platform. One of the key benefits of consistency it the ability you get to make your development efforts once and reuse them on the same platform independent of its physical location (being the public cloud Microsoft Azure, your service provider running  or own your datacenter running Microsoft Azure Stack.
 
-Create once, deploy everywhere.
+image
+
+## Create once, deploy everywhere.
 
 I'm very passionate about this consistency. For the last half year I have been investing a lot of evenings and weekends contributing to an already rock solid solution, trying to make it even more better. I can assure you, there are a lot of people at Microsoft working on this consistency that are just as passionate. 
 
