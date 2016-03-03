@@ -21,7 +21,7 @@ For deploying virtual machines you can choose between two methods.
 - Stand alone virtual machine
 - VM Role
 
-<img src="/images/2015-02-11/GalleryItem.png" width="700">
+<img src="/images/2015-02-11/GalleryItem.png" width="720">
 
 ### Stand alone virtual machine
 
@@ -53,7 +53,7 @@ The VMM library must contain a sysprepped Operating System virtual hard disk, wi
 
 With the release or System Center R2 support for differencing disks is added to Virtual Machine Manager. The properties of a Hyper-V host contains a Placement Paths tab.
 
-<img src="/images/2015-02-11/Placement-Paths.png" width="700">
+<img src="/images/2015-02-11/Placement-Paths.png" width="720">
 
 When you deploy your very first VM Role with only an Operating system disk, VMM is used to locate the sysprepped virtual hard disk in the library and copy that file to the location that is configured in the Placement Paths for the host selected through the intelligent placement process in VMM. If no default parent disk path is set, the location for the parent disk is defined through VMM intelligent placement.
 
@@ -102,7 +102,7 @@ A plan in Windows Azure Pack is mapped to a cloud in VMM. This allows you to cho
 
 To enable a cloud in VMM for VM Roles with dedicated disks op the properties of the Cloud in the VMs and Services tab of VMM. Select the Custom Properties tab.
 
-<img src="/images/2015-02-11/Cloud.png" width="700">
+<img src="/images/2015-02-11/Cloud.png" width="720">
 
 Select Manage Custom Properties and in the windows that opens click create.
 
@@ -112,13 +112,13 @@ Specify the following name for the custom property
 
 Add the newly created custom property as an assigned property. Verify the object type is set to cloud.
 
-<img src="/images/2015-02-11/Custom-Property.png" width="700">
+<img src="/images/2015-02-11/Custom-Property.png" width="500">
 
 Click OK to submit and assign the new custom property.
 
 The final step is to specify a `false` value for this custom property.
 
-<img src="/images/2015-02-11/Custom-Property-value.png" width="700">
+<img src="/images/2015-02-11/Custom-Property-value.png" width="720">
 
 New VM Role that are created in a plan that is mapped to this VMM cloud will be configured with dedicated disks.
 
@@ -130,7 +130,7 @@ A question I also get frequently is does the VM Role use fixed disks or dynamica
 
 You have this awesome solution but there is one tiny thing that is holding you back and you try to squeeze it in by doing all kind of workarounds.
 
-<img src="/images/2015-02-11/squeeze.png" width="700">
+<img src="/images/2015-02-11/squeeze.png" width="400">
 
 A lot of people at Microsoft have been very helpful in getting a fitting garage for the VM Role supercar. A big THANK YOU to Eric Winner, Stephen Baron, John Ballard, Bradley Bartz, Robert Reynolds, Hector Linares and especially David Armour, Pradeep Reddy and Manish Jha for their time, listening ear and hard work.
 
