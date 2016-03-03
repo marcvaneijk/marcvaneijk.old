@@ -4,9 +4,8 @@ date: 2016-03-03
 author: Marc van Eijk
 title: Azure Resource Manager - get rid of hardcoded public endpoint in your templates and retrieve them dynamically 
 tags: Azure Resource Manager, ARM, blob, public endpoint, reference, concat
-published: false
 ---
-With the introduction of Microsoft Azure Stack technical preview, Microsoft is getting really close to one consistent platform. One of the key benefits of consistency it the ability you get to make your development efforts once and reuse them on the same platform independent of its physical location (being the public cloud Microsoft Azure, your service provider running  or own your datacenter running Microsoft Azure Stack.
+With the introduction of Microsoft Azure Stack technical preview, Microsoft is getting really close to one consistent platform. One of the key benefits of consistency is the ability to make your development efforts once and reuse them on the same platform independent of its physical location (being the public cloud Microsoft Azure, your service provider or your own datacenter running Microsoft Azure Stack).
 
 <img src="/images/2016-03-03/jsontemplate.png" width="500">
 
@@ -14,18 +13,18 @@ With the introduction of Microsoft Azure Stack technical preview, Microsoft is g
 
 I'm very passionate about this consistency. For the last half year I have been investing a lot of evenings and weekends contributing to an already rock solid solution, trying to make it even more better. I can assure you, there are a lot of people at Microsoft working on this consistency that are just as passionate. 
 
-If you are reading this you are probably familiar with the azure-quickstart-templates repository on GitHub. It contains over 250 templates (from basic examples to advanced nested templates).
+If you are reading this you are probably familiar with the [azure-quickstart-templates](http://github.com/Azure/azure-quickstart-templates) repository on GitHub. It contains over 250 templates (from basic examples to advanced nested templates).
 
 A challenge that makes the templates harder to deploy everywhere are hardcoded public endpoints. 
-If you do a quick search in the repository https://github.com/Azure/azure-quickstart-templates/search?l=json&q=core.windows.net&utf8=%E2%9C%93 you will notice that 260 entries have the storage endpoint hardcoded to core.windows.net in the template.
+If you do a quick search in the azure-quickstart-templates repository <https://github.com/Azure/azure-quickstart-templates/search?l=json&q=core.windows.net&utf8=%E2%9C%93> you will notice that 260 entries have the storage endpoint hardcoded to core.windows.net in the template.
 
-No problem if you are deploying these templates to Microsoft Azure, of course. But what about deploying this template to a consistent Microsoft Azure Stack environment (either at a service provider or in your datacenter)? The public endpoint will be different. The current public endpoint for storage the Technical Preview of Microsoft Azure Stack is set to azurestack.local.
+These hardcoded endpoints are not a problem if you are deploying these templates to Microsoft Azure of course. But what about deploying one of these template to a consistent Microsoft Azure Stack environment (either at a service provider or in your datacenter)? The public endpoint will be different. The current public endpoint for storage the Technical Preview of Microsoft Azure Stack is set to `azurestack.local`.
 
-There is an easy way to solve that. Just create a parameter for the endpoint. Define the allowedValues with the two public endpoints and replace the hardcoded values with the parameter. 
+There is an easy way to solve that. Just create a parameter for the endpoint. Define the `allowedValues` with the two public endpoints and replace the hardcoded values with the parameter. 
 
 ### Storage endpoint namespace
 
-If you use Storage in your template, Create a parameter to specify the storage namespace. Set the default value of the parameter to core.windows.net. Additional endpoints can be specified in the allowed value property. That was even the guidance we settled on initially for the readme.md in the azurestack-quickstart-templates.
+If you use Storage in your template, Create a parameter to specify the storage namespace. Set the default value of the parameter to `core.windows.net`. Additional endpoints can be specified in the allowed value property. That was even the guidance we settled on initially for the readme.md in the azurestack-quickstart-templates.
 
 ```
 "parameters": {
