@@ -9,11 +9,11 @@ The first Microsoft Ignite event took place on May 4-8, 2015 in Chicago. If I re
 
 With the announcement of Microsoft Azure Stack, this event formed another milestone is the journey of Microsoft to one consistent platform. And what a milestone! The interest to Microsoft Azure Stack was huge. This was visible at the booth, as well as Microsoft Azure Stack related sessions. People where standing, because no more seats where left.
 
-<img src="/images/2016-02-13/Ignite.jpg" width="700">
+<img src="/images/2016-02-13/Ignite.jpg" width="720">
 
 I met with my good friend Carsten Rachfahl and had a chat about Microsoft Azure Stack. A couple of weeks after the recording, Carsten called me to publish it. We agreed to wait for the availability of the first Technical Preview. You now have access to that, so ignite your Microsoft Azure Stack interest even more by watching the recording.
 
-<img src="/images/2016-02-13/Interview.png" width="700">
+<img src="/images/2016-02-13/Interview.png" width="720">
 
 I also had to opportunity to present in two sessions at Ignite.
 
