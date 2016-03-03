@@ -23,14 +23,17 @@ I have two different accounts. One account is an Organizational account and the 
 <!--more-->
 
 <img src="/images/2014-12-30/02-msn.png" width="200"> 
+
 The Microsoft account is used for creating a subscription in Azure.
 
 <img src="/images/2014-12-30/03-marcvaneijk.com_.png" width="200"> 
+
 The Organizational account is used for creating an office 365 subscription. I also created a Azure subscription with this account.
 
 Besides these two personal accounts I also have a business email address.
 
 <img src="/images/2014-12-30/04-inovativ.png" width="200"> 
+
 This business email address is not enabled for any Microsoft services whatsoever.
 
 For provisioning a resource group through PowerShell I executed the Add-AzureAccount cmdlet and authenticated with my Microsoft account.
@@ -53,7 +56,7 @@ But instead of getting a list of templates, I got an error.
 
 Your Azure credentials have not been set up or have expired, please run Add-AzureAccount to set up your Azure credentials.
 
-<img src="/images/2014-12-30/06-Error.png" width="700">
+<img src="/images/2014-12-30/06-Error.png" width="720">
 
 To retrieve the information of the account used in for session run
 
@@ -63,7 +66,7 @@ Get-AzureAccount
 
 The output of the command confused me. The ID was set to my business email address.
 
-<img src="/images/2014-12-30/07-Get-AzureAccount.png" width="700">
+<img src="/images/2014-12-30/07-Get-AzureAccount.png" width="720">
 
 As specified before, this account is not enabled for any Microsoft services whatsoever. So how did I end up with with this user ID for my PowerShell session?
 
@@ -81,7 +84,7 @@ A quick search on the net did not return any similar issues and I know I’m not
 
 In the cool new Azure preview portal something caught my attention. The dropdown on the user account showed three directories.
 
-<img src="/images/2014-12-30/08-Directories.png" width="700">
+<img src="/images/2014-12-30/08-Directories.png" width="300">
 
 The first directory was part of my subscription, but the second directory was part of the subscription created by the Office 365 account. And the third directory really raised my eyebrows.
 
@@ -91,13 +94,13 @@ This was getting more confusing by the minute. After getting a good night sleep 
 
 The user administration page in my Office 365 Organizational account revealed my Microsoft account. To test the theory I deleted my Microsoft account from the Office 365 user administration page, logged on with my Microsoft account to http://portal.azure.com and checked the directories again. The directory from my Office 365 subscription was gone.
 
-<img src="/images/2014-12-30/09-Two-Directories.png" width="700">
+<img src="/images/2014-12-30/09-Two-Directories.png" width="300">
 
 Running the Add-AzureAccount resluted in one less tenant, but the account mismatch was still there.
 
 I still didn’t understand why my business email address showed up in the Add-AzureAccount. After some more troubleshooting I selected the microsoft.onmicrosoft.com directory in the new azure portal and to my surprise my business email address was displayed.
 
-<img src="/images/2014-12-30/04-inovativ.png" width="700">
+<img src="/images/2014-12-30/04-inovativ.png" width="200">
 
 Since this email address was not enabled for Microsoft services whatsoever, it was obvious that the issue correlated to an external user in Office 365. I work with Microsoft on a regular basis. For a project I was invited to a SharePoint site by Microsoft. The invite was sent to my business email address and I accepted that invite with my Microsoft account. Which caused my business email business address to be mapped to my Microsoft account in the microsoft.onmicrosoft.com directory.
 
