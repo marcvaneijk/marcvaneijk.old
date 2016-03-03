@@ -26,19 +26,27 @@ Luckily for us is there is an easier way of getting the bandwidth information by
 
 To get a list of all vNICs in the Management OS run the following cmdlet
 
-`Get-VMNetworkAdapter -ManagementOS`
+```
+Get-VMNetworkAdapter -ManagementOS
+```
 
 To get a list of all vNICs attached to virtual machines run the following cmdlet
 
-`Get-VMNetworkAdapter -VMName *`
+```
+Get-VMNetworkAdapter -VMName *
+```
 
 To get a list of all vNICs run the following cmdlet
 
-`Get-VMNetworkAdapter -All`
+```
+Get-VMNetworkAdapter -All
+```
 
 Running any of these cmdlets with display the results in a table format with predefined set of properties. Nothing fancy yet. These predefined properties do not show any information about the bandwidth values. For this we will have to specify the properties we would like to have in our table. Usually you would then run the same command and pipe it to a Format-List.
 
-`Get-VMNetworkAdapter -VMName * | FL`
+```
+Get-VMNetworkAdapter -VMName * | FL
+```
 
 The result of this cmdlet is a list properties for each virtual machine.
 
@@ -46,7 +54,9 @@ The result of this cmdlet is a list properties for each virtual machine.
 
 Near the bottom of the each list are a couple of bandwidth values. We are interested in MinimumBandwidthWeight and BandwidthPercentage. The name of the virtual machine might also come in handy. With this information we can run the command again, pipe it to a Format-Table and specify these properties.
 
-`Get-VMNetworkAdapter -VMName * | FT Name, MinimumBandwidthWeight, BandwidthPercentage`
+```
+Get-VMNetworkAdapter -VMName * | FT Name, MinimumBandwidthWeight, BandwidthPercentage
+```
 
 02 FT
 
@@ -54,7 +64,9 @@ As you can see we now have a nice table displaying the calculated BandwidthPerce
 
 So I tried to narrow down the Format-List command by specifying the same properties.
 
-`Get-VMNetworkAdapter -VMName * | FL Name, MinimumBandwidthWeight, BandwidthPercentage`
+```
+Get-VMNetworkAdapter -VMName * | FL Name, MinimumBandwidthWeight, BandwidthPercentage
+```
 
 03 FL with Properties
 
@@ -67,7 +79,9 @@ This doesn’t make any sense. I asked [Jeff Wouters (MVP Powershell)](https://t
 
 Jeff was right, the property BandwidthPercentage was in the list of available properties but the MinimumBandwidthWeight was not. Another property called BandwidthSetting caught my attention so I tried to run the cmdlet by using this property.
 
-`Get-VMNetworkAdapter -VMName * | FT Name, BandwidthSetting, BandwidthPercentage`
+```
+Get-VMNetworkAdapter -VMName * | FT Name, BandwidthSetting, BandwidthPercentage
+```
 
 05 Alias
 
@@ -77,13 +91,17 @@ Mm.. That was not the result I hoped for. I decided to do some PowerShell readin
 
 That sounds like the result I’m looking for. But the -ExpandProperty is a parameter of the Select-Object cmdlet. Let’s try to pipe the Get-VMNetworkAdapter -VMName * cmdlet to the Select-Object cmdlet referencing the BandwidthSetting property from the Get-member cmdlet and then pipe that to a Format-Table.
 
-`Get-VMNetworkAdapter -VMName * | Select-Object Name, bandwidthpercentage -ExpandProperty Bandwidthsetting | FT –AutoSize`
+```
+Get-VMNetworkAdapter -VMName * | Select-Object Name, bandwidthpercentage -ExpandProperty Bandwidthsetting | FT –AutoSize
+```
 
 06 ExpandProperty and other properties
 
 And there we have the result we were looking for. You can add additional properties. For example:
 
-`Get-VMNetworkAdapter -VMName * | Select-Object name, MacAddress, SwitchName, bandwidthpercentage -ExpandProperty Bandwidthsetting | FT –AutoSize`
+```
+Get-VMNetworkAdapter -VMName * | Select-Object name, MacAddress, SwitchName, bandwidthpercentage -ExpandProperty Bandwidthsetting | FT –AutoSize
+```
 
 07 ExpandProperty and other properties
 
