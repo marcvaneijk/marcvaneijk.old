@@ -7,7 +7,7 @@ tags:
 ---
 Windows Azure Pack is getting the attention it deserves. Microsoft is doing a great job in blogging extensively about the endless possibilities with this crucial piece in the CloudOS vision. Since the initial preview of Windows Azure Services for Windows Server, which was recently succeeded by Windows Azure Pack, I have done a couple of series on some inner working.
 
-CloudOS
+<img src="/images/2013-12-23/CloudOS.jpg" width="720">
 
 These series were born because of personal interest or the amount of questions I got on a particular subject. I have worked closely with a lot of folks from Microsoft to get the most out of the solution. Their input, enthusiasm and willingness to help is just great. 
 
@@ -27,3 +27,5 @@ Is this documentation not already available somewhere, you ask? Well, yes and no
 But we have been working with this product in actual deployments and have gained a lot of knowledge from that. The next whitepapers will be in line with the already released ones and will describe resource providers that can be configured in Windows Azure Pack. 
 
 The last weeks I have done a lot of reading, testing and configuring with ADFS in combination with Windows Azure Pack. Every part that is unraveled is tested in a complete production ready environment. With High Availability at all levels, separate domains for security reasons, etc. This last piece of information was necessary for the whitepaper. To give you a small teaser for the whitepaper, a screenshot from the ADFS portal for Windows Azure Pack for Inovativ.
+
+<img src="/images/2013-12-23/Inovativ-Portal.png" width="720">
