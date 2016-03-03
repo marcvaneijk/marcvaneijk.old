@@ -22,7 +22,7 @@ Remove-MgmtSvcResourceProvider -AdminUri “https://localhost:30004″ -Token $T
 
 When you verify the registration status in the admin portal after running the cmdlets you should be able to perform the registration again. I successfully registered the SMA endpoint again in the admin portal.
 
-<img src="/images/2014-03-19/Register-SMA.png" width="720">
+<img src="/images/2014-03-19/Register-SMA.png" width="500">
 
 But the Automation tab in the VM Clouds presented the same surprise again. 
 <!--more-->
@@ -42,6 +42,6 @@ New-SCSpfSetting –Name EndpointURL –SettingType EndpointconnectionString –
 
 After a refresh the admin portal should now reflect the changes we made.
 
-<img src="/images/2014-03-19/After-SPF-cmdlets.png" width="500">
+<img src="/images/2014-03-19/After-SPF-cmdlets.png" width="720">
 
 Yesterday I got a call from [Darryl van der Peijl](http://www.darrylvanderpeijl.nl/) who was deploying a new lab environment and he encountered the exact same issue.If you also see this issue please add a comment to this blog or ping me on twitter [@_marcvaneijk](http://twitter.com/_marcvaneijk)
