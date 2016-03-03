@@ -206,6 +206,8 @@ Change the storageUri property to the following value.
 
 You can now delete the `blobStorageEndpoint` parameter as it is no longer used. You can now successfully deploy this template to Microsoft Azure and to Microsoft Azure Stack Technical Preview without specifying or even changing the public endpoints.
 
+### Existing resource in different resource group
+
 It is also possible to reference an existing resource from another resource group in the same subscription
 
 ```
@@ -231,4 +233,8 @@ It is also possible to reference an existing resource from another resource grou
 }
 ```
 
+### Any public endpoint
+
 In this example I used the public endpoint for blob storage. But you can use the same expression for other public endpoints (e.g. keyVault). You just need to change the resource provider type, the resource type, the resource name, and the primaryEndpoint type in the reference expression. Start with Ryan's example to get the object and then specify the exact endpoint you want in a string.
+
+> Create your template once, get rid of harcoded public endpoint, retrieve them dynamically and deploy your template everywhere!
