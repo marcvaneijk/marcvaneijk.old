@@ -73,26 +73,30 @@ Note: If you use a self-signed certificate it is necessary to place the public k
 
 For creating the self-signed certificate you can use makecert.exe that is part of the [Windows Software Development Kit (SDK) for Windows 8.1 Preview](http://msdn.microsoft.com/en-us/library/windows/desktop/bg162891.aspx). If you have an older version of makecert lying around make sure that is capable of creating certificates with an sha256 algorithm. You can verify this my running 
 
-`makecert.exe -! -a <algorithm> (The signature's digest algorithm) <md5|sha1|sha256|sha384|sha512> (Default to 'sha1')`
+```
+makecert.exe -! -a <algorithm> (The signature's digest algorithm) <md5|sha1|sha256|sha384|sha512> (Default to 'sha1')
+```
 
 The result should display sha256 as possible options. I have placed a copy of the makecert file from the Windows Software Development Kit (SDK) for Windows 8.1 Preview [here](https://skydrive.live.com/redir?resid=A49424DE2FED3A2!1349&authkey=!AHCBtSsbeR2P5vA)
 
 Create a self-signed certificate by running:
 
-`makecert -n "CN=Remote Console Connect" -r -pe -a sha256 -e <mm/dd/yyyy> -len 2048 -sky signature -eku 1.3.6.1.5.5.7.3.2 –sr "LocalMachine" -ss My -sy 24  "<CertificateName>.cer"`
+```
+makecert -n "CN=Remote Console Connect" -r -pe -a sha256 -e <mm/dd/yyyy> -len 2048 -sky signature -eku 1.3.6.1.5.5.7.3.2 –sr "LocalMachine" -ss My -sy 24  "<CertificateName>.cer"
+```
 
 -sky signature | use for signing 
 --- | --- | ---
--r create self-signed 
--n “CN=Remote Console Connect” subject name (Remote Console Connect) 
--pe private key is exportable 
--a sha256 cert algorithm 
--len 2048 key length 
-–e <mm/dd/yyyy> expiry date 
--eku 1.3.6.1.5.5.7.3.2 enhanced key usage (client auth) 
--ss My place the private key in certificate store (My) 
--sy 24 Cryptographic provider type (supports SHA256) 
-“<CertificateName>.cer” name for the public key 
+-r | create self-signed 
+-n "CN=Remote Console Connect" | subject name (Remote Console Connect) 
+-pe | private key is exportable 
+-a sha256 | cert algorithm 
+-len 2048 | key length 
+–e <mm/dd/yyyy> | expiry date 
+-eku 1.3.6.1.5.5.7.3.2 | enhanced key usage (client auth) 
+-ss My | place the private key in certificate store (My) 
+-sy 24 | Cryptographic provider type (supports SHA256) 
+"<CertificateName>.cer" | name for the public key 
 
 The command generates a self-signed certificate in the certificates user store. To export the certificate open a Microsoft Management Console (mmc.exe) add the certificates snap-in and connect to the user account. Expand Certificates > Personal > Certificates, right-click the certificate we just created, open the All Tasks menu and choose export.
 
@@ -106,69 +110,82 @@ Logon to the server running System Center Service Provider Foundation 2012 R2 an
 
 The import process of the .PFX file can also be done by running the following PowerShell script.
 
-PS C:> Import-PfxCertificate -CertStoreLocation Cert:LocalMachineMy -Filepath “<certificate path>.pfx”-Password <Secure String> 
+```
+Import-PfxCertificate -CertStoreLocation Cert:LocalMachineMy -Filepath "<certificate path>.pfx" -Password <Secure String>
+```
 
 When the .PFX file is imported, start the import of the .CER file by double-clicking on it. Select install certificate on the General tab. Select Local Machine as the Store Location, select to place the certificate in the following store and browse to the Trusted Root Certification Authorities store.
 
 The import process of the .CER file can also be done by running the following PowerShell script.
 
-PS C:> Import-Certificate -CertStoreLocation cert:LocalMachineRoot -Filepath “<certificate path>.cer”
+```
+Import-Certificate -CertStoreLocation cert:LocalMachineRoot -Filepath "<certificate path>.cer"
+```
 
 System Center Service Provider Foundation 2012 R2 needs to be configured to use the certificate to create claims tokens by using the Set-SCSPFVmConnectGlobalSettings cmdlet.
 
 We need to specify three values for the cmdlet.
-1.The lifetime value of a token. The command allows you to Issue tokens that have a lifetime between 1 and 60 minutes.
-2.You can specify how hosts are identified. Host can be identified by; FQDN – fully qualified domain name
-Host – hostname
-IPv4 – IPv4 address
-IPv6 – IPv6 address
 
+1.The lifetime value of a token. The command allows you to Issue tokens that have a lifetime between 1 and 60 minutes.
+2.You can specify how hosts are identified. Host can be identified by; 
+ - FQDN – fully qualified domain name
+ - Host – hostname
+ - IPv4 – IPv4 address
+ - IPv6 – IPv6 address
 3.The thumbprint of the certificate we created earlier.
 
 We can find the certificate thumbprint by running the following cmdlet.
 
-PS C:> $thumbprints = @(dir cert:localmachineMy | Where-Object { $_.subject -eq “CN=Remote Console Connect” } ).thumbprint
-PS C:> $thumbprints
+```
+$thumbprints = @(dir cert:localmachineMy | Where-Object { $_.subject -eq "CN=Remote Console Connect" } ).thumbprint
+$thumbprints
+```
 
 In my lab environment the Remote Desktop Gateway is located in a separate domain from the Hyper-V hosts and there is no name resolution from the DMZ domain to the management domain. In this blog I will configure Console Connect to use the IP address of the host to connect to.
 
 Run the following cmdlets to configure System Center Service Provider Foundation 2012 R2 to use the certificate to create claims tokens.
 
-PS C:> import-module spfadmin
-PS C:> Set-SCSPFVmConnectGlobalSettings -AccessTokenLifetimeInMinutes 5 -CertificateThumbprint 9D726C513A9A5D358CE13F5E1682052C61A4C7DF -HostIdentityType IPv4
+```
+import-module spfadmin
+Set-SCSPFVmConnectGlobalSettings -AccessTokenLifetimeInMinutes 5 -CertificateThumbprint 9D726C513A9A5D358CE13F5E1682052C61A4C7DF -HostIdentityType IPv4`
+```
 
 You can verify your settings by running the cmdlet.
 
-PS C:> Set-SCSPFVmConnectGlobalSettings
+```
+Set-SCSPFVmConnectGlobalSettings
+```
 
 In the Windows Azure Pack preview bits there is a known issue with the RDP file that is created for a tenant when using Console Connect. To workaround this issue you need to install URL Rewrite on the System Center Service Provider Foundation 2012 R2 server. URL rewrite be installed using the same Web Platform Installer that is used for installing Windows Azure Pack.
 
 After installer URL rewrite on the System Center Service Provider Foundation 2012 R2 server open IIS manager, select the SPF website and open the URL rewrite feature. Select Add rule to start the Add rule wizard. Select to create a blank Outbound rule, give it a temporary name, type some text in the pattern field (we will replace these settings in a second) and select apply. Open the web.config file located in the SPF folder with notepad. If you did a default installation the web.config file is located in C:inetpubSPF. Replace the temporary outbound rule you just created with the following:
 
+```
 <outboundRules>
-<clear />
-<rule name=”Fix gatewayaccesstoken” preCondition=”VMConsole RDP File”>
-<match filterByTags=”None” pattern=”gatewayeaccesstoken” />
-<conditions logicalGrouping=”MatchAll” trackAllCaptures=”true” />
-<action type=”Rewrite” value=”gatewayaccesstoken” />
-</rule>
-<rule name=”Fix gatewaycredentialssource” preCondition=”VMConsole RDP File”>
-<match filterByTags=”None” pattern=”gatewaycredentialssource:i:4″ />
-<conditions logicalGrouping=”MatchAll” trackAllCaptures=”true” />
-<action type=”Rewrite” value=”gatewaycredentialssource:i:5″ />
-</rule>
-<rule name=”Fix gatewayprofileusagemethod” preCondition=”VMConsole RDP File”>
-<match filterByTags=”None” pattern=”gatewayprofileusagemethod:i:0″ />
-<conditions logicalGrouping=”MatchAll” trackAllCaptures=”true” />
-<action type=”Rewrite” value=”gatewayprofileusagemethod:i:1″ />
-</rule>
-<preConditions>
-<preCondition name=”VMConsole RDP File”>
-<add input=”{REQUEST_URI}” pattern=”^.*(/VMConnection)$” />
-<add input=”{RESPONSE_CONTENT_TYPE}” pattern=”^application/x-rdp$” />
-</preCondition>
-</preConditions>
+ <clear />
+ <rule name="Fix gatewayaccesstoken" preCondition="VMConsole RDP File">
+  <match filterByTags="None" pattern="gatewayeaccesstoken" />
+  <conditions logicalGrouping="MatchAll" trackAllCaptures="true" />
+  <action type="Rewrite" value="gatewayaccesstoken" />
+ </rule>
+ <rule name="Fix gatewaycredentialssource" preCondition="VMConsole RDP File">
+  <match filterByTags="None" pattern="gatewaycredentialssource:i:4" />
+  <conditions logicalGrouping="MatchAll" trackAllCaptures="true" />
+  <action type="Rewrite" value="gatewaycredentialssource:i:5" />
+ </rule>
+ <rule name="Fix gatewayprofileusagemethod" preCondition="VMConsole RDP File">
+  <match filterByTags="None" pattern="gatewayprofileusagemethod:i:0" />
+  <conditions logicalGrouping="MatchAll" trackAllCaptures="true" />
+  <action type="Rewrite" value="gatewayprofileusagemethod:i:1" />
+ </rule>
+ <preConditions>
+  <preCondition name="VMConsole RDP File">
+   <add input="{REQUEST_URI}" pattern="^.*(/VMConnection)$" />
+   <add input="{RESPONSE_CONTENT_TYPE}" pattern="^application/x-rdp$" />
+  </preCondition>
+ </preConditions>
 </outboundRules>
+```
 
 Save the web.config file and perform an IISReset.
 
