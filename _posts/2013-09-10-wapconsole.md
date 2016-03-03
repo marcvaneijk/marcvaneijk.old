@@ -5,23 +5,24 @@ author: Marc van Eijk
 title: Windows Azure Pack Console Connect
 tags: Certificate, claims based authentication, Console Connect, Marc van Eijk, Remote Desktop Gateway, URL rewrite, VMConnect, WAP, Windows Azure Pack
 ---
-Almost a year ago I wrote a blog on the Beta of Windows Azure for Windows Server.
+Almost a year ago I wrote a blog on the Beta of [Windows Azure for Windows Server](/2012/11/09/wa4ws).
 
 It was a very promising solution, but also had some shortcomings from a Service Provider perspective. I summed up a couple of requirements or nice to haves at the end of that blog
-•TCP Endpoints
-•Site to site VPN
-•VM Networks
-•Remote in to VM RDP Gateway with single sign on
-•Change owner of existing virtual machines
-•Change SPF Registration URL and credentials
 
-A lot of great work has been done since the RTM version of Windows Azure for Windows Server. Not only have they implemented all these requirements for Service Providers, but they even pushed the envelope by implementing a lot of other great features. Because all these new functionalities deserve an easier and more clear name, the product is renamed to Windows Azure Pack.
+- TCP Endpoints
+- Site to site VPN
+- VM Networks
+- Remote in to VM RDP Gateway with single sign on
+- Change owner of existing virtual machines
+- Change SPF Registration URL and credentials
+
+A lot of great work has been done since the RTM version of Windows Azure Services for Windows Server. Not only have they implemented all these requirements for Service Providers, but they even pushed the envelope by implementing a lot of other great features. Because all these new functionalities deserve an easier and more clear name, the product is renamed to Windows Azure Pack.
 
 One Platform
 
-Microsoft has released the Preview bits for Windows Azure Pack for download through the Web Platform Installer that can be downloaded here.
+Microsoft has released the Preview bits for Windows Azure Pack for download through the Web Platform Installer that can be downloaded [here](http://www.microsoft.com/web/downloads/platform.aspx).
 
-In the previous version (Windows Azure for Windows Server) the only way to connect to a virtual machine was by using the Remote Desktop Protocol and connect directly to the IP address of the virtual machine. This required that the virtual machine was running, RDP in the guest OS was enabled, firewall exclusions for RDP were in place and the virtual machine had a public IP address. This public IP address would then be injected in to an RDP file when a tenant used the connect button from the Service Management Portal.
+In the previous version (Windows Azure Services for Windows Server) the only way to connect to a virtual machine was by using the Remote Desktop Protocol and connect directly to the IP address of the virtual machine. This required that the virtual machine was running, RDP in the guest OS was enabled, firewall exclusions for RDP were in place and the virtual machine had a public IP address. This public IP address would then be injected in to an RDP file when a tenant used the connect button from the Service Management Portal.
 
 If one of these requirements for connecting to the virtual machine was not met, you were unable to connect in to the virtual machine. You probably can think of some situations where this would be the case.
 
@@ -33,7 +34,7 @@ There are some limitations to Console Connect when you compare it the a default 
 
 There are a lot of folks out there trying the Preview bits and having a hard time to get this configured. After a chat with the Program Manager for this feature we agreed that the steps to get Console Connect configured can be described in this blog post. Please take note that these step will change in the RTM for Windows Azure Pack, where the host management for Console Connect is moved to System Center Virtual Machine Manager 2012 R2.
 
-Security
+## Security
 
 Console Connect leverages the Remote Desktop Gateway feature in Windows Server 2012 R2. In essence you are connecting to a host that will in turn present the screen/keyboard/mouse functionality (optionally through a Remote Desktop Gateway). This requires some proper security measures to enforce that a tenant can only access his own virtual machines and not the virtual machines from another tenant or even worse connect to the host from the management domain.
 
@@ -41,48 +42,47 @@ To enforce these security measures, support for claims based authentication in W
 
 In addition to the security measures with claims based authentication the configuration of the Remote Desktop Gateway will limit its functionality to be used only for console access to virtual machines and unable to be used for other purposes.
 
-Design
+## Design
 
 For this blog I’m using a lab environment. In this lab environment System Center Virtual Machine Manager 2012 R2 and the Windows Server 2012 R2 Hyper-V clusters are located in a management domain. Windows Azure Pack is installed in a DMZ in a separate domain. The Remote Desktop Gateway is deployed in the same domain as Windows Azure Pack. The two environments are separated by a firewall. If you have a smaller lab environment with a single domain and all the Azure Pack components installed on a single host (express installation) the steps for configuring Console Connect will be the same except for the location of some objects. I will assume that you have Windows Azure Pack already up and running.
 
 Design
 
 The steps for configuring Console Connect for Windows Azure Pack preview, can be divided into the following parts.
-•Certificate
-•Service Provider Foundation
-•Hyper-V hosts
-•Remote Desktop Gateway (only required for access from the internet)
-•Windows Azure Pack
 
+- Certificate
+- Service Provider Foundation
+- Hyper-V hosts
+- Remote Desktop Gateway (only required for access from the internet)
+- Windows Azure Pack
 
+## Certificate
 
-Certificate
-
-A certificate with a private key on System Center Service Provider Foundation 2012 R2 is used for claims based authentication. The public keys of this certificate must be installed on the Hyper-V hosts and the Remote Desktop Gateway to accept tokes signed by System Center Service Provider Foundation 2012 R2.
+A certificate with a private key on System Center Service Provider Foundation 2012 R2 is used for claims based authentication. The public keys of this certificate must be installed on the Hyper-V hosts and the Remote Desktop Gateway to accept tokens signed by System Center Service Provider Foundation 2012 R2.
 
 Valid certificates for issuing remote console tokens have the following required attributes:
-•The certificate has not expired
-•The Key Usage field contains Digital Signature
-•The Enhanced Key Usage contains Client Authentication (1.3.6.1.5.5.7.3.2)
-•The root CA certificates of the CAs that issued this certificate must be installed in the Trusted Root Certification Authorities store
+
+- The certificate has not expired
+- The Key Usage field contains Digital Signature
+- The Enhanced Key Usage contains Client Authentication (1.3.6.1.5.5.7.3.2)
+- The root CA certificates of the CAs that issued this certificate must be installed in the Trusted Root Certification Authorities store
 
 For the lab environment I’m using a self-signed certificate, but you can also a the Enterprise Certificate Authority if you have one configured in your domain or request a certificate from a public Certificate Authority.
 
 Note: If you use a self-signed certificate it is necessary to place the public key of the certificate into the Trusted Root Certification Authorities store on the Remote Desktop Gateway and the Hyper-V hosts.
 
-For creating the self-signed certificate you can use makecert.exe that is part of the Windows Software Development Kit (SDK) for Windows 8.1 Preview. If you have an older version of makecert lying around make sure that is capable of creating certificates with an sha256 algorithm. You can verify this my running makecert.exe -!
+For creating the self-signed certificate you can use makecert.exe that is part of the [Windows Software Development Kit (SDK) for Windows 8.1 Preview](http://msdn.microsoft.com/en-us/library/windows/desktop/bg162891.aspx). If you have an older version of makecert lying around make sure that is capable of creating certificates with an sha256 algorithm. You can verify this my running 
 
--a <algorithm> The signature’s digest algorithm.
+`makecert.exe -! -a <algorithm> (The signature's digest algorithm) <md5|sha1|sha256|sha384|sha512> (Default to 'sha1')`
 
-<md5|sha1|sha256|sha384|sha512>. Default to ‘sha1’
-
-The result should display sha256 as possible options. I have placed a copy of the makecert file from the Windows Software Development Kit (SDK) for Windows 8.1 Preview here
+The result should display sha256 as possible options. I have placed a copy of the makecert file from the Windows Software Development Kit (SDK) for Windows 8.1 Preview [here](https://skydrive.live.com/redir?resid=A49424DE2FED3A2!1349&authkey=!AHCBtSsbeR2P5vA)
 
 Create a self-signed certificate by running:
 
-makecert -n “CN=Remote Console Connect” -r -pe -a sha256 -e <mm/dd/yyyy> -len 2048 -sky signature -eku 1.3.6.1.5.5.7.3.2 -ss My -sy 24 “<CertificateName>.cer”
+`makecert -n "CN=Remote Console Connect" -r -pe -a sha256 -e <mm/dd/yyyy> -len 2048 -sky signature -eku 1.3.6.1.5.5.7.3.2 –sr "LocalMachine" -ss My -sy 24  "<CertificateName>.cer"`
 
--sky signature use for signing 
+| -sky signature | use for signing 
+--- | --- | ---
 -r create self-signed 
 -n “CN=Remote Console Connect” subject name (Remote Console Connect) 
 -pe private key is exportable 
@@ -117,11 +117,11 @@ PS C:> Import-Certificate -CertStoreLocation cert:LocalMachineRoot -Filepath “
 System Center Service Provider Foundation 2012 R2 needs to be configured to use the certificate to create claims tokens by using the Set-SCSPFVmConnectGlobalSettings cmdlet.
 
 We need to specify three values for the cmdlet.
-1.The lifetime value of a toke. The command allows you to Issue tokens that have a lifetime between 1 and 60 minutes.
-2.You can specify how hosts are identified. Host can be identified by; •FQDN – fully qualified domain name
-•Host – hostname
-•IPv4 – IPv4 address
-•IPv6 – IPv6 address
+1.The lifetime value of a token. The command allows you to Issue tokens that have a lifetime between 1 and 60 minutes.
+2.You can specify how hosts are identified. Host can be identified by; FQDN – fully qualified domain name
+Host – hostname
+IPv4 – IPv4 address
+IPv6 – IPv6 address
 
 3.The thumbprint of the certificate we created earlier.
 
@@ -171,6 +171,12 @@ After installer URL rewrite on the System Center Service Provider Foundation 201
 </outboundRules>
 
 Save the web.config file and perform an IISReset.
+
+In a default configuration the SPF service account does not have access to the private key of the Console Connect certificate that is installed on the SPF server.
+
+After configuring all parts and the tenant uses Console Connect, the ManagementODataService log on the SPF server displays the following error. Operation manager plugin method ‘GetReadStream’ for resource name ‘VMM.VirtualMachine’ failed with error messsage ‘Keyset does not exist’.
+
+Add the SPF domain service account to the local administrator group on the SPF server and a reboot the SPF Server.
 
 Hyper-V hosts
 
