@@ -7,7 +7,7 @@ tags: API, Marc van Eijk, Microsoft Azure, Powershell, PublishSettings, Tenant P
 ---
 Microsoft Azure and Windows Azure Pack are like two circles. These circles are moving towards each other and are already overlapping on certain parts. The CloudOS vision is those two circles completely merged into one.
 
-<img src="/images/2014-06-11/Circles.png" width="720">
+<img src="/images/2014-06-11/Circles.png" width="500">
 
 So, when you work with Windows Azure Pack it is very interesting to keep an eye on Microsoft Azure, the public cloud solution from Microsoft. This gives a good idea of the features that are coming to Windows Azure Pack, but also gives more insight in the features that are already available in Windows Azure Pack today. In this blog we will cover a feature that is not very well known but can be very useful. The Windows Azure Pack Tenant Public API.
 
@@ -48,7 +48,7 @@ Instead of accepting the license terms, click the link “click here to see addi
 
 The download should now only contain the Windows Azure PowerShell module (about 8-9 MB in size).
 
-<img src="/images/2014-06-11/Download.png" width="720">
+<img src="/images/2014-06-11/Download.png" width="60">
 
 Install this module.
 
