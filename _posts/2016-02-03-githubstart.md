@@ -298,11 +298,11 @@ There is no need to add the files to the index. GitHub client will do that for y
 
 On the top right of the GitHub desktop you will see a new moment in time (commit) in the timeline. Clicking on a circle in that “timeline” shows you the changes made in that commit. Clicking on the last icon (most right circle), presents the current state.
 
-<img src="/images/2016-02-03/39-GitHubD-Sync.png" width="250">
+<img src="/images/2016-02-03/39-GitHubD-Sync.png" width="200">
 
 The last step to take is to push the commit to GitHub. You can do that by clicking the **Sync** button on the top right of GitHub Desktop. If it is the first time you are pushing to a new repository, the button will be called **Publish**. For any subsequent pushes the button is called Sync.
 
-<img src="/images/2016-02-03/40-GitHubD-Publish.png" width="250">
+<img src="/images/2016-02-03/40-GitHubD-Publish.png" width="200">
 
 There is an important difference with the command line Git client here. Clicking the Sync button will not only push the local changes to GitHub, but it will first pull possible changes from GitHub first. These possible changes might be caused by you editing files in the repository directly in GitHub. If that is the case, GitHub will notify you that a conflict exists.
 
@@ -330,7 +330,7 @@ Make a new commit.
 
 And sync to GitHub by clicking the **Sync** button on the top right. Note the icon of the commit is different, because of the merge.
 
-<img src="/images/2016-02-03/47-GitHubD-Conflict7.png" width="250">
+<img src="/images/2016-02-03/47-GitHubD-Conflict7.png" width="200">
 
 The Sync now completes successfully and the README.md file on the GitHub repository contains the final edits we just made locally.
 
@@ -352,11 +352,11 @@ It is possible to create a copy of the repository from another GitHub account in
 
 To fork a repository browse to the repository in another GitHub account. Click the **Fork** icon on the right top of the repository start page.
 
-<img src="/images/2016-02-03/50-Fork1.png" width="700">
+<img src="/images/2016-02-03/50-Fork1.png" width="720">
 
 Creating the fork in your account takes a couple of seconds. After the fork is created you are redirected to the fork in your account. You can see that the reference to the original repository is recorded as part of the fork.
 
-<img src="/images/2016-02-03/51-Fork2.png" width="700">
+<img src="/images/2016-02-03/51-Fork2.png" width="400">
 
 A fork is a moment in time copy created in your GitHub account, before you can edit the files you need to clone the fork to your local machine. The steps to clone the fork to your local machine are exactly the same as the steps described earlier to clone a repository.
 
@@ -372,7 +372,7 @@ To start contributing to a repository in another GitHub account you need to fork
 
 Start by creating a fork of the repository you want to contribute to. Then create a clone of the fork on your local machine. Get the repository endpoint by browsing to the start page of the fork in your GitHub account.
 
-<img src="/images/2016-02-03/52-PR1.png" width="700">
+<img src="/images/2016-02-03/52-PR1.png" width="720">
 
 Copy the endpoint URI and open a command prompt. Change the current path to the directory where you want the clone directory to be created and run
 
@@ -382,7 +382,7 @@ Git clone <endpoint of the fork>
 
 This will make a local clone of the fork. Just as with the clone of your own repository Git creates to aliases (one for `fetch` and one for `push`) called **origin** pointing to the endpoint of the repository on GitHub.
 
-<img src="/images/2016-02-03/53-PR2.png" width="700">
+<img src="/images/2016-02-03/53-PR2.png" width="600">
 
 But we do not have any reference to the source (also called upstream) repository. To add a reference to the upstream repository run
 
@@ -391,13 +391,13 @@ But we do not have any reference to the source (also called upstream) repository
 git remote add upstream https://github.com/marcvaneijk/RepositoryInAnotherAccount.git
 ```
 
-<img src="/images/2016-02-03/54-PR3.png" width="700">
+<img src="/images/2016-02-03/54-PR3.png" width="720">
 
 When you now do a `Git remote -v` you will notice you two additional aliases (`fetch` and `push`) called **upstream**. You can use `fetch` (or `pull` as explained earlier) to update your clone. You cannot use `push` to push changes directly to the upstream server. You will need to submit a pull-request for that.
 
 Let’s make a change locally. I’ll add a file to the local clone of the fork.
 
-<img src="/images/2016-02-03/55-PR4.png" width="700">
+<img src="/images/2016-02-03/55-PR4.png" width="720">
 
 The procedure to contribute to the repository of the other GitHub user is almost the same as contributing to you own repository.
 
@@ -406,7 +406,7 @@ Git add .
 Git commit -m “Added initial version of NewFile.txt”
 ```
 
-<img src="/images/2016-02-03/56-PR5.png" width="700">
+<img src="/images/2016-02-03/56-PR5.png" width="720">
 
 Instead of pulling the latest updates from our fork (which we have not changed), we will get latest updates of the upstream repository.
 
@@ -414,7 +414,7 @@ Instead of pulling the latest updates from our fork (which we have not changed),
 Git pull upstream master
 ```
 
-<img src="/images/2016-02-03/57-PR6.png" width="700">
+<img src="/images/2016-02-03/57-PR6.png" width="600">
 
 Now in this case it is much more likely that code in the upstream is changed. Because other people are contributing to it as well.
 
@@ -424,7 +424,7 @@ We solve the conflict in the exact same way as was explained earlier in this blo
 Git push origin master
 ```
 
-<img src="/images/2016-02-03/58-PR7.png" width="700">
+<img src="/images/2016-02-03/58-PR7.png" width="720">
 
 To summarize the code we just executed
 
@@ -444,21 +444,21 @@ Git push origin master
 
 The last step we need to perform is to create a pull request. When working with Git command line we will make that pull request directly from GitHub. Open a browser, browse to <github.com> and sign in with your github credentials. Browse to the fork we just pushed the changes to.
 
-<img src="/images/2016-02-03/59-PR8.png" width="700">
+<img src="/images/2016-02-03/59-PR8.png" width="720">
 
 On the start page of the fork, click the green **New pull request** icon. That will open a page to compare the differences between the fork and the upstream repository.
 
-<img src="/images/2016-02-03/60-PR9.png" width="700">
+<img src="/images/2016-02-03/60-PR9.png" width="720">
 
 You can see that the is one new file (called NewFile.txt) that is on the fork, but not on the upstream. Click the green **create pull request** button.
 
-<img src="/images/2016-02-03/61-PR10.png" width="700">
+<img src="/images/2016-02-03/61-PR10.png" width="720">
 
 Specify a title and explanation that will help the author of the upstream repository to make a good assessment of the code he might be merging into his code. Click create pull request.
 
 You are now redirected to the account of the upstream repository. The page opens in your pull request.
 
-<img src="/images/2016-02-03/62-PR11.png" width="700">
+<img src="/images/2016-02-03/62-PR11.png" width="720">
 
 The owner of the upstream repository is notified that a new pull-request is awaiting his review. This process (`fork`, `clone`, `commit`, `push` and `pull-request` is complete integrated within GitHub Desktop.
 
@@ -466,17 +466,17 @@ The owner of the upstream repository is notified that a new pull-request is awai
 
 Start by creating a fork of the repository you want to contribute to. Then create a clone of the fork on your local machine You can either click on the Download to GitHub Desktop button on start page of the fork in your GitHub account
 
-<img src="/images/2016-02-03/63-GH-PR1.png" width="700">
+<img src="/images/2016-02-03/63-GH-PR1.png" width="720">
 
 Or you create the local clone of the fork directly from GitHub Desktop.
 
-<img src="/images/2016-02-03/64-GH-PR2.png" width="700">
+<img src="/images/2016-02-03/64-GH-PR2.png" width="500">
 
 After the repository is opened there is no need to add the upstream server. GitHub Desktop will do that automatically.
 
 Let’s make a change locally. I’ll add a file to the local clone of the fork.
 
-<img src="/images/2016-02-03/65-GH-PR3.png" width="700">
+<img src="/images/2016-02-03/65-GH-PR3.png" width="600">
 
 The change is picked up by GitHub Desktop
 
@@ -484,23 +484,23 @@ The change is picked up by GitHub Desktop
 
 Commit the change to the master.
 
-<img src="/images/2016-02-03/67-GH-PR5.png" width="700">
+<img src="/images/2016-02-03/67-GH-PR5.png" width="350">
 
 And sync (`pull` and `push`) the changes to the fork in GitHub.
 
-<img src="/images/2016-02-03/68-GH-Sync.png" width="700">
+<img src="/images/2016-02-03/68-GH-Sync.png" width="250">
 
 Note that the commits to the fork are displayed in a separate timeline to the upstream repository. Instead of doing a pull request from GitHub, we can also perform a pull request directly from GitHub Desktop. On the top right an icon called Pull request is displayed.
 
-<img src="/images/2016-02-03/69-GH-PR7.png" width="700">
+<img src="/images/2016-02-03/69-GH-PR7.png" width="250">
 
 If we click that icon a windows pops up that allows you to submit a pull request to the upstream repository.
 
-<img src="/images/2016-02-03/70-GH-PR8.png" width="700">
+<img src="/images/2016-02-03/70-GH-PR8.png" width="350">
 
 When the pull request completes, GitHub Desktop provides you with a link to see the pull request on GitHub
 
-<img src="/images/2016-02-03/71-GH-PR9.png" width="700">
+<img src="/images/2016-02-03/71-GH-PR9.png" width="350">
 
 This will bring up the same page as we saw earlier, when we submitted the pull request directly on GitHub.
 
@@ -516,7 +516,7 @@ Open a command prompt change the current path to your local clone. In this examp
 Git branch
 ```
 
-<img src="/images/2016-02-03/72-GitBranch1.png" width="700">
+<img src="/images/2016-02-03/72-GitBranch1.png" width="500">
 
 Since we have not create any additional braches yet, the master is the only branch. It is also the active branch, hence it is displayed in green. To create a new branch run the following command
 
@@ -525,7 +525,7 @@ Since we have not create any additional braches yet, the master is the only bran
 Git branch myfeature
 ```
 
-<img src="/images/2016-02-03/73-GitBranch2.png" width="700">
+<img src="/images/2016-02-03/73-GitBranch2.png" width="500">
 
 This creates a new branch called my feature. If we run the command to retrieve all the branches, we can see that the new branch called myfeature now also exists, but master is still the current branch. To select another branch run the following command
 
@@ -534,7 +534,7 @@ This creates a new branch called my feature. If we run the command to retrieve a
 Git checkout myfeature
 ```
 
-<img src="/images/2016-02-03/74-GitBranch3.png" width="700">
+<img src="/images/2016-02-03/74-GitBranch3.png" width="500">
 
 Please note that you are note able to checkout to another branch without committing your changes to the current active branch first. If we now retrieve the braches again
 
@@ -542,11 +542,11 @@ Please note that you are note able to checkout to another branch without committ
 Git branch
 ```
 
-<img src="/images/2016-02-03/75-GitBranch4.png" width="700">
+<img src="/images/2016-02-03/75-GitBranch4.png" width="500">
 
 We can see that the myfeature branch is the current active branch. To give you an idea of the independent development line each branch provides, we’ll create a new file in the current active branch. In this example I have created a .txt file called NewTextFileInBranch.
 
-<img src="/images/2016-02-03/76-GitBranch5.png" width="700">
+<img src="/images/2016-02-03/76-GitBranch5.png" width="500">
 
 Next we need to add and commit the changes in our branch.
 
@@ -555,7 +555,7 @@ Git add .
 Git commit -m “new textfile in branch”
 ```
 
-<img src="/images/2016-02-03/77-GitBranch6.png" width="700">
+<img src="/images/2016-02-03/77-GitBranch6.png" width="500">
 
 Now that we have comitted the changes to our branch, lets change the branch to master.
 
@@ -563,11 +563,11 @@ Now that we have comitted the changes to our branch, lets change the branch to m
 Git checkout master
 ```
 
-<img src="/images/2016-02-03/78-GitBranch7.png" width="700">
+<img src="/images/2016-02-03/78-GitBranch7.png" width="500">
 
 After the current branch has been configured to master, the folder is in its original state (we did not make any changes to the master).
 
-<img src="/images/2016-02-03/79-GitBranch8.png" width="700">
+<img src="/images/2016-02-03/79-GitBranch8.png" width="720">
 
 If we were to change the branch to myfeature again. The NewTextFileInBranch.txt would be present again. Each branch will have its own version of the truth.
 
@@ -575,19 +575,19 @@ If we were to change the branch to myfeature again. The NewTextFileInBranch.txt 
 
 GitHub Desktop also allows you to create branches. Open GitHub Desktop and select a repository. For this example we will use the **RepositoryInAnotherAccount**. Which is the local clone of the fork we used for the example with the pull-request.On the top menu the is an account (next to the name of the branch). If you hover over that icon it will say **Create a new branch**. Click that icon.
 
-<img src="/images/2016-02-03/80-GitHBranch1.png" width="700">
+<img src="/images/2016-02-03/80-GitHBranch1.png" width="500">
 
 Specify the name of the branch. Use something descriptive (for example the name of the folder containing your ARM template).
 
-<img src="/images/2016-02-03/81-GitHBranch2.png" width="700">
+<img src="/images/2016-02-03/81-GitHBranch2.png" width="350">
 
 When you create the new branch GitHub Desktop will automatically checkout to that new branch. Make some changes to the local clone, commit these changes. Make additional changes to the local clone and make do a commit again. You now multiple commits that are local only. Sync the commits to your fork and open a pull request.
 
-<img src="/images/2016-02-03/83-GitHBranch3.png" width="700">
+<img src="/images/2016-02-03/83-GitHBranch3.png" width="250">
 
 When you browse to the pull request on GitHub, you can now see that the commits are grouped together in a single pull request, but still consists of individual commits. This makes is more clear for the author to evaluate the changes and merge the content.
 
-<img src="/images/2016-02-03/84-GitHBranch4.png" width="700">
+<img src="/images/2016-02-03/84-GitHBranch4.png" width="720">
 
 ## Summary
 
