@@ -488,19 +488,19 @@ Commit the change to the master.
 
 And sync (`pull` and `push`) the changes to the fork in GitHub.
 
-<img src="/images/2016-02-03/68-GH-Sync.png" width="250">
+<img src="/images/2016-02-03/68-GH-Sync.png" width="200">
 
 Note that the commits to the fork are displayed in a separate timeline to the upstream repository. Instead of doing a pull request from GitHub, we can also perform a pull request directly from GitHub Desktop. On the top right an icon called Pull request is displayed.
 
-<img src="/images/2016-02-03/69-GH-PR7.png" width="250">
+<img src="/images/2016-02-03/69-GH-PR7.png" width="200">
 
 If we click that icon a windows pops up that allows you to submit a pull request to the upstream repository.
 
-<img src="/images/2016-02-03/70-GH-PR8.png" width="350">
+<img src="/images/2016-02-03/70-GH-PR8.png" width="300">
 
 When the pull request completes, GitHub Desktop provides you with a link to see the pull request on GitHub
 
-<img src="/images/2016-02-03/71-GH-PR9.png" width="350">
+<img src="/images/2016-02-03/71-GH-PR9.png" width="300">
 
 This will bring up the same page as we saw earlier, when we submitted the pull request directly on GitHub.
 
@@ -516,7 +516,7 @@ Open a command prompt change the current path to your local clone. In this examp
 Git branch
 ```
 
-<img src="/images/2016-02-03/72-GitBranch1.png" width="500">
+<img src="/images/2016-02-03/72-GitBranch1.png" width="400">
 
 Since we have not create any additional braches yet, the master is the only branch. It is also the active branch, hence it is displayed in green. To create a new branch run the following command
 
@@ -525,7 +525,7 @@ Since we have not create any additional braches yet, the master is the only bran
 Git branch myfeature
 ```
 
-<img src="/images/2016-02-03/73-GitBranch2.png" width="500">
+<img src="/images/2016-02-03/73-GitBranch2.png" width="400">
 
 This creates a new branch called my feature. If we run the command to retrieve all the branches, we can see that the new branch called myfeature now also exists, but master is still the current branch. To select another branch run the following command
 
@@ -534,7 +534,7 @@ This creates a new branch called my feature. If we run the command to retrieve a
 Git checkout myfeature
 ```
 
-<img src="/images/2016-02-03/74-GitBranch3.png" width="500">
+<img src="/images/2016-02-03/74-GitBranch3.png" width="400">
 
 Please note that you are note able to checkout to another branch without committing your changes to the current active branch first. If we now retrieve the braches again
 
@@ -542,7 +542,7 @@ Please note that you are note able to checkout to another branch without committ
 Git branch
 ```
 
-<img src="/images/2016-02-03/75-GitBranch4.png" width="500">
+<img src="/images/2016-02-03/75-GitBranch4.png" width="400">
 
 We can see that the myfeature branch is the current active branch. To give you an idea of the independent development line each branch provides, we’ll create a new file in the current active branch. In this example I have created a .txt file called NewTextFileInBranch.
 
