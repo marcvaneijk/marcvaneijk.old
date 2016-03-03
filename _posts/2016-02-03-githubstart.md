@@ -88,7 +88,7 @@ For the purpose of this blog we’ll look at the operations from the perspective
 
 To install the Git client browse to <http://www.git-scm.com/> and select to download the latest source release.
 
-<img src="/images/2016-02-03/06-Git-Download.png" width="300">
+<img src="/images/2016-02-03/06-Git-Download.png" width="250">
 
 Start the setup wizard. Accept the License, leave the defaults in the **Select Components** screen.
 
@@ -118,23 +118,23 @@ After the installation completes open a command prompt. Type Git in the console 
 
 To install GitHub Desktop browse to <https://desktop.github.com/> and select to download GitHub Desktop.
 
-<img src="/images/2016-02-03/13-GitHubD-download.png" width="700">
+<img src="/images/2016-02-03/13-GitHubD-download.png" width="500">
 
 The installation will start by downloading the rest of the software (just over 100MB). When the file is downloaded and the installation is complete GitHub Desktop will open.
 
-<img src="/images/2016-02-03/14-GitHubD-start.png" width="700">
+<img src="/images/2016-02-03/14-GitHubD-start.png" width="720">
 
 Before we add a repository we need to configure some additional settings. Open the options by clicking on the icon that is in the right top corner.
 
-<img src="/images/2016-02-03/15-GitHubD-options1.png" width="700">
+<img src="/images/2016-02-03/15-GitHubD-options1.png" width="300">
 
 In the options screen select the **Add account**. In the login screen that opens specify the **GitHub username** and **password** that you created earlier in this blog.
 
-<img src="/images/2016-02-03/16-GitHubD-options2.png" width="700">
+<img src="/images/2016-02-03/16-GitHubD-options2.png" width="720">
 
 Specify an email address in the **Configure git** entry. The Clone path is used to story the local copies of your GitHub content. Make sure the **Clone path** matches the location you want to locally store the templates you will be working on. You will notice later in this blog that you can override this location. You can consider this path as the default value.
 
-<img src="/images/2016-02-03/17-GitHubD-options3.png" width="700">
+<img src="/images/2016-02-03/17-GitHubD-options3.png" width="720">
 
 Save the settings. Now that we have both clients in place we can start working with our repository.
 
