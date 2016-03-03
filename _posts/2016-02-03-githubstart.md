@@ -118,7 +118,7 @@ After the installation completes open a command prompt. Type Git in the console 
 
 To install GitHub Desktop browse to <https://desktop.github.com/> and select to download GitHub Desktop.
 
-<img src="/images/2016-02-03/13-GitHubD-download.png" width="500">
+<img src="/images/2016-02-03/13-GitHubD-download.png" width="400">
 
 The installation will start by downloading the rest of the software (just over 100MB). When the file is downloaded and the installation is complete GitHub Desktop will open.
 
@@ -126,7 +126,7 @@ The installation will start by downloading the rest of the software (just over 1
 
 Before we add a repository we need to configure some additional settings. Open the options by clicking on the icon that is in the right top corner.
 
-<img src="/images/2016-02-03/15-GitHubD-options1.png" width="300">
+<img src="/images/2016-02-03/15-GitHubD-options1.png" width="250">
 
 In the options screen select the **Add account**. In the login screen that opens specify the **GitHub username** and **password** that you created earlier in this blog.
 
@@ -146,11 +146,11 @@ The repository we created in our GitHub account is only available on the hosted 
 
 Open the command line on the local machine. When you clone a repository from the command line, Git will create the clone in the current path. First browse to the folder where you want the clone created. Each clone will git its own folder, so you just need a root folder (e.g. c:\templates). Browse to the root folder.
 
-<img src="/images/2016-02-03/18-Clone1.png" width="700">
+<img src="/images/2016-02-03/18-Clone1.png" width="400">
 
 Next we need lookup the Git endpoint of our GitHub repository. You can find the endpoint by browsing GitHub (if you are not signed in, sign in with the credentials you created earlier). Select our first repository. On the top the endpoint for our repository is displayed. You can click the copy Icon on the right (or directly copy the URI).
 
-<img src="/images/2016-02-03/19-Clone2.png" width="700">
+<img src="/images/2016-02-03/19-Clone2.png" width="720">
 
 Type `git clone <the repository endpoint>` in you command line. 
 
@@ -158,7 +158,7 @@ Type `git clone <the repository endpoint>` in you command line.
 git clone https://github.com/marcvaneijkdemo/MyFirstRepository.git
 ```
 
-<img src="/images/2016-02-03/20-Clone3.png" width="700">
+<img src="/images/2016-02-03/20-Clone3.png" width="720">
 
 We’ll get a warning that we are cloning an empty repository. You can ignore that, because we are doing just that!
 
@@ -177,11 +177,11 @@ Now let’s see how cloning in GitHub Desktop works.
 
 There are two ways to clone a repository with GitHub Desktop. You can open GitHub Desktop, Click the plus icon on the top left and select clone. The UI connects to your GitHub account (remember you specified your GitHub credentials in GitHub Desktop earlier) and show the repositories on your account. Select the repository you want to clone and click **Clone <RepositoryName>**. You are prompted to select a local path for you clone. The default location is the path we specified in the installation of GitHub Desktop earlier. You can also select a different path. In the folder you select, a subfolder is created with the name of the repository. This folder only contains a hidden .git folder that is used by git for versioning data.
 
-<img src="/images/2016-02-03/21-GitHubD-clone1.png" width="700">
+<img src="/images/2016-02-03/21-GitHubD-clone1.png" width="500">
 
 It also possible to browse GitHub, select your repository and click the **Set up in Desktop** button.
 
-<img src="/images/2016-02-03/22-GitHubD-clone2.png" width="700">
+<img src="/images/2016-02-03/22-GitHubD-clone2.png" width="720">
 
 The rest of the steps are the same as cloning the repository directly from GitHub Desktop.
 
@@ -191,7 +191,7 @@ Now that we have a local copy of our repository let’s make some changes to it.
 
 If you create a README file in the root of your repository, GitHub will automatically render the content of the file on the start page of your repository. You can create a README in plain text or use markdown. Markdown allows you to enhance your text. Let’s start with a super simple example using plain text. Open Windows Explorer and browse to the folder of your cloned repository. Create a new text file in the folder. Add a description about your repository and save the file. Rename the file, including the file extension, to README.md (README in uppercase and md in lowercase).
 
-<img src="/images/2016-02-03/23-README11.png" width="700">
+<img src="/images/2016-02-03/23-README11.png" width="720">
 
 Now that we made some changes to our local clone, we need to sync that to our repository on GitHub.
 
@@ -203,7 +203,7 @@ To sync the changes we have made locally to our repository in GitHub we use a co
 
 Open a command prompt and change the path to the local repository folder
 
-<img src="/images/2016-02-03/24-GitPush1.png" width="700">
+<img src="/images/2016-02-03/24-GitPush1.png" width="400">
 
 When we cloned the repository Git created a hidden folder called .get in the repository folder. This hidden folder is used by Git for versioning, but also contains some information about the source repository (called origin). We can get the remote endpoint that are currently configured for this local clone.
 
