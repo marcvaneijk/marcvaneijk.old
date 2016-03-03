@@ -195,7 +195,7 @@ After configuring all parts and the tenant uses Console Connect, the ManagementO
 
 Add the SPF domain service account to the local administrator group on the SPF server and a reboot the SPF Server.
 
-Hyper-V hosts
+## Hyper-V hosts
 
 On each Hyper-V host, that will run virtual machines accessible by Windows Azure Pack, the following configuration steps must be done. As noted before these steps are specific for Windows Azure Preview. In Windows Azure Pack RTM this configuration is moved to System Center Virtual Machine Manager 2012 R2.
 
@@ -203,27 +203,33 @@ First we need to import the public key of the certificate. Copy the .CER file we
 
 The import process of the .CER file can also be done by running the following PowerShell script.
 
-PS C:> Import-Certificate -CertStoreLocation cert:LocalMachineRoot -Filepath “<certificate path>.cer”
+```
+Import-Certificate -CertStoreLocation cert:LocalMachineRoot -Filepath "<certificate path>.cer"
+```
 
 Restart the Hyper-V Virtual Machine Management Service after importing the certificate on each Hyper-V host. The certificate should be imported in the certificate store on the Hyper-V servers before continuing.
 
 When authenticating tokens Hyper-V will only accept tokens that are signed using specific certificates and hashing algorithms. The TrustedIssuerCertificateHashes property is an array of certificate thumbprints. To configure the TrustedIssuerCertificateHashes property use the following cmdlet.
 
-$Server = “RES-HVT01.res.local”
-$Thumbprint = “9D726C513A9A5D358CE13F5E1682052C61A4C7DF”
-$TSData = Get-WmiObject -computername $Server -NameSpace “rootvirtualizationv2” -Class “Msvm_TerminalServiceSettingData”
-$TSClass = Get-WmiObject -computername $Server -NameSpace “rootvirtualizationv2” -Class “Msvm_TerminalService”
+```
+$Server = "RES-HVT01.res.local"
+$Thumbprint = "9D726C513A9A5D358CE13F5E1682052C61A4C7DF"
+$TSData = Get-WmiObject -computername $Server -NameSpace "rootvirtualizationv2" -Class "Msvm_TerminalServiceSettingData"
+$TSClass = Get-WmiObject -computername $Server -NameSpace "rootvirtualizationv2" -Class "Msvm_TerminalService"
 $TSData.TrustedIssuerCertificateHashes = $Thumbprint
-$JobResult = $TSClass.ModifyServiceSettings($($TSData.GetText(‘CimDTD20’), $null))
+$JobResult = $TSClass.ModifyServiceSettings($($TSData.GetText('CimDTD20'), $null))
+```
 
 Replace the $Server variable with the FQDN of the host where you are running the script on.
 
 Replace the $Thumbprint variable the thumbprint of the certificate we create earlier. The cmdlet to retrieve the thumbprint is the same that we used before
 
-PS C:> $thumbprints = @(dir cert:localmachineMy | Where-Object { $_.subject -eq “CN=Remote Console Connect” } ).thumbprint
-PS C:> $thumbprints
+```
+$thumbprints = @(dir cert:localmachineMy | Where-Object { $_.subject -eq "CN=Remote Console Connect" } ).thumbprint
+$thumbprints
+```
 
-Remote Desktop Gateway
+## Remote Desktop Gateway
 
 In this example the Remote Desktop Gateway is located in the DMZ domain. It is also possible to locate the Remote Desktop Gateway in the same domain as all other components. When you have installed the Operating System (in this example Windows Server 2012 R2), install the Remote Desktop Gateway using Add Roles and Features in Server Manager.
 
@@ -231,39 +237,49 @@ Install the Microsoft System Center Virtual Machine Manager Console Connect Gate
 
 After the installation completes, execute the following command.
 
-regsvr32 “C:Program FilesMicrosoft System Center 2012 R2Virtual Machine ManagerConsole Connect Gatewaybinfedauthplugin.dll”
+```
+regsvr32 "C:Program Files\Microsoft System Center 2012 R2\Virtual Machine Manager\Console Connect Gateway\bin\fedauthplugin.dll"
+```
 
 When authenticating tokens the Remote Desktop Gateway will only accept tokens that are signed using specific certificates and hashing algorithms. The TrustedIssuerCertificateHashes property is an array of certificate thumbprints. This configuration is performed by setting the TrustedIssuerCertificate properties on the WMI FedAuthSettings class by using the following cmdlet.
 
-$Server = “rdgw.contoso.com”
-$Thumbprint = “9D726C513A9A5D358CE13F5E1682052C61A4C7DF ”
-$TSData = Get-WmiObject -computername $Server -NameSpace “rootTSGatewayFedAuth2” -Class “FedAuthSettings”
+```
+$Server = "rdgw.contoso.com"
+$Thumbprint = "9D726C513A9A5D358CE13F5E1682052C61A4C7DF"
+$TSData = Get-WmiObject -computername $Server -NameSpace "rootTSGatewayFedAuth2" -Class "FedAuthSettings"
 $TSData.TrustedIssuerCertificates = $Thumbprint
 $TSData.Put() 
+```
 
 Replace the $Server variable with the FQDN of the host where you are running the script on.
 
 Replace the $Thumbprint variable the thumbprint of the certificate we create earlier. The cmdlet to retrieve the thumbprint is the same that we used before
 
-PS C:> $thumbprints = @(dir cert:localmachineMy | Where-Object { $_.subject -eq “CN=Remote Console Connect” } ).thumbprint
-PS C:> $thumbprints
+```
+$thumbprints = @(dir cert:localmachineMy | Where-Object { $_.subject -eq "CN=Remote Console Connect" } ).thumbprint
+$thumbprints
+```
 
 The Authentication plugin should be set with the following PowerShell cmdlet.
 
+```
 $g = Get-WmiObject -Namespace rootCIMV2TerminalServices -Class Win32_TSGatewayServerSettings
- $g.SetAuthenticationPlugin(“FedAuthAuthenticationPlugin”)
- $g.SetAuthorizationPlugin(“FedAuthAuthorizationPlugin”)
- $g.RecycleRpcApplicationPools()
+$g.SetAuthenticationPlugin("FedAuthAuthenticationPlugin")
+$g.SetAuthorizationPlugin("FedAuthAuthorizationPlugin")
+$g.RecycleRpcApplicationPools()
+```
 
 And finally create this registry key on the Remote Desktop Gateway server
 
-HKEY_LOCAL_MACHINESOFTWAREMicrosoftTerminal Server GatewaypreRDPDisableRegKey
+```
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Terminal Server Gateway\preRDP\DisableRegKey
+```
 
 The Remote Desktop Gateway should be configured with a web server certificate provided by a public Certificate Authority. To configure this certificate you can use the default configuration steps for assigning a certificate in the Remote Desktop Gateway management console.
 
 If you have located the Remote Desktop Gateway server in a separate domain like I have, then you also need to punch a hole in the firewall. To enable connectivity a tenant needs to access the Remote Desktop Gateway from the internet over port 443 and the Remote Desktop Gateway will need access to the Hyper-V hosts on TCP port 2179.
 
-Windows Azure Pack
+## Windows Azure Pack
 
 Now with all components in place we need to configure the plan in Windows Azure Pack preview to provide the Console Connect functionality to Tenant. Take note that a change to a plan in Windows Azure Pack preview will change the status of the Plan to syncing indefinitely. Create a new plan and assign the virtual machine clouds service. Open the plan and select to configure the virtual machine clouds plan service. On the bottom of the page is an option to enable connect to the console of virtual machines.
 
@@ -283,14 +299,10 @@ Console Connect screen
 
 Hopefully the top bar on the Console Connect window will be updated for Windows Azure Pack RTM, because it now displays the IP address (since we choose to connect on IP) of the underlying host. I don’t think most Service Provider will be to happy providing that information to the tenant.
 
-More Information
+## More Information
 
-For more information on Windows Azure Pack check out these videos from TechEd 2013
-
-Enabling On-Premises IaaS Solutions with the Windows Azure Pack
-
-Administering and Automating On-Premises IaaS Scenarios Using the Windows Azure Pack
-
-Building Cloud Services with Windows Server 2012 R2, Microsoft System Center 2012 R2 and the Windows Azure Pack
-
-Enabling Multi-Tenant IaaS Clouds in Microsoft System Center and Windows ServerEnabling Multi-Tenant IaaS Clouds in Microsoft System Center and Windows Server
+- [For more information on Windows Azure Pack check out these videos from TechEd 2013](http://channel9.msdn.com/Events/TechEd/Europe/2013/MDC-B364#fbid=htLx5u4w1Fe)
+- [Enabling On-Premises IaaS Solutions with the Windows Azure Pack](http://channel9.msdn.com/Events/TechEd/Europe/2013/MDC-B364#fbid=htLx5u4w1Fe)
+- [Administering and Automating On-Premises IaaS Scenarios Using the Windows Azure Pack](http://channel9.msdn.com/Events/TechEd/Europe/2013/MDC-B362#fbid=htLx5u4w1Fe)
+- [Building Cloud Services with Windows Server 2012 R2, Microsoft System Center 2012 R2 and the Windows Azure Pack](http://channel9.msdn.com/Events/TechEd/Europe/2013/MDC-B215#fbid=htLx5u4w1Fe)
+- [Enabling Multi-Tenant IaaS Clouds in Microsoft System Center and Windows ServerEnabling Multi-Tenant IaaS Clouds in Microsoft System Center and Windows Server](http://channel9.msdn.com/Events/TechEd/Europe/2013/MDC-B318#fbid=htLx5u4w1Fe)
