@@ -7,7 +7,7 @@ tags:
 ---
 The Cloud OS was implemented in our lab environment directly after the release of the 2012 R2 bits. That was a little over a year ago. The Windows Azure Pack installer creates multiple self-signed certificates that are used for different websites. In a simple Windows Azure Pack express installation you will get fourteen self-signed certificate. Looking at these certificates you will notice two different types. Most certificates are web server certificates assigned to a Windows Azure Pack website in IIS. There are also two signing certificates. The signing certificates are used by the Windows Azure Pack authentication sites.
 
-<img src="/images/2014-12-04/01-Signing-Certificates.png" width="700">
+<img src="/images/2014-12-04/01-Signing-Certificates.png" width="720">
 
 I’d like to point out that one of the post deployment tasks for every environment should be to replace the default self-signed certificates with trusted certificates. This is possible for all default certificates but not for the two signing certificates used for the authentication sites.
 
@@ -15,7 +15,7 @@ All self-signed certificates created by the Windows Azure Pack installer have an
 
 Unfortunately is the self-signed authentication signing certificate recreated with the information stored in the Windows Azure Pack database, including the original expiration date. Recreating the authentication signing certificate by deleting it from the personal computer store and recreating it by running the Windows Azure Pack configuration wizard results in the same issue. An expired self-signed authentication signing certificate.
 
-<img src="/images/2014-12-04/02-Expired-Signing-Cert.png" width="700">
+<img src="/images/2014-12-04/02-Expired-Signing-Cert.png" width="400">
 
 After making some changes in the database I was able to recreate the certificate with a new expiration date. But as you might now, hacking the database is not supported.
 
