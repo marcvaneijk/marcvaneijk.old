@@ -32,8 +32,8 @@ You can download Microsoft Azure PowerShell module 0.8.6 through the Web Platfor
 
 The VM Role is a custom configuration that can consist of many required and optional fields. As with the GUI wizard some values must be provided for the PowerShell cmdlet. Creating a new VM Role with the New-WAPackVMRole cmdlet requires some input.
 
-<img src="/images/2014-08-05/01wapcmdlet.png" width="700">
+<img src="/images/2014-08-05/01wapcmdlet.png" width="720">
 
 If we take a look at the ResourceDefinition of an existing VM Role there is still some configuration requirement, but it is a huge improvement compared the previous procedure.
 
-<img src="/images/2014-08-05/02resdef.png" width="700">
+<img src="/images/2014-08-05/02resdef.png" width="720">
