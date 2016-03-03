@@ -84,7 +84,7 @@ A quick search on the net did not return any similar issues and I know I’m not
 
 In the cool new Azure preview portal something caught my attention. The dropdown on the user account showed three directories.
 
-<img src="/images/2014-12-30/08-Directories.png" width="300">
+<img src="/images/2014-12-30/08-Directories.png" width="200">
 
 The first directory was part of my subscription, but the second directory was part of the subscription created by the Office 365 account. And the third directory really raised my eyebrows.
 
@@ -94,7 +94,7 @@ This was getting more confusing by the minute. After getting a good night sleep 
 
 The user administration page in my Office 365 Organizational account revealed my Microsoft account. To test the theory I deleted my Microsoft account from the Office 365 user administration page, logged on with my Microsoft account to http://portal.azure.com and checked the directories again. The directory from my Office 365 subscription was gone.
 
-<img src="/images/2014-12-30/09-Two-Directories.png" width="300">
+<img src="/images/2014-12-30/09-Two-Directories.png" width="200">
 
 Running the Add-AzureAccount resluted in one less tenant, but the account mismatch was still there.
 
