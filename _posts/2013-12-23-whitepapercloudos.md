@@ -3,7 +3,7 @@ layout: post
 date: 2013-12-23
 author: Marc van Eijk
 title: Whitepaper Series on the CloudOS 
-tags:
+tags: CloudOS, WAP Wiki, Whitepaper, Windows Azure Pack, Windows Azure Services
 ---
 Windows Azure Pack is getting the attention it deserves. Microsoft is doing a great job in blogging extensively about the endless possibilities with this crucial piece in the CloudOS vision. Since the initial preview of Windows Azure Services for Windows Server, which was recently succeeded by Windows Azure Pack, I have done a couple of series on some inner working.
 
