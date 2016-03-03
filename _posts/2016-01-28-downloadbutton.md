@@ -7,7 +7,7 @@ tags: Azure Resource Manager, Azure Service Fabric, Git, Github, Microsoft Azure
 ---
 In the roadmap to its one consistent platform vision, the first technical preview of Microsoft Azure Stack is a significant milestone. If we stop running for a second and look back over our shoulders, it is just unbelievable what Microsoft has achieved in a very short amount of time. Starting with a CTP of Windows Azure back in 2008, their public cloud GA-ed in February 1, 2010. That is just 6 years ago. In the classic Operating System release cycle that means two OS versions. In the agile cloud, those release cycle numbers are easily exceeded, on a daily basis, per resource type.
 
-<img src="/images/2016-01-28/Download.png" width="700">
+<img src="/images/2016-01-28/Download.png" width="720">
 
 With every innovation comes disruption. Things change. Although change can be hard initially, we learn, adapt and interact. Each person and each organization in its own pace. Microsoft is the only cloud company that not only acknowledges that, but also enable you in that process. Microsoft allows you to dynamically shift and choose in this transition to cloud services.
 
