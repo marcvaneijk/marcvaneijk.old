@@ -140,7 +140,9 @@ If you want to reference a different endpoint than blob (e.g. the table endpoint
 
 Now how can we use this expression in real production deployment template?
 
-Let's take this template as an example
+## Update an existing deployment template
+
+Let's take an existing template from the AzureStack quickstart templates repository as an example
 
 <https://github.com/Azure/AzureStack-QuickStart-Templates/tree/master/101-simple-windows-vm>
 
