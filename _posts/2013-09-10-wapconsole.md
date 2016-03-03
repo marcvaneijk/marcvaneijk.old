@@ -81,7 +81,7 @@ Create a self-signed certificate by running:
 
 `makecert -n "CN=Remote Console Connect" -r -pe -a sha256 -e <mm/dd/yyyy> -len 2048 -sky signature -eku 1.3.6.1.5.5.7.3.2 –sr "LocalMachine" -ss My -sy 24  "<CertificateName>.cer"`
 
-| -sky signature | use for signing 
+-sky signature | use for signing 
 --- | --- | ---
 -r create self-signed 
 -n “CN=Remote Console Connect” subject name (Remote Console Connect) 
