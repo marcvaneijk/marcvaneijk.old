@@ -227,7 +227,7 @@ The changes in the updated index can be recorded in a snapshot of our local clon
 git commit -m “added README.md”
 ```
 
-<img src="/images/2016-02-03/27-GitPush4.png" width="600">
+<img src="/images/2016-02-03/27-GitPush4.png" width="720">
 
 The snapshot we just created is still on the local clone. We can resume working on the local clone, by adding, changing or deleting files and folder. Recording the changes in more commits, by running the same `git commit` command (each with their own comment). All these changes and commits are on your local machine. Nobody but you is able to access the folder and if your machine crashes, all your work is gone. To sync your work to your repository in GitHub we need to `push` the commits. Before we push our changes to GitHub, it is crucial to understand that the content on your GitHub repository might have changed while you were working with the local clone. You might have changes files directly on GitHub or other users might have contributed to your code (which we will cover later). But if you have a file that is changed on GitHub and the same file in your clone that you changed locally, what change is authoritive? Git does not know. To prevent this issue you need to get the latest version from GitHub first before you push your local changes to it. There are two ways to do this with Git. We can either `fetch` and `merge` or we can `pull`. Pull is a combination of (fetch and merge in one action). Pull seems to be the logical thing to do right? But there is a caveat. Let’s explain with an example.
 
@@ -294,51 +294,51 @@ You can even click on the file and the changes you made will be visible (in gree
 
 There is no need to add the files to the index. GitHub client will do that for you. You will need to commit and push the changes. All you need to do to make a commit, after you made changes to the local clone, is to specify a title (comment) and a description for the commit and click “Commit to master”.
 
-<img src="/images/2016-02-03/38-GitHubD-Push3.png" width="400">
+<img src="/images/2016-02-03/38-GitHubD-Push3.png" width="350">
 
 On the top right of the GitHub desktop you will see a new moment in time (commit) in the timeline. Clicking on a circle in that “timeline” shows you the changes made in that commit. Clicking on the last icon (most right circle), presents the current state.
 
-<img src="/images/2016-02-03/39-GitHubD-Sync.png" width="700">
+<img src="/images/2016-02-03/39-GitHubD-Sync.png" width="250">
 
 The last step to take is to push the commit to GitHub. You can do that by clicking the **Sync** button on the top right of GitHub Desktop. If it is the first time you are pushing to a new repository, the button will be called **Publish**. For any subsequent pushes the button is called Sync.
 
-<img src="/images/2016-02-03/40-GitHubD-Publish.png" width="700">
+<img src="/images/2016-02-03/40-GitHubD-Publish.png" width="250">
 
 There is an important difference with the command line Git client here. Clicking the Sync button will not only push the local changes to GitHub, but it will first pull possible changes from GitHub first. These possible changes might be caused by you editing files in the repository directly in GitHub. If that is the case, GitHub will notify you that a conflict exists.
 
-<img src="/images/2016-02-03/41-GitHubD-Conflict1.png" width="700">
+<img src="/images/2016-02-03/41-GitHubD-Conflict1.png" width="400">
 
 It will then show what files has a conflict and what the conflict is.
 
-<img src="/images/2016-02-03/42-GitHubD-Conflict2.png" width="700">
+<img src="/images/2016-02-03/42-GitHubD-Conflict2.png" width="720">
 
 If we look at the content of the file, we can see that the conflicts has been marked in the content of the file too.
 
-<img src="/images/2016-02-03/43-GitHubD-Conflict3.png" width="700">
+<img src="/images/2016-02-03/43-GitHubD-Conflict3.png" width="720">
 
 We can solve this conflict, the same way as described in the Git procedure. Edit the file to manually to merge the parts of the file that GitHub had trouble merging. This may mean discarding either your changes or someone else’s or doing a mix of the two. You will also need to delete the `<<<<<<<`, `=======`, and `>>>>>>>` in the file.
 
-<img src="/images/2016-02-03/44-GitHubD-Conflict4.png" width="700">
+<img src="/images/2016-02-03/44-GitHubD-Conflict4.png" width="720">
 
 Save the file. GitHub will pick up the new changes.
 
-<img src="/images/2016-02-03/45-GitHubD-Conflict5.png" width="700">
+<img src="/images/2016-02-03/45-GitHubD-Conflict5.png" width="720">
 
 Make a new commit.
 
-<img src="/images/2016-02-03/46-GitHubD-Conflict6.png" width="700">
+<img src="/images/2016-02-03/46-GitHubD-Conflict6.png" width="350">
 
 And sync to GitHub by clicking the **Sync** button on the top right. Note the icon of the commit is different, because of the merge.
 
-<img src="/images/2016-02-03/47-GitHubD-Conflict7.png" width="700">
+<img src="/images/2016-02-03/47-GitHubD-Conflict7.png" width="250">
 
 The Sync now completes successfully and the README.md file on the GitHub repository contains the final edits we just made locally.
 
-<img src="/images/2016-02-03/48-GitHubD-Conflict8.png" width="700">
+<img src="/images/2016-02-03/48-GitHubD-Conflict8.png" width="720">
 
 There is much more possible with the commit, push and pull commands, but this should give you enough for basic operations. It is very important to commit and push frequently. That will ensure your work is safe.
 
-<img src="/images/2016-02-03/49-fire.jpg" width="700">
+<img src="/images/2016-02-03/49-fire.jpg" width="400">
 
 ## Enhance the README
 
