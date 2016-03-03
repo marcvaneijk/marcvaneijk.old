@@ -51,7 +51,6 @@ blockquote {
 /* table */
 
 table {
-  text-align: left;
   width: 100%;
   border-collapse: collapse;
   font-size: 14px;
@@ -74,10 +73,12 @@ tr:nth-child(even) {
 
 th {
   padding: 5px;
+  text-align: left;
 }
 
 td {
   padding: 5px;
+  text-align: left;
 }
 
 /* Index */
