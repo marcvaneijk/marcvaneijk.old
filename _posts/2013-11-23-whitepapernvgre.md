@@ -1,6 +1,6 @@
 ---
 layout: post
-date: 2013-11-22
+date: 2013-11-23
 author: Marc van Eijk
 title: Windows Server 2012 R2 and System Center 2012 R2 – Hyper-V Network Virtualization Whitepaper
 tags: 
