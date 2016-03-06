@@ -6,6 +6,7 @@ title: Azure Resource Manager – Validate all template functions
 tags:
 ---
 In your deployment templates for Azure Resource Manager, you can use all kind of template functions. These functions can perform a variety of actions, from retrieving information to calculating numbers and changing string values. You can find a description of these template functions (including some examples) [here](https://azure.microsoft.com/en-us/documentation/articles/resource-group-template-functions/)
+<!--more-->
 
 The list of functions retrieved from the article at the time of writing this blogpost are grouped in the following categories.
 
