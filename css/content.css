@@ -119,12 +119,11 @@ td {
 
 /* about */
 
-.PhotoWrapper {
+.photoWrapper {
   background-color: #1e73be;
 }
 
-.Photo {
-  padding-top 10px;
-  padding-bottom : 50px;
-}
+.photo {
+  padding-top: 20px;
+  padding-bottom : 80px;
 }
