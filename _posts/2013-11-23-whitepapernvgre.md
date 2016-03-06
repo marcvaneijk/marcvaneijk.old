@@ -11,4 +11,4 @@ To reduce the complexity, a couple of community members have put a lot of effort
 
 If you want to get started with Network Virtualization this whitepaper is a great way. It provides an excellent step by step to configure all the required components and also points out the potential pitfalls. No more time to waste. Download the whitepaper Hybrid Cloud with [NVGRE (WSSC 2012 R2)](http://gallery.technet.microsoft.com/Hybrid-Cloud-with-NVGRE-aa6e1e9a) and start exploring the world of Network Virtualization today!
 
-NVGRE Whitepaper
+<img src="/images/2013-11-23/NVGRE-Whitepaper.png" width=720">
