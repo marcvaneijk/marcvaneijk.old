@@ -123,8 +123,8 @@ li.widgetSearchUl {
 
 /* about */
 
-.about {
-
+.photo {
+  display:block;
 }
 
 .aboutLeft {
