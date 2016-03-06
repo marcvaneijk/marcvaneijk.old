@@ -121,12 +121,12 @@ td {
 
 .photoWrapper {
   background-color: #1e73be;
+  float:left;
 }
 
 .photo {
   padding-top: 20px;
   padding-bottom : 80px;
-  float:left;
 }
 
 .about {
