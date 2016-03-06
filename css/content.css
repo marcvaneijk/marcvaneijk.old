@@ -122,6 +122,7 @@ td {
 .photoWrapper {
   background-color: #1e73be;
   float: left;
+  height: 600px;
 }
 
 .photo {
@@ -131,5 +132,5 @@ td {
 
 .about {
   background-color: grey;
-  height: 900px;
+  height: 600px;
 }
