@@ -132,6 +132,13 @@ td {
 
 .about {
   padding-left: 20px;
+  margin:left: 20px;
   background-color: grey;
   height: 600px;
+}
+
+.aboutTitle {
+  font-size: 30px;
+  color: #1e73be;
+  font-weight: 300;
 }
