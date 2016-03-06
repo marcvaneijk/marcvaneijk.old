@@ -6,6 +6,7 @@ title: Microsoft Azure Stack – Guidelines for contributing ARM templates
 tags:
 ---
 While everybody is installing the Technical Preview of Microsoft Azure Stack, I figured it might be a good idea to work on some guidelines for deploying ARM templates on Microsoft Azure Stack Technical Preview when the installation is completed. The guidelines are published as the README.md file in the azurestack-quickstart-templates repository on GitHub.
+<!--more-->
 
 <https://github.com/Azure/AzureStack-QuickStart-Templates>
 
