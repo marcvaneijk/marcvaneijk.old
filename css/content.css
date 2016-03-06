@@ -131,7 +131,7 @@ td {
 }
 
 .about {
-  margin-left: 20px;
+  padding-left: 20px;
   background-color: grey;
   height: 600px;
 }
