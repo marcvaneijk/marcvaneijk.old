@@ -127,3 +127,8 @@ li.widgetSearchUl {
   background-color: #1e73be;
 }
 
+.aboutTitle {
+  font-size: 30px;
+  color: #1e73be;
+  font-weight: 300;
+}
