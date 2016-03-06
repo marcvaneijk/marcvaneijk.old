@@ -123,6 +123,10 @@ li.widgetSearchUl {
 
 /* about */
 
+.about {
+  border-collapse: separate;
+}
+
 .aboutLeft {
   background-color: #1e73be;
   padding: 0px;
@@ -132,4 +136,5 @@ li.widgetSearchUl {
   font-size: 30px;
   color: #1e73be;
   font-weight: 300;
+  padding-left: 20px;
 }
