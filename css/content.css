@@ -119,6 +119,12 @@ td {
 
 /* about */
 
-.aboutPhoto {
+.PhotoWrapper {
   background-color: #1e73be;
+}
+
+.Photo {
+  padding-top 10px;
+  padding-bottom : 50px;
+}
 }
