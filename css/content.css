@@ -121,7 +121,7 @@ td {
 
 .photoWrapper {
   background-color: #1e73be;
-  float:left;
+  float: left;
 }
 
 .photo {
@@ -130,5 +130,5 @@ td {
 }
 
 .about {
-  background-color:grey;
+  background-color: grey;
 }
