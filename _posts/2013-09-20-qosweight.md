@@ -20,7 +20,7 @@ To get the percentage of a single vNIC, divide the weight of a single vNIC by th
 
 Virtual machines tend to move all over the place and to make it even more complex it is also possible to create vNICs accessible for the MangementOS. These vNICs can also have a minimum bandwidth value.
 
-00 QOS
+<img src="/images/2013-09-20/00-QOS.png" width=720">
 
 Luckily for us is there is an easier way of getting the bandwidth information by calling on our good friend PowerShell. You can use the Get-VMNetworkAdapter cmdlet to retrieve a list of information about each vNIC (attached to a virtual machine or running in the MangementOS).
 
@@ -50,7 +50,7 @@ Get-VMNetworkAdapter -VMName * | FL
 
 The result of this cmdlet is a list properties for each virtual machine.
 
-01 FL
+<img src="/images/2013-09-20/01-FL.png" width=720">
 
 Near the bottom of the each list are a couple of bandwidth values. We are interested in MinimumBandwidthWeight and BandwidthPercentage. The name of the virtual machine might also come in handy. With this information we can run the command again, pipe it to a Format-Table and specify these properties.
 
@@ -58,7 +58,7 @@ Near the bottom of the each list are a couple of bandwidth values. We are intere
 Get-VMNetworkAdapter -VMName * | FT Name, MinimumBandwidthWeight, BandwidthPercentage
 ```
 
-02 FT
+<img src="/images/2013-09-20/02-FT.png" width=720">
 
 As you can see we now have a nice table displaying the calculated BandwidthPercentage values. But the MinimumBandwidthWeight is not showing any values. Despite the Format-List that did show the assigned weight.
 
@@ -68,14 +68,14 @@ So I tried to narrow down the Format-List command by specifying the same propert
 Get-VMNetworkAdapter -VMName * | FL Name, MinimumBandwidthWeight, BandwidthPercentage
 ```
 
-03 FL with Properties
+<img src="/images/2013-09-20/03-FL-with-Properties.png" width=720">
 
 This doesn’t make any sense. I asked [Jeff Wouters (MVP Powershell)](https://twitter.com/JeffWouters) if he had some pointers for me. His quick and effective answer:
 
 > Sounds like the display name and the real name of the properties aren’t the same. To retrieve the real name run the cmdlet 
 > `Get-VMNetworkAdapter -VMName * | Get-Member`
 
-04 Get-Member
+<img src="/images/2013-09-20/04-Get-Member.png" width=720">
 
 Jeff was right, the property BandwidthPercentage was in the list of available properties but the MinimumBandwidthWeight was not. Another property called BandwidthSetting caught my attention so I tried to run the cmdlet by using this property.
 
@@ -83,7 +83,7 @@ Jeff was right, the property BandwidthPercentage was in the list of available pr
 Get-VMNetworkAdapter -VMName * | FT Name, BandwidthSetting, BandwidthPercentage
 ```
 
-05 Alias
+<img src="/images/2013-09-20/05-Alias.png" width=720">
 
 Mm.. That was not the result I hoped for. I decided to do some PowerShell reading again. Finally I found a parameter called [–ExpandProperty](http://technet.microsoft.com/en-us/library/hh849895.aspx).
 
@@ -95,7 +95,7 @@ That sounds like the result I’m looking for. But the -ExpandProperty is a para
 Get-VMNetworkAdapter -VMName * | Select-Object Name, bandwidthpercentage -ExpandProperty Bandwidthsetting | FT –AutoSize
 ```
 
-06 ExpandProperty and other properties
+<img src="/images/2013-09-20/06-ExpandProperty-and-other-properties.png" width=720">
 
 And there we have the result we were looking for. You can add additional properties. For example:
 
@@ -103,8 +103,8 @@ And there we have the result we were looking for. You can add additional propert
 Get-VMNetworkAdapter -VMName * | Select-Object name, MacAddress, SwitchName, bandwidthpercentage -ExpandProperty Bandwidthsetting | FT –AutoSize
 ```
 
-07 ExpandProperty and other properties
+<img src="/images/2013-09-20/07-ExpandProperty-and-other-properties.png" width=720">
 
 For a Powershell MVP like Jeff this is probably not a complicated thing, but all the blogs if have read with a Get-VMNetworkAdapter referencing the MinimumBandwidthWeight in a Fortmat-Table display no values. Thought this one might come in handy.
 
-Twitter
+<img src="/images/2013-09-20/Twitter.png" width=720">
