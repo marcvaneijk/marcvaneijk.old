@@ -145,3 +145,7 @@ li.widgetSearchUl {
   color: #1e73be;
   font-weight: 300;
 }
+
+.clear {
+  clear: both;
+}
