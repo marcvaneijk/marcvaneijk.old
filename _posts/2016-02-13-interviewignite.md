@@ -6,6 +6,7 @@ title: Microsoft Azure Stack – Chat with Carsten Rachfahl at Ignite
 tags:
 ---
 The first Microsoft Ignite event took place on May 4-8, 2015 in Chicago. If I remember correctly there were more than 23000 attendees. Events like these gives you the opportunity to engage with the Microsoft product teams directly, get in touch with other community members and meet a lot of friends.
+<!--more-->
 
 With the announcement of Microsoft Azure Stack, this event formed another milestone is the journey of Microsoft to one consistent platform. And what a milestone! The interest to Microsoft Azure Stack was huge. This was visible at the booth, as well as Microsoft Azure Stack related sessions. People where standing, because no more seats where left.
 
