@@ -126,4 +126,9 @@ td {
 .photo {
   padding-top: 20px;
   padding-bottom : 80px;
+  float:left;
+}
+
+.about {
+  background-color:grey;
 }
