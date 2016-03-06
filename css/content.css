@@ -125,6 +125,11 @@ li.widgetSearchUl {
 
 .aboutLeft {
   background-color: #1e73be;
+  padding: 0px;
+}
+
+.aboutPhoto {
+  padding: 0px;
 }
 
 .aboutTitle {
