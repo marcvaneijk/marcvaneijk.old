@@ -18,7 +18,7 @@ It was a very promising solution, but also had some shortcomings from a Service 
 
 A lot of great work has been done since the RTM version of Windows Azure Services for Windows Server. Not only have they implemented all these requirements for Service Providers, but they even pushed the envelope by implementing a lot of other great features. Because all these new functionalities deserve an easier and more clear name, the product is renamed to Windows Azure Pack.
 
-One Platform
+<img src="/images/2013-09-10/One-Platform.png" width=720">
 
 Microsoft has released the Preview bits for Windows Azure Pack for download through the Web Platform Installer that can be downloaded [here](http://www.microsoft.com/web/downloads/platform.aspx).
 
@@ -46,7 +46,7 @@ In addition to the security measures with claims based authentication the config
 
 For this blog I’m using a lab environment. In this lab environment System Center Virtual Machine Manager 2012 R2 and the Windows Server 2012 R2 Hyper-V clusters are located in a management domain. Windows Azure Pack is installed in a DMZ in a separate domain. The Remote Desktop Gateway is deployed in the same domain as Windows Azure Pack. The two environments are separated by a firewall. If you have a smaller lab environment with a single domain and all the Azure Pack components installed on a single host (express installation) the steps for configuring Console Connect will be the same except for the location of some objects. I will assume that you have Windows Azure Pack already up and running.
 
-Design
+<img src="/images/2013-09-10/Design.png" width=720">
 
 The steps for configuring Console Connect for Windows Azure Pack preview, can be divided into the following parts.
 
@@ -104,7 +104,7 @@ In the Export Private Key screen select No, do not export the private key. In th
 
 Start the Certificate Export Wizard again. In the Export Private Key screen select Yes, export the private key. This forces the wizard to export the certificate as Personal Information Exchange – PKCS # 12 (.PFX) file. Leave the default checkmark on the Export File Format screen and click next. Enable the Password checkmark on the Security screen and specify a password for the .PFX file. Specify the location to export the certificate and complete the wizard. This exported certificate (.PFX file) with the private key will be installed on the server running System Center Service Provider Foundation 2012 R2. The .CER file will be installed on the server running System Center Service Provider Foundation 2012 R2, the Remote Desktop Gateway and the Hyper-V hosts.
 
-Service Provider Foundation
+## Service Provider Foundation
 
 Logon to the server running System Center Service Provider Foundation 2012 R2 and copy the .PFX and .CER files we just created. Import the .PFX file by double-clicking on it. Select Local Machine as the Store Location, confirm the file path, enter the password you used when you exported the certificate, optionally select to mark the key as exportable, select to place the certificate in the following store and browse to the Personal store.
 
@@ -283,19 +283,19 @@ If you have located the Remote Desktop Gateway server in a separate domain like 
 
 Now with all components in place we need to configure the plan in Windows Azure Pack preview to provide the Console Connect functionality to Tenant. Take note that a change to a plan in Windows Azure Pack preview will change the status of the Plan to syncing indefinitely. Create a new plan and assign the virtual machine clouds service. Open the plan and select to configure the virtual machine clouds plan service. On the bottom of the page is an option to enable connect to the console of virtual machines.
 
-Plan
+<img src="/images/2013-09-10/Plan.png" width=720">
 
 When you enable this option the tenant will get the option to connect to the console of a virtual machine from the Service Management Portal.
 
-ConsoleConnect
+<img src="/images/2013-09-10/ConsoleConnect.png" width=720">
 
 The tenant is presented with an RDP file in the bottom of the page.
 
-RDP File
+<img src="/images/2013-09-10/RDP-File.png" width=720">
 
 After opening the file the tenant is prompted with an unknown publisher warning from the virtual machine itself. When the tenant click connect the remote desktop connection is made and the tenant will see the console of the virtual machine. A good shortcut to know is ALT + CTRL + END to perform an CRTL + ALT + Delete in the Console Connect window.
 
-Console Connect screen
+<img src="/images/2013-09-10/Console-Connect-screen.png" width=720">
 
 Hopefully the top bar on the Console Connect window will be updated for Windows Azure Pack RTM, because it now displays the IP address (since we choose to connect on IP) of the underlying host. I don’t think most Service Provider will be to happy providing that information to the tenant.
 
