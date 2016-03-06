@@ -7,7 +7,7 @@ tags: Console Connect, Marc van Eijk, Remote Console, WAP, WAP Wiki, Windows Azu
 ---
 For the preview bits of Windows Azure Pack I did a [blog post](/2013/09/10/wapconsole) on connecting to a virtual machine through a console connection. The Windows Azure Pack tenant site actually allows two ways to connect to a virtual machine. The dashboard tab of a virtual machine in the tenant site present a button connect on the bottom bar. If the remote console functionality is enabled in the plan for the tenant , this button will display two options.
 
-<img src="/images/2014-01-05/01-Remote-Console.png" width=720">
+<img src="/images/2014-01-05/01-Remote-Console.png" width=600">
 
 When you select the first option, called Desktop, you are prompted with a screen to select a virtual network interface and available IP addresses that are available to the VM. When you select the virtual network interface and IP address that you want to connect on, the IP address is injected in an RDP file that is presented to the user. The RDP file will initiate a regular RDP connection to the IP address that was injected in the RDP file. Pretty straightforward.
 
@@ -44,7 +44,7 @@ Remote console can also be configured to connect to the Hyper-V host on IP addre
 
 When Windows Server 2012 R2, System Center 2012 R2 and Windows Azure Pack entered GA, we reinstalled the complete environment using the RTM bits. The configuration of Remote Console is improved.  System Center VMM 2012 R2 is now in charge of the configuration on the Hyper-V hosts, which allows the design to scale for larger deployments. We configured Remote Console to connect to the Hyper-V hosts on IP address as we did in the preview bits. Performing a console connect to a virtual machine faied with the error An authentication error occurred (0x607).
 
-<img src="/images/2014-01-05/607.png" width=720">
+<img src="/images/2014-01-05/607.png" width=400">
 
 After a lot of troubleshooting I decided to install an additional RD Gateway and make it member of the management domain. After changing the incoming NAT rule to the new RD Gateway the error remained. Finally I created a new cert, deleted all the previous certs from the stores on the involved servers, imported the cert in the DB again and refreshed the host in VMM. I could connect successfully once. I noticed that got an additional security warning with the name of the host the VM was running on. Disconnecting and connection again showed the same error again.
 
@@ -154,7 +154,7 @@ After installer URL rewrite on the System Center Service Provider Foundation 201
 
 Save the web.config file. An RDP file that is auto generated when Remote Console is after the change performed contains the authentication level:i:0 line.
 
-<img src="/images/2014-01-05/05-RDP-file.png" width=720">
+<img src="/images/2014-01-05/05-RDP-file.png" width=500">
 
 Remote Console with the VMConnectHostIdentificationMode set to IP now allows the tenant to connect successfully, while still complying with a Service Provider security rules. I’d like to thank Ashley and Richard for their support.
 
