@@ -130,7 +130,7 @@ li.widgetSearchUl {
 }
 
 .photo {
-  padding-top: 40px;
+  padding-top: 50px;
   padding-bottom : 80px;
 }
 
@@ -144,6 +144,12 @@ li.widgetSearchUl {
   font-size: 30px;
   color: #1e73be;
   font-weight: 300;
+  height: 50px;
+}
+
+.aboutDescription {
+  background-color: grey;
+  height: 200px;
 }
 
 .clear {
