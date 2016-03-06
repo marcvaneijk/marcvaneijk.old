@@ -107,4 +107,4 @@ Get-VMNetworkAdapter -VMName * | Select-Object name, MacAddress, SwitchName, ban
 
 For a Powershell MVP like Jeff this is probably not a complicated thing, but all the blogs if have read with a Get-VMNetworkAdapter referencing the MinimumBandwidthWeight in a Fortmat-Table display no values. Thought this one might come in handy.
 
-<img src="/images/2013-09-20/Twitter.png" width=720">
+[<img src="/images/2013-09-20/Twitter.png" width=500">](http://twitter.com/_marcvaneijk)
