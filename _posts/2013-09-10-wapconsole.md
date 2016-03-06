@@ -287,7 +287,7 @@ Now with all components in place we need to configure the plan in Windows Azure 
 
 When you enable this option the tenant will get the option to connect to the console of a virtual machine from the Service Management Portal.
 
-<img src="/images/2013-09-10/ConsoleConnect.png" width=720">
+<img src="/images/2013-09-10/ConsoleConnect.png" width=500">
 
 The tenant is presented with an RDP file in the bottom of the page.
 
