@@ -59,8 +59,7 @@ Specify the values for the parameters in the azuredeploy.parameters.json file, a
 - nested
 - images
 
-
-
+<img src="/images/2016-03-18/namingConvention.png" width="720">
 
 GitHub uses ASCII for ordering files and folder. For consistent ordering create all files and folder in lowercase. The only exception to this guideline is the README.md, that should be in the format UPPERCASE.lowercase.
 
@@ -97,17 +96,17 @@ To create a new deployment template scenario using the following workflow.
 - Update the README.md in the new folder
 - Create a new Azure Resource Group template and give it the same name as scenario folder
 
-
+ <img src="/images/2016-03-18/newProject.png" width="700">
 
 - Remove the azuredeploy.json template from the project
 - Add the azuredeploy.json from your deployment folder by right clicking the template folder in the solution explorer, select add, existing item.
 
-
+ <img src="/images/2016-03-18/addExistingItem.png" width="700">
 
 - Work your template magic in Visual Studio
 - Test the template by directly deploying it from Visual Studio
 
-
+ <img src="/images/2016-03-18/newDeployment.png" width="700">
 
 - Save the template
 - Push the changes to your repository in GitHub
