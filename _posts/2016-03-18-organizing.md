@@ -11,9 +11,9 @@ After you have mastered the basics of template orchestration in Azure Resource M
 
 ## Prerequisites
 
-	- GitHub account
-	- Git or GitHub Desktop
-	- Visual Studio with the latest Azure SDK
+- GitHub account
+- Git or GitHub Desktop
+- Visual Studio with the latest Azure SDK
 
 Check [Azure Resource Manager – Getting started with GitHub](/2016/02/03/githubstart) for a step by step to create a GitHub account and install Git or GitHub Desktop.
 
@@ -58,6 +58,8 @@ Specify the values for the parameters in the azuredeploy.parameters.json file, a
 - scripts
 - nested
 - images
+
+
 
 
 GitHub uses ASCII for ordering files and folder. For consistent ordering create all files and folder in lowercase. The only exception to this guideline is the README.md, that should be in the format UPPERCASE.lowercase.
