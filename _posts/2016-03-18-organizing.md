@@ -66,7 +66,7 @@ GitHub uses ASCII for ordering files and folder. For consistent ordering create 
 
 **README.md**
 
-A readme is very important for a deployment template scenario. It is usually overlooked or contains just a couple of lines of text. The README.md describes your deployment. A good description helps other community members to understand your deployment. The README.md uses GitHub Flavored Markdown for formatting text. If you want to add images to your README.md file, store the images in the images folder. Reference the images in the README.md with a relative path (e.g.  ![alt text](images/namingConvention.png "Files, folders and naming conventions") ). This ensures the link will reference the target repository if the source repository is forked. A good README.md contains the following sections.
+A readme is very important for a deployment template scenario. It is usually overlooked or contains just a couple of lines of text. The README.md describes your deployment. A good description helps other community members to understand your deployment. The README.md uses GitHub Flavored Markdown for formatting text. If you want to add images to your README.md file, store the images in the images folder. Reference the images in the README.md with a relative path (e.g.  `![alt text](images/namingConvention.png "Files, folders and naming conventions")`). This ensures the link will reference the target repository if the source repository is forked. A good README.md contains the following sections.
 
 - Deploy to Azure button
 - Description of what the template will deploy
