@@ -16,6 +16,6 @@ title: Post by Date
       {% endif %}
     {% endunless %}
 
-    <li>{{ post.date | date:"%B %d" }} <a href="{{ post.url }}">{{ post.title }}</a></li>
+    <li><a href="{{ post.url }}">{{ post.title }}</a></li>
   {% endfor %}
 </ul>
