@@ -76,15 +76,15 @@ A readme is very important for a deployment template scenario. It is usually ove
 
 > Do not include the parameters or the variables of the deployment script
 
-Instead of describing all the individual pieces of the README.md file, you can find a sample README.md here. 
+You can download a [sample README.md](https://github.com/marcvaneijk/arm/blob/master/000-patterns/Sample%20README.md). 
 
 ## Starter folder
 
 Instead of creating a deployment template scenario folder with all files from scratch it is much easier to copy the complete folder with all files from a starter folder. Create a starter folder in the root of your local clone. Create an blank deployment template in Visual Studio (you can even decide to add an [object variable](/2016/03/14/nested) with the template link).
 
-You can copy and store the sample README.md file in your own repository and copy that to each new deployment that you create. You only need to update it to reflect the scenario and you done. All README.md will have a standard layout this way, without requiring a lot of work from your end.
+You can copy and store the [sample README.md](https://github.com/marcvaneijk/arm/blob/master/000-patterns/Sample%20README.md) file in your own repository and copy that to each new deployment that you create. You only need to update it to reflect the scenario and you done. All README.md files will have a standard layout this way, without requiring a lot of work from your end.
 
-Make sure you also create a README.md in the root folder of your repository describing the content and preferably the contribution guidance if people want to contribute to your code.
+Make sure you also create a README.md in the root folder of your repository describing the repository content and preferably the contribution guidance if people want to contribute to your code.
 
 ## Workflow
 
