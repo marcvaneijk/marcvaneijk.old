@@ -1,6 +1,6 @@
 ---
 layout: post
-date: 2010-12-04
+date: 2014-12-04
 author: Marc van Eijk
 title: Windows Azure Pack authentication signing certificate expired 
 tags:
