@@ -14,6 +14,7 @@ After you have mastered the basics of template orchestration in Azure Resource M
 - Git or GitHub Desktop
 - Visual Studio with the latest Azure SDK
 
+<!--more-->
 Check [Azure Resource Manager – Getting started with GitHub](/2016/02/03/githubstart) for a step by step to create a GitHub account and install Git or GitHub Desktop.
 
 ## Folder structure
