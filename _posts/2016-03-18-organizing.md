@@ -4,7 +4,6 @@ date: 2016-03-18
 author: Marc van Eijk
 title: Azure Resource Manager - Organizing your templates
 tags: Azure Resource Manager, structure, templates, readme, markdown, workflow
-published: false
 ---
 
 After you have mastered the basics of template orchestration in Azure Resource Manager, you find templates and samples in multiple locations. You might have some copies on your local disk, a couple of Visual Studio project containing .json deployment templates, you might have created a GitHub account and stored some templates in a repository. This blog will help with organizing your template, by standardizing your workflow. 
