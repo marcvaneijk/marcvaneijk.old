@@ -1,0 +1,221 @@
+---
+layout: post
+date: 2016-03-21
+author: Marc van Eijk
+title: Azure Resource Manager - Security policies
+tags: Security Policies, Policy Definition, Policy Assignment, Azure Resource Manager, RBAC
+published: false
+---
+Azure Resource Manager provides an advanced template orchestration engine. By integration RBAC you can define who gets access to what resources. RBAC can be configured at the subscription level, resource group level and on individual resource level. Many organization have additional requirements when it comes to controlling possibilities at deployment time. You can think of allowing deployment only in certain region, enforcing a type of naming convention, denying a particular resource type to be deployed. This is where Security Policies come in. Security Policies are complementary to RBAC and combined they allow organization to utilize the platform in advanced ways still complying with their policy requirements and conventions.
+
+## Prerequisites
+
+In this blog we will create and assign a security policy. To follow the steps in the blog you will need
+
+- Microsoft Azure subscription
+- Visual Studio with Microsoft Azure SDK
+- Azure PowerShell module
+
+Visual Studio community edition can be installed directly from the Web Platform Installer, you can even select an installation with comes with the latest Microsoft Azure SDK . The Microsoft Azure PowerShell module can also be installed from the Web Platform Installer.
+
+## Security Policies
+
+The configuration process of Security Policies consists of two parts. First we need to create a Policy Definition and then we assign that Policy Definition. Policies can be assigned at the subscription, resource group or resource level.
+
+## Example
+
+We'll start be creating and assigning an simple security policy. This allows you to understand the concept quickly, before diving in to the details. Each security policy that you create can be deleted and each security policy that you assign can be removed. You can safely create a Resource Group in an existing subscription, create and a assign a security policy to that Resource Group and delete it afterwards, without affecting any of the other Resource Groups or resources in the same subscription. In fact this example does exactly that.
+
+Start by signing in from you an PowerShell session
+
+```
+Login-AzureRmAccount
+```
+
+We'll create a dedicated Resource Group for this example
+
+```
+$ResourceGroup = New-AzureRmResourceGroup -Name security.policy -Location "West Europe"
+```
+
+Next we will create the Policy Definition
+
+```
+$PolicyDefinition = New-AzureRmPolicyDefinition -Name myPolicyDefinition  -DisplayName myPolicyDefinition -Description "Do not allow the creation of Storage Accounts" -Policy "{""if"":{""source"":""action"",""equals"":""Microsoft.Storage/storageAccounts/write""},""then"":{""effect"":""deny""}}"
+```
+
+The last step is to assign the policy to the Resource Group we just created. To define the scope you will need to get your subscriptionId. You can get your subscriptionId with the `Get-AzureRmSubscription` cmdlet.
+
+```
+$Subscription = Get-AzureRmSubscription -SubscriptionName "Developer Program Benefit"
+$ResourceGroupName = $ResourceGroup.ResourceGroupName
+$PolicyAssignment = New-AzureRmPolicyAssignment -Name myPolicyAssignment -PolicyDefinition $PolicyDefinition -Scope /subscriptions/$Subscription/resourceGroups/$ResourceGroupName
+```
+
+The policy we just assigned to the new Resource Group, denies the write action in the Microsoft.Storage/storageAccounts namespace. We can validate the Security Policy by trying to create a new storageAccount in the Resource Group.
+
+```
+$StorageAccountName = 'storage' + (get-random -Minimum 123456789 -Maximum 987654321)
+New-AzureRmStorageAccount -ResourceGroupName $ResourceGroup.ResourceGroupName -Name $StorageAccountName -Type Standard_LRS -Location "West Europe"
+```
+
+This fails with the error
+
+
+
+```
+New-AzureRmStorageAccount : RequestDisallowedByPolicy: The resource action 'Microsoft.Storage/storageAccounts/write' is disallowed by one or more policies. Policy identifier(s): 
+'/subscriptions/11430ac3-e443-4f27-bbac-82775ecd76c1/providers/Microsoft.Authorization/policyDefinitions/myPolicyDefinition'.
+```
+
+The security policy is enforced in Azure Resource Manager. No matter what tool you use to connect (Portal, PowerShell, VS, Cross Platform CLI or community tooling) the security policy applies to all of them. When we try to create a storageAccount in the Resource Group from the Portal, we are presented with an error as well.
+
+
+
+```
+{
+  "error": {
+    "code": "RequestDisallowedByPolicy",
+    "message": "The resource action 'Microsoft.Storage/storageAccounts/write' is disallowed by one or more policies. Policy identifier(s): '/subscriptions/11430ac3-e443-4f27-bbac-82775ecd76c1/providers/Microsoft.Authorization/policyDefinitions/myPolicyDefinition'."
+  }
+}
+```
+
+Note: if you assign this security policy to an existing resource group with an existing storage account, it only denies the creation of new storage accounts in the that resource group, you can still make changes to the existing storage account.
+
+To remove the resources we used for this example run the following cmdlets. Please note that the last line removes the Resource Group. If you have used this example to an existing resource group that you do not want to delete, do not run the last cmdlet.
+
+```
+Remove-AzureRmPolicyAssignment -Id $PolicyAssignment.PolicyAssignmentId
+Remove-AzureRmPolicyDefinition -Id $PolicyDefinition.PolicyDefinitionId
+Remove-AzureRmResourceGroup -Name $ResourceGroup.ResourceGroupName
+```
+
+## Policy Definition
+
+Now that you have an idea of the capabilities of a security policy let's look at the policy in more detail. A policy has a condition (when is the policy applied) and an effect (what is the action to take). The most simple example is 
+
+```
+{
+  "if" : {
+    <condition> 
+  },
+  "then" : {
+    "effect" : "deny"
+  }
+}
+```
+
+The effect can either be `deny` or `audit`.
+
+The condition is configured with logical operators. 
+
+```
+"if" : {
+  "<logical operator>" : {
+    "field" : "<field>",
+    "condition" : ["<fieldvalue1>" , "<fieldvalue2>"]
+  }
+}
+```
+
+For example, this condition is true if the specified location does not match "northeurope" or "westeurope"
+
+```
+"if" : {
+  "not" : {
+    "field" : "location",
+    "in" : ["northeurope" , "westeurope"]
+  }
+}
+```
+
+### Logical Operators
+
+There are three supported logical operators (Not, And, Or)
+
+Operator | Syntax 
+--- | ---
+Not | "not" 
+And | "allOf"
+Or | "anyOf"
+
+You can use nested operators for more advanced policy configuration.
+
+```
+"if" : {
+    "not" : {
+      "anyOf" : [
+        {
+          "source" : "action",
+          "like" : "Microsoft.Resources/*"
+        },
+        {
+          "source" : "action",
+          "like" : "Microsoft.Compute/*"
+        },
+        {
+          "source" : "action",
+          "like" : "Microsoft.Storage/*"
+        },
+        {
+          "source" : "action",
+          "like" : "Microsoft.Network/*"
+        }
+      ]
+    }
+```
+
+### Conditions
+
+A condition evaluates whether a field or source meets certain criteria.
+
+Condition | Syntax 
+--- | ---
+Equals | "equals" : "<value>" 
+Like | "like" : "<value>" 
+Contains | "contains" : "<value>" 
+In | "in" : [ "<value1>","<value2>" ] 
+ContainsKey | "containsKey" : "<keyName>" 
+
+## Visual Studio
+
+In the initial example we specified JSON for the policy directly in the PowerShell cmdlet to create a new Policy Definition.
+
+```
+$PolicyDefinition = New-AzureRmPolicyDefinition -Name myPolicyDefinition  -DisplayName myPolicyDefinition -Description "Do not allow the creation of Storage Accounts" -Policy "{""if"":{""source"":""action"",""equals"":""Microsoft.Storage/storageAccounts/write""},""then"":{""effect"":""deny""}}"
+```
+
+It is a quick way to specify the policy, but it is very hard to edit the actual policy this way. Not even to mention creating it from scratch. Luckily we can create and edit the policies in Visual Studio. There is even a schema that provides intellisense for editing the policies in Visual Studio
+
+```
+http://schema.management.azure.com/schemas/2015-10-01-preview/policyDefinition.json
+```
+
+Open Visual Studio and create a new file, by selecting File > New > File from the menu. In the dialog box that opens type `json` in the searchbox on the right top.
+
+
+
+Select to create a new JSON file. Next copy the schema link in the `schema:` box on the top of the file 
+
+
+
+Copy the following code between the two existing brackets
+
+```
+  "if": {
+    "source": "action",
+    "equals": "Microsoft.Storage/storageAccounts/write"
+  },
+  "then": { "effect": "deny" }
+```
+
+
+
+Save the file locally (e.g. c:\securityPolicies\myPolicy.json). You can create a new Policy Definition by referencing this file instead of specifying the policy inline.
+
+```
+$PolicyDefinition = New-AzureRmPolicyDefinition -Name myPolicyDefinition  -DisplayName myPolicyDefinition -Description "Do not allow the creation of Storage Accounts" -Policy c:\securityPolicies\myPolicy.json
+```
+
+## BuiltIn policy definitions
