@@ -11,6 +11,8 @@ Microsoft defined the next generation foundation for its public cloud platform.
 One of the core capabilities of Azure Resource Manager is template orchestration for all resources types in the platform. 
 Enabling you to deploy any type of application (IaaS, PaaS or a combination) from a single template. 
 
+<img src="/images/2016-04-13/01-consistency.png" width="720">
+
 To provide you with a range of sample templates, Microsoft started a community initiative for creating, 
 maintaining and contributing templates in a public repository on GitHub. 
 While this repository started with a modest set of templates, 
