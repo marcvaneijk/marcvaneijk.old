@@ -4,7 +4,6 @@ date: 2016-04-13
 author: Marc van Eijk
 title: Updated guidelines for Azure Resource Manager templates
 tags: Azure Resource Manager, ARM, Guidelines, Best Practices
-published: false
 ---
 With the introduction of Azure Resource Manager at [Build in 2014](https://channel9.msdn.com/Events/Build/2014/2-607), 
 Microsoft defined the next generation foundation for its public cloud platform. 
