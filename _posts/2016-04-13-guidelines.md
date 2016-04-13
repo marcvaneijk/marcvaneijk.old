@@ -38,7 +38,7 @@ The majority of the templates use hardcoded endpoint, requiring minor adjustment
 Together with a lot of passionate people from Microsoft that are involved with this topic, we were able to settle on an updated set of guidelines. 
 These guidelines address the challenges we have learned so for. 
 Improving the standardization and reusability of contributions to the repository. 
-But more importantly it contains guidelines that help you create and maintain any ARM templates, whether you prefer to store them on GitHub or not.
+But more importantly it contains guidelines that help you create and maintain any ARM template, whether you prefer to store them on GitHub or not.
 
 The guidelines are split into three documents.
 
@@ -46,4 +46,4 @@ The guidelines are split into three documents.
 + [**Best practices**](https://github.com/Azure/azure-quickstart-templates/blob/master/1-CONTRIBUTION-GUIDE/best-practices.md). Best practices for improving the quality of your template design.
 + [**Git tutorial**](https://github.com/Azure/azure-quickstart-templates/blob/master/1-CONTRIBUTION-GUIDE/git-tutorial.md). Step by step to get you started with Git.
 
-I can't stress this enough. You will gain benefit from creating templates that are compliant to these guidelines and best practices. The guidelines and best practices are based on the learnings from all the community members that contributed over 330 templates to the repository and from the result of the deployments of these templates on the Microsoft Azure platform. 
+I can't stress this enough. You will gain benefit from creating templates that are compliant to these guidelines and best practices. The guidelines and best practices are based on the learnings from all the community members that contributed over 330 templates to the repository and from the results of the deployments of these templates on the Microsoft Azure platform. 
